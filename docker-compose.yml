@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=1234567890
+      - POSTGRES_USER=root
+      - POSTGRES_DB=db
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8000:8080
+
+  frontend:
+    image: node:14.16.0
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes: 
+      - ./frontend:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: sh -c "yarn install && yarn start"
+
+  backend:
+    image: node:14.16.0
+    ports:
+      - 3001:3000
+    working_dir: /app
+    volumes: 
+      - ./backend:/app
+    command: sh -c "yarn install && yarn run start:dev"    
