@@ -6,4 +6,9 @@ const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 @Injectable()
-export class UserService {}
+export class UserService {
+    constructor(
+        @Inject('USER_REPOSITORY')
+        private userRepository: Repository<User>,
+      ) {}
+}

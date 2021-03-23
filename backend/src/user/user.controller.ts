@@ -6,4 +6,6 @@ import { Request, Response } from 'express';
 
 
 @Controller('/user')
-export class UserController {}
+export class UserController {
+    constructor(private readonly userService: UserService) {}
+}

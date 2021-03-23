@@ -6,4 +6,9 @@ import { Post } from '../post/post.entity';
 import { User } from '../user/user.entity';
 
 @Injectable()
-export class CommentService {}
+export class CommentService {
+    constructor(
+        @Inject('COMMENT_REPOSITORY')
+        private commentRepository: Repository<Comment>
+      ) {}
+}

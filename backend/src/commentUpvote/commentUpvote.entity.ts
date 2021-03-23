@@ -1,12 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Post as PostEntity } from '../post/post.entity';
 import { User as UserEntity } from '../user/user.entity';
-import { CommentUpvote as CommentUpvoteEntity } from '../commentUpvote/commentUpvote.entity';
+import { Comment as CommentEntity } from '../comment/comment.entity';
+
 
 @Entity()
-export class Comment {
+export class CommentUpvote {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ManyToOne(() => CommentEntity, comment => comment.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+  @JoinColumn({name : 'commentId'})
+  comment: CommentEntity;
 
   @ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
   @JoinColumn({name : 'postId'})
@@ -15,14 +20,5 @@ export class Comment {
   @ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
   @JoinColumn({name : 'userId'})
   user: UserEntity;
-
-  @Column('text')
-  comment: string;
-
-  @Column('date')
-  timestamp: Date;
-
-  @OneToMany(() => CommentUpvoteEntity, commentUpvote => commentUpvote.comment , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  commentUpvote: CommentUpvoteEntity[];
-
+  
 }

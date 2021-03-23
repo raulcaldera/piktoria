@@ -5,4 +5,6 @@ import { CreatePostDto } from './dto/createPost.dto';
 
 
 @Controller('/post')
-export class PostController {}
+export class PostController {
+    constructor(private readonly postService: PostService) {}
+}
