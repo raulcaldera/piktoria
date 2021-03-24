@@ -74,46 +74,69 @@ export class UserService {
 	}
 
 	/*Update Username*/
-	async updateUsername(updatedUser : {id: number , username: string}) {
-		const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
+	async updateUsername(updatedUser : {id: number , username: string}, req) {
+		let auth = await this.verify(req.cookies?.JWT, updatedUser.id)
+		
+		if (auth) {
+			const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
 
-		if (dbUser !== undefined) {
-			console.log("User already exists");
-			return false;
+			if (dbUser !== undefined) {
+				console.log("User already exists");
+				return {updated: false, msg: "This username already exists"};
+			}
+	
+			return await getConnection()
+			.createQueryBuilder()
+			.update(User)
+			.set({ username: updatedUser.username })
+			.where("id = :id", { id: updatedUser.id })
+			.execute();
+		} else {
+			console.log("User not authorized to perform this operation");
+			return {updated: false, msg: "Unauthorized"};	
 		}
 
-		return await getConnection()
-		.createQueryBuilder()
-		.update(User)
-		.set({ username: updatedUser.username })
-		.where("id = :id", { id: updatedUser.id })
-		.execute();
 	}
 
 	/*Update Email*/
-	async updateEmail(updatedEmail : {id: number, email:string}) {
-		const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
+	async updateEmail(updatedEmail : {id: number, email:string}, req) {
+		let auth = await this.verify(req.cookies?.JWT, updatedEmail.id);
 
-		if (dbUser !== undefined) {
-			console.log("User email already exists");
-			return false;
-		}		
-		return await getConnection()
-		.createQueryBuilder()
-		.update(User)
-		.set({ email: updatedEmail.email })
-		.where("id = :id", { id: updatedEmail.id })
-		.execute();
+		if (auth) {
+			const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
+
+			if (dbUser !== undefined) {
+				console.log("User email already exists");
+				return {updated: false, msg: "This email already exists"};
+			}
+
+			return await getConnection()
+			.createQueryBuilder()
+			.update(User)
+			.set({ email: updatedEmail.email })
+			.where("id = :id", { id: updatedEmail.id })
+			.execute();
+		} else {
+			console.log("User not authorized to perform this operation");
+			return {updated: false, msg: "Unauthorized"};			
+		}
 	}
 
 	/*Delete*/
-	async deleteUser(id: number) {
-		return await getConnection()
-		.createQueryBuilder()
-		.delete()
-		.from(User)
-		.where("id = :id", { id: id })
-		.execute();
+	async deleteUser(id: number, req) {
+		let auth = await this.verify(req.cookies?.JWT, id);
+		
+		if (auth) { 
+			return await getConnection()
+			.createQueryBuilder()
+			.delete()
+			.from(User)
+			.where("id = :id", { id: id })
+			.execute();
+		} else {
+			console.log("User not authorized to perform this operation");
+			return {deleted: false, msg: "Unauthorized"};		
+		}	
 	}
 
 }

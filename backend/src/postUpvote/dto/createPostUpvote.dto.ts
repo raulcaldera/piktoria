@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsDate } from 'class-validator';
+import { IsInt } from 'class-validator';
 
 export class CreatePostUpvoteDto {
   @IsInt() readonly postId: number;

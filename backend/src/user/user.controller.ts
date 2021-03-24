@@ -20,7 +20,6 @@ export class UserController {
 
             res.cookie('JWT', jwt, { maxAge: 900000, httpOnly: true });
             res.send({ signedUp: true });
-
         } catch (err) {
             console.log('Error in signUp: ' + err);
         }
@@ -66,45 +65,23 @@ export class UserController {
     }
 
     /*Update*/
-    @Put('/update/username')
+    @Put('/username')
     @UseGuards(AuthGuard)
-    async updateUsername(@Body() updatedUser: { id: number, username: string}, @Req() req: Request) {
-        let auth = await this.userService.verify(req.cookies?.JWT, updatedUser.id)
-
-        if (auth) {
-            return this.userService.updateUsername(updatedUser);
-        } else {
-            console.log('User not authorized to update this data');
-            return false;
-        }
-
+    updateUsername(@Body() updatedUser: { id: number, username: string}, @Req() req: Request) {
+        return this.userService.updateUsername(updatedUser, req);
     }
 
-    @Put('/update/email')
+    @Put('/email')
     @UseGuards(AuthGuard)
-    async updateEmail(@Body() updatedEmail: { id: number, email: string}, @Req() req: Request) {
-        let auth = await this.userService.verify(req.cookies?.JWT, updatedEmail.id)
-
-        if (auth) {
-            return this.userService.updateEmail(updatedEmail);
-        } else {
-            console.log('User not authorized to update this data');
-            return false;
-        }
+    updateEmail(@Body() updatedEmail: { id: number, email: string}, @Req() req: Request) {
+        return this.userService.updateEmail(updatedEmail, req);
     }    
 
     /*Delete*/
     @Delete('/:id')
     @UseGuards(AuthGuard)
-    async deleteUser(@Param('id') id: number, @Req() req: Request) {
-        let auth = await this.userService.verify(req.cookies?.JWT, id)
-
-        if (auth) {        
-            return this.userService.deleteUser(id);
-        } else {
-            console.log('User not authorized to delete this data');
-            return false;
-        }            
+    deleteUser(@Param('id') id: number, @Req() req: Request) {        
+        return this.userService.deleteUser(id, req);  
     }
 
 }
