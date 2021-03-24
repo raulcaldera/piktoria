@@ -2,36 +2,41 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req, Res } 
 import { AuthGuard } from 'src/core/guards/auth.guard';
 import { PostUpvoteService } from './postUpvote.service';
 import { CreatePostUpvoteDto } from '../postUpvote/dto/createPostUpvote.dto'
-import { Request, Response } from 'express';
 
 @Controller('/postupvotes')
 export class PostUpvoteController {
     constructor(private readonly postUpvoteService: PostUpvoteService) {}
 
-    /*Like Post*/
+    /*Upvote Post*/
     @Post()
     @UseGuards(AuthGuard)
-    likePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
-        return this.postUpvoteService.likePost(CreatePostUpvoteDto);
+    upvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
+        return this.postUpvoteService.upvotePost(CreatePostUpvoteDto);
     }
 
-    /*Get Post Likes*/
+    /*Get Upvote by Id*/
     @Get('/:id')
-    getPostLikes(@Param('id') id: number) {
-        return this.postUpvoteService.getPostLikes(id);
+    getUpvoteById(@Param('id') id: number) {
+        return this.postUpvoteService.getUpvoteById(id);
+    }
+    
+    /*Get Post Upvotes*/
+    @Get('/:postId')
+    getPostUpvotes(@Param('postId') postId: number) {
+        return this.postUpvoteService.getPostUpvotes(postId);
     }
 
-    /*Get Post Likes By User*/
+    /*Get Post Upvotes By User*/
     @Get('/user/:userId')
-    getPostLikesByUserId(@Param('authorId') userId: number)  {
-            return this.postUpvoteService.getPostLikesByUserId(authorId);    
+    getPostUpvotesByUserId(@Param('authorId') userId: number)  {
+        return this.postUpvoteService.getPostUpvotesByUserId(userId);    
     }
 
-    /*Unlike Post*/
-    @Delete()
+    /*Downvote Post*/
+    @Delete('/:id')
     @UseGuards(AuthGuard)
-    UnlikePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
-        return this.postUpvoteService.UnlikePost(CreatePostUpvoteDto);
+    DownvotePost(@Param('id') id: number) {
+        return this.postUpvoteService.DownvotePost(id);
     }
     
 }

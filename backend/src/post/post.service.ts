@@ -50,7 +50,7 @@ export class PostService {  constructor(
 
   async updatePostTitle(updatedPost : { id: number , title: string }, req) {
     let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
-	let auth = await this.verify(req.cookies?.JWT, post.author);
+	  let auth = await this.verify(req.cookies?.JWT, post.author);
 
     if (auth) { 
       return await getConnection()
