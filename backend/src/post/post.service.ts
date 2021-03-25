@@ -22,14 +22,27 @@ export class PostService {  constructor(
 		return false;
 	}
 
-  async createPost(post: IPost) {
-    let postRelation = await this.postRepository.save(post);
+  async createPost(post: IPost, req) {
+    let auth = await this.verify(req.cookies?.JWT, post.authorId);
 
-    return await getConnection()
-    .createQueryBuilder()
-    .relation(User, "post")
-    .of(post.authorId)         // We add into the user with this userId ...
-    .add(postRelation.id);     // ... a post with this id
+    if (auth) {
+      try {
+        let postRelation = await this.postRepository.save(post);
+
+        await getConnection()
+        .createQueryBuilder()
+        .relation(User, "post")
+        .of(post.authorId)         // We add into the user with this userId ...
+        .add(postRelation.id);     // ... a post with this id
+
+        return {posted: true, msg: "Post created"};
+      } catch(err) {
+          console.log('Error creating post: ' + err);
+          return {posted: false, msg: err}; 
+      }
+    } else {
+        return {posted: false, msg: "User not authorized to perform this operation"};	      
+    }
   }
 
   async getAll() {
@@ -58,8 +71,8 @@ export class PostService {  constructor(
         .execute();
         return {updated: true, msg: "Post title updated"};
       } catch(err) {
-        console.log('Error in updating post title: ' + err);
-        return {updated: false, msg: err}; 
+          console.log('Error in updating post title: ' + err);
+          return {updated: false, msg: err}; 
       }
     } else {
 		  return {updated: false, msg: "User not authorized to perform this operation"};	      
@@ -80,8 +93,8 @@ export class PostService {  constructor(
         .execute();
         return {updated: true, msg: "Post body updated"};
       } catch(err) {
-        console.log('Error in updating post body: ' + err);
-        return {updated: false, msg: err}; 
+          console.log('Error in updating post body: ' + err);
+          return {updated: false, msg: err}; 
       }
     } else {
 		  return {updated: false, msg: "User not authorized to perform this operation"};	      
@@ -102,8 +115,8 @@ export class PostService {  constructor(
         .execute();
         return {deleted: true, msg: "Post deleted"};
       } catch(err) {
-        console.log('Error in deleting post: ' + err); 
-        return {deleted: false, msg: err};
+          console.log('Error in deleting post: ' + err); 
+          return {deleted: false, msg: err};
       }
     } else {
 	  	return {deleted: false, msg: "User not authorized to perform this operation"};

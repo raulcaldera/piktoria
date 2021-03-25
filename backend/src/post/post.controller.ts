@@ -11,8 +11,8 @@ export class PostController {
     /*Create*/
     @Post()
     @UseGuards(AuthGuard)
-    createPost(@Body() createPostDto: CreatePostDto) {
-      return this.postService.createPost(createPostDto);
+    createPost(@Body() createPostDto: CreatePostDto, @Req() req: Request) {
+      return this.postService.createPost(createPostDto, req);
     }
 
     /*Read*/
