@@ -34,17 +34,25 @@ export class UserService {
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(user.password, salt);
 		const dbUser = await this.userRepository.findOne({username: user?.username});
+		const dbEmail = await this.userRepository.findOne({email: user?.email});
 	
 		if (dbUser !== undefined) {
-			console.log("User already exists");
-			return {signedUp: false, msg: "User already exists"};
+			return {signedUp: false, jwt: false , msg: "User already exists"};
+		}
+
+		if (dbEmail !== undefined) {
+			return {signedUp: false, jwt: false , msg: "Email already exists"};
 		}
 	
 		user.password = hashedPassword;
 		const insertedUser = await this.userRepository.save(user);
 	
-		if (!insertedUser) 	return {signedUp: false, msg: "User creation error"};
-		return await {signedUp: this.createJwt(insertedUser.id, insertedUser.username)};
+		if (!insertedUser) {
+			return {signedUp: false, jwt: false, msg: "User creation error"};
+		}
+
+		const token = await this.createJwt(insertedUser.id, insertedUser.username);
+		return {signedUp: true, jwt: token, msg: "Signed Up!"};
 	
 	  }
 
@@ -54,17 +62,18 @@ export class UserService {
 
 		if (dbUser) {
 			const validPassword = await bcrypt.compare(user.password, dbUser.password);
-			
 			if (validPassword) {
-				return await this.createJwt(dbUser.id, dbUser.username);
+				const token = await this.createJwt(dbUser.id, dbUser.username);
+				return {logedIn: true, jwt: token, msg: "Loged In!"};
+			} else {
+				return {logedIn: false, jwt: false, msg: "Invalid password"};
 			}
 		}
 
-		return false;
+		return {logedIn: false, jwt: false, msg: "User not found"};
 	}  
 
 	/*Read*/
-
 	async getAll() {
 		return await this.userRepository.find({});
 	}
@@ -76,12 +85,11 @@ export class UserService {
 	/*Update Username*/
 	async updateUsername(updatedUser : {id: number , username: string}, req) {
 		let auth = await this.verify(req.cookies?.JWT, updatedUser.id)
-		
+
 		if (auth) {
 			const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
 
 			if (dbUser !== undefined) {
-				console.log("User already exists");
 				return {updated: false, msg: "This username already exists"};
 			}
 	
@@ -92,7 +100,6 @@ export class UserService {
 			.where("id = :id", { id: updatedUser.id })
 			.execute();
 		} else {
-			console.log("User not authorized to perform this operation");
 			return {updated: false, msg: "Unauthorized"};	
 		}
 
@@ -106,7 +113,6 @@ export class UserService {
 			const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
 
 			if (dbUser !== undefined) {
-				console.log("User email already exists");
 				return {updated: false, msg: "This email already exists"};
 			}
 
@@ -117,7 +123,6 @@ export class UserService {
 			.where("id = :id", { id: updatedEmail.id })
 			.execute();
 		} else {
-			console.log("User not authorized to perform this operation");
 			return {updated: false, msg: "Unauthorized"};			
 		}
 	}
@@ -134,7 +139,6 @@ export class UserService {
 			.where("id = :id", { id: id })
 			.execute();
 		} else {
-			console.log("User not authorized to perform this operation");
 			return {deleted: false, msg: "Unauthorized"};		
 		}	
 	}

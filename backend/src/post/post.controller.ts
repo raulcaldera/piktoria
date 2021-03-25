@@ -2,9 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req, Res } 
 import { AuthGuard } from 'src/core/guards/auth.guard';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/createPost.dto';
-import { CreatePostUpvoteDto } from '../postUpvote/dto/createPostUpvote.dto'
 import { Request, Response } from 'express';
-
 
 @Controller('/post')
 export class PostController {

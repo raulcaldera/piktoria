@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     var authCookie = request.cookies?.JWT;
 
     if ( !authCookie ) {
-        throw new UnauthorizedException("Not Authorized")  
+        throw new UnauthorizedException("Not Authorized, No Cookie")  
     }
 
     let userAuth;
@@ -20,10 +20,8 @@ export class AuthGuard implements CanActivate {
     try {
         userAuth = jwt.verify(authCookie,'shhhhh');
     } catch (err) {
-        throw new UnauthorizedException("Not Authorized")    
+        throw new UnauthorizedException("Not Authorized, Not Verified")    
     }
-
-    console.log(userAuth);
 
     request.userId =  userAuth.userId; 
     return true;

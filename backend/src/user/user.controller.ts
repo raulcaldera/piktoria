@@ -12,14 +12,14 @@ export class UserController {
     @Post('/signup')
     async signup(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
         try {
-            const jwt = await this.userService.signup(createUserDto);
+            const signupRes = await this.userService.signup(createUserDto);
 
-            if (!jwt.signedUp) {
-                res.send(jwt);
+            if (!signupRes.jwt) {
+                res.send(signupRes);
             }
 
-            res.cookie('JWT', jwt, { maxAge: 900000, httpOnly: true });
-            res.send({ signedUp: true });
+            res.cookie('JWT', signupRes.jwt, { maxAge: 900000, httpOnly: true });
+            res.send(signupRes);
         } catch (err) {
             console.log('Error in signUp: ' + err);
         }
@@ -29,14 +29,14 @@ export class UserController {
     @Post('/login')
     async login(@Body() user: { email: string, password: string }, @Res() res: Response) {
         try {
-            const jwt = await this.userService.authenticate(user);
+            const loginRes = await this.userService.authenticate(user);
 
-            if (!jwt) {
-                res.send({ logedIn: false });
+            if (!loginRes.jwt) {
+                res.send(loginRes);
             }
 
-            res.cookie('JWT', jwt, { maxAge: 900000, httpOnly: true });
-            res.send({ logedIn: true });
+            res.cookie('JWT', loginRes.jwt, { maxAge: 900000, httpOnly: true });
+            res.send(loginRes);
         } catch (err) {
             console.log('Error in logIn: ' + err);
         }
