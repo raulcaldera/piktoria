@@ -41,61 +41,69 @@ export class PostService {  constructor(
   }
 
   async getPostsByAuthorId(authorId: number) {
-    return await getConnection()
-    .createQueryBuilder()
-    .relation(User, "post")
-    .of(authorId) 
-    .loadMany();
+    return await this.postRepository.find({relations: ['author'],  where: { author : authorId }});
   }  
 
   async updatePostTitle(updatedPost : { id: number , title: string }, req) {
     let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
-	  let auth = await this.verify(req.cookies?.JWT, post.author);
+	  let auth = await this.verify(req.cookies?.JWT, post.author.id);
 
     if (auth) { 
-      return await getConnection()
-      .createQueryBuilder()
-      .update(Post)
-      .set({ title: updatedPost.title })
-      .where("id = :id", { id: updatedPost.id })
-      .execute();
+      try {
+        await getConnection()
+        .createQueryBuilder()
+        .update(Post)
+        .set({ title: updatedPost.title })
+        .where("id = :id", { id: updatedPost.id })
+        .execute();
+        return {updated: true, msg: "Post title updated"};
+      } catch(err) {
+        console.log('Error in updating post title: ' + err); 
+      }
     } else {
-		console.log("User not authorized to perform this operation");
-		return {updated: false, msg: "Unauthorized"};	      
+		  return {updated: false, msg: "User not authorized to perform this operation"};	      
     }
   }
 
   async updatePostBody(updatedPost : { id: number , body: string }, req) {
-	let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
-	let auth = await this.verify(req.cookies?.JWT, post.author);
+	  let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
+	  let auth = await this.verify(req.cookies?.JWT, post.author.id);
 
-    if (auth) { 
-		return await getConnection()
-		.createQueryBuilder()
-		.update(Post)
-		.set({ body: updatedPost.body })
-		.where("id = :id", { id: updatedPost.id })
-		.execute();
+    if (auth) {
+      try {
+        await getConnection()
+        .createQueryBuilder()
+        .update(Post)
+        .set({ body: updatedPost.body })
+        .where("id = :id", { id: updatedPost.id })
+        .execute();
+        return {updated: true, msg: "Post body updated"};
+      } catch(err) {
+        console.log('Error in updating post body: ' + err);         
+      }
     } else {
-		console.log("User not authorized to perform this operation");
-		return {updated: false, msg: "Unauthorized"};	      
+		  return {updated: false, msg: "User not authorized to perform this operation"};	      
     }
   }  
 
   async deletePost(id: number, req) {
-	let post = await this.postRepository.findOne({relations: ['author'],  where: { id : id }});
-	let auth = await this.verify(req.cookies?.JWT, post.author);
+	  let post = await this.postRepository.findOne({relations: ['author'],  where: { id : id }});
+	  let auth = await this.verify(req.cookies?.JWT, post.author.id);
 
-    if (auth) { 
-		return await getConnection()
-		.createQueryBuilder()
-		.delete()
-		.from(Post)
-		.where("id = :id", { id: id })
-		.execute();
+    if (auth) {
+      try {
+        await getConnection()
+        .createQueryBuilder()
+        .delete()
+        .from(Post)
+        .where("id = :id", { id: id })
+        .execute();
+        return {updated: true, msg: "Post deleted"};
+      } catch(err) {
+        console.log('Error in deleting post: ' + err);            
+      }
     } else {
-		console.log("User not authorized to perform this operation");
-		return {deleted: false, msg: "Unauthorized"};	      
+	  	return {deleted: false, msg: "User not authorized to perform this operation"};	      
     }
   }
 
