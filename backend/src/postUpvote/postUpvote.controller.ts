@@ -21,22 +21,22 @@ export class PostUpvoteController {
     }
     
     /*Get Post Upvotes*/
-    @Get('/:postId')
+    @Get('/post/:postId')
     getPostUpvotes(@Param('postId') postId: number) {
         return this.postUpvoteService.getPostUpvotes(postId);
     }
 
     /*Get Post Upvotes By User*/
     @Get('/user/:userId')
-    getPostUpvotesByUserId(@Param('authorId') userId: number)  {
+    getPostUpvotesByUserId(@Param('userId') userId: number)  {
         return this.postUpvoteService.getPostUpvotesByUserId(userId);    
     }
 
     /*Downvote Post*/
-    @Delete('/:id')
+    @Delete()
     @UseGuards(AuthGuard)
-    DownvotePost(@Param('id') id: number) {
-        return this.postUpvoteService.DownvotePost(id);
+    DownvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
+        return this.postUpvoteService.DownvotePost(CreatePostUpvoteDto);
     }
     
 }

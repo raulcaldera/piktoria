@@ -58,7 +58,8 @@ export class PostService {  constructor(
         .execute();
         return {updated: true, msg: "Post title updated"};
       } catch(err) {
-        console.log('Error in updating post title: ' + err); 
+        console.log('Error in updating post title: ' + err);
+        return {updated: false, msg: err}; 
       }
     } else {
 		  return {updated: false, msg: "User not authorized to perform this operation"};	      
@@ -79,7 +80,8 @@ export class PostService {  constructor(
         .execute();
         return {updated: true, msg: "Post body updated"};
       } catch(err) {
-        console.log('Error in updating post body: ' + err);         
+        console.log('Error in updating post body: ' + err);
+        return {updated: false, msg: err}; 
       }
     } else {
 		  return {updated: false, msg: "User not authorized to perform this operation"};	      
@@ -98,12 +100,14 @@ export class PostService {  constructor(
         .from(Post)
         .where("id = :id", { id: id })
         .execute();
-        return {updated: true, msg: "Post deleted"};
+        return {deleted: true, msg: "Post deleted"};
       } catch(err) {
-        console.log('Error in deleting post: ' + err);            
+        console.log('Error in deleting post: ' + err); 
+        return {deleted: false, msg: err};
       }
     } else {
-	  	return {deleted: false, msg: "User not authorized to perform this operation"};	      
+	  	return {deleted: false, msg: "User not authorized to perform this operation"};
+      	      
     }
   }
 
