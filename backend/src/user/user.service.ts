@@ -93,12 +93,15 @@ export class UserService {
 				return {updated: false, msg: "This username already exists"};
 			}
 	
-			return await getConnection()
+			await getConnection()
 			.createQueryBuilder()
 			.update(User)
 			.set({ username: updatedUser.username })
 			.where("id = :id", { id: updatedUser.id })
 			.execute();
+
+			return {updated: true, msg: "Username updated"};
+
 		} else {
 			return {updated: false, msg: "Unauthorized"};	
 		}
@@ -116,12 +119,15 @@ export class UserService {
 				return {updated: false, msg: "This email already exists"};
 			}
 
-			return await getConnection()
+			await getConnection()
 			.createQueryBuilder()
 			.update(User)
 			.set({ email: updatedEmail.email })
 			.where("id = :id", { id: updatedEmail.id })
 			.execute();
+
+			return {updated: true, msg: "Email updated"};
+
 		} else {
 			return {updated: false, msg: "Unauthorized"};			
 		}
@@ -132,12 +138,14 @@ export class UserService {
 		let auth = await this.verify(req.cookies?.JWT, id);
 		
 		if (auth) { 
-			return await getConnection()
+			await getConnection()
 			.createQueryBuilder()
 			.delete()
 			.from(User)
 			.where("id = :id", { id: id })
 			.execute();
+
+			return {deleted: true, msg: "User deleted"};		
 		} else {
 			return {deleted: false, msg: "Unauthorized"};		
 		}	

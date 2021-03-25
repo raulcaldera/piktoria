@@ -2,6 +2,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req, Res } 
 import { AuthGuard } from 'src/core/guards/auth.guard';
 import { PostUpvoteService } from './postUpvote.service';
 import { CreatePostUpvoteDto } from '../postUpvote/dto/createPostUpvote.dto'
+import { Request, Response } from 'express';
 
 @Controller('/postupvotes')
 export class PostUpvoteController {
@@ -10,8 +11,8 @@ export class PostUpvoteController {
     /*Upvote Post*/
     @Post()
     @UseGuards(AuthGuard)
-    upvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
-        return this.postUpvoteService.upvotePost(CreatePostUpvoteDto);
+    upvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request) {
+        return this.postUpvoteService.upvotePost(CreatePostUpvoteDto, req);
     }
 
     /*Get Upvote by Id*/
@@ -35,8 +36,8 @@ export class PostUpvoteController {
     /*Downvote Post*/
     @Delete()
     @UseGuards(AuthGuard)
-    DownvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto) {
-        return this.postUpvoteService.DownvotePost(CreatePostUpvoteDto);
+    DownvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request) {
+        return this.postUpvoteService.DownvotePost(CreatePostUpvoteDto, req);
     }
     
 }

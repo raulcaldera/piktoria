@@ -13,35 +13,50 @@ export class PostUpvoteService {  constructor(
     private postUpvoteRepository: Repository<PostUpvote>
   ) {}
 
-  async upvotePost(postUpvote: IPostUpvote) {
-    let dbUpvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postUpvote.postId, user : postUpvote.userId}});
+  async verify(authCookie, userId) {
+		let userAuth = await jwt.verify(authCookie,'shhhhh');
 
-    if (dbUpvote !== undefined) {
-      console.log("User has already upvoted this post");
-      return {upvoted: false, postUpvoteId: false, msg: "User has already upvoted this post"};		
-    }
+		if (userAuth.userId == userId) {
+			return true;
+		}
 
-    try {
-      let postUpvoteRelation = await this.postUpvoteRepository.save({}); 
+		return false;
+	}
 
-      await getConnection()
-      .createQueryBuilder()
-      .relation(User, "postUpvote")
-      .of(postUpvote.userId)         // We add into the user with this userId ...
-      .add(postUpvoteRelation.id);     // ... a post upvote with this id	  
-    
-      await getConnection()
-      .createQueryBuilder()
-      .relation(Post, "postUpvote")
-      .of(postUpvote.postId)         // We add into the post with this userId ...
-      .add(postUpvoteRelation.id);     // ... a post upvote with this id	  	
+  async upvotePost(postUpvote: IPostUpvote, req) {
+    let auth = await this.verify(req.cookies?.JWT, postUpvote.userId);
+
+    if (auth) {
+      let dbUpvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postUpvote.postId, user : postUpvote.userId}});
+
+      if (dbUpvote !== undefined) {
+        console.log("User has already upvoted this post");
+        return {upvoted: false, postUpvoteId: false, msg: "User has already upvoted this post"};		
+      }
+
+      try {
+        let postUpvoteRelation = await this.postUpvoteRepository.save({}); 
+
+        await getConnection()
+        .createQueryBuilder()
+        .relation(User, "postUpvote")
+        .of(postUpvote.userId)         // We add into the user with this userId ...
+        .add(postUpvoteRelation.id);     // ... a post upvote with this id	  
       
-      return {upvoted: true, postUpvoteId: postUpvoteRelation.id, msg: "Post Upvoted"};	
-    } catch(err) {
-        console.log('Error upvoting post: ' + err);
-        return {upvoted: false, postUpvoteId: false, msg: err};	            
+        await getConnection()
+        .createQueryBuilder()
+        .relation(Post, "postUpvote")
+        .of(postUpvote.postId)         // We add into the post with this userId ...
+        .add(postUpvoteRelation.id);     // ... a post upvote with this id	  	
+        
+        return {upvoted: true, postUpvoteId: postUpvoteRelation.id, msg: "Post Upvoted"};	
+      } catch(err) {
+          console.log('Error upvoting post: ' + err);
+          return {upvoted: false, postUpvoteId: false, msg: err};	            
+      }
+    } else {
+	  	  return {upvoted: false, postUpvoteId: false, msg: "User not authorized to perform this operation"};	      
     }
-    
   }  
 
   async getUpvoteById(id: number) {
@@ -60,14 +75,28 @@ export class PostUpvoteService {  constructor(
 
   }
 
-  async DownvotePost(postUpvote: IPostUpvote) {
-    let dbUpvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postUpvote.postId, user : postUpvote.userId}});
+  async DownvotePost(postDownvote: IPostUpvote, req) {
+    let auth = await this.verify(req.cookies?.JWT, postDownvote.userId);
+    
+    if (auth) {
+      try {
+        let dbDownvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postDownvote.postId, user : postDownvote.userId}});
 
-    return await getConnection()
-    .createQueryBuilder()
-    .delete()
-    .from(PostUpvote)
-    .where("id = :id", { id: dbUpvote.id })
-    .execute();	  
+        await getConnection()
+        .createQueryBuilder()
+        .delete()
+        .from(PostUpvote)
+        .where("id = :id", { id: dbDownvote.id })
+        .execute();	
+
+        return {downvoted: true, msg: "Post Downvoted"};	
+      } catch(err) {
+          console.log('Error downvoting post: ' + err);
+          return {downvoted: false, msg: err};	
+      }           
+    } else {
+      return {downvoted: false, msg: "User not authorized to perform this operation"};	      
+    }
   }
+
 }
