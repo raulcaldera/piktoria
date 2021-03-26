@@ -87,21 +87,25 @@ export class UserService {
 		let auth = await this.verify(req.cookies?.JWT, updatedUser.id)
 
 		if (auth) {
-			const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
+			try {			
+				const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
 
-			if (dbUser !== undefined) {
-				return {updated: false, msg: "This username already exists"};
+				if (dbUser !== undefined) {
+					return {updated: false, msg: "This username already exists"};
+				}
+		
+				await getConnection()
+				.createQueryBuilder()
+				.update(User)
+				.set({ username: updatedUser.username })
+				.where("id = :id", { id: updatedUser.id })
+				.execute();
+
+				return {updated: true, msg: "Username updated"};
+			} catch(err) {
+				console.log('Error in updating user: ' + err); 
+				return {updated: false, msg: err};	
 			}
-	
-			await getConnection()
-			.createQueryBuilder()
-			.update(User)
-			.set({ username: updatedUser.username })
-			.where("id = :id", { id: updatedUser.id })
-			.execute();
-
-			return {updated: true, msg: "Username updated"};
-
 		} else {
 			return {updated: false, msg: "Unauthorized"};	
 		}
@@ -113,21 +117,25 @@ export class UserService {
 		let auth = await this.verify(req.cookies?.JWT, updatedEmail.id);
 
 		if (auth) {
-			const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
+			try {
+				const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
 
-			if (dbUser !== undefined) {
-				return {updated: false, msg: "This email already exists"};
+				if (dbUser !== undefined) {
+					return {updated: false, msg: "This email already exists"};
+				}
+
+				await getConnection()
+				.createQueryBuilder()
+				.update(User)
+				.set({ email: updatedEmail.email })
+				.where("id = :id", { id: updatedEmail.id })
+				.execute();
+
+				return {updated: true, msg: "Email updated"};
+			} catch(err) {
+				console.log('Error in updating email: ' + err); 
+				return {updated: false, msg: err};					
 			}
-
-			await getConnection()
-			.createQueryBuilder()
-			.update(User)
-			.set({ email: updatedEmail.email })
-			.where("id = :id", { id: updatedEmail.id })
-			.execute();
-
-			return {updated: true, msg: "Email updated"};
-
 		} else {
 			return {updated: false, msg: "Unauthorized"};			
 		}
@@ -137,15 +145,20 @@ export class UserService {
 	async deleteUser(id: number, req) {
 		let auth = await this.verify(req.cookies?.JWT, id);
 		
-		if (auth) { 
-			await getConnection()
-			.createQueryBuilder()
-			.delete()
-			.from(User)
-			.where("id = :id", { id: id })
-			.execute();
+		if (auth) {
+			try {
+				await getConnection()
+				.createQueryBuilder()
+				.delete()
+				.from(User)
+				.where("id = :id", { id: id })
+				.execute();
 
-			return {deleted: true, msg: "User deleted"};		
+				return {deleted: true, msg: "User deleted"};
+			} catch(err) {
+				console.log('Error in deleting user: ' + err); 
+				return {deleted: false, msg: err};				
+			}		
 		} else {
 			return {deleted: false, msg: "Unauthorized"};		
 		}	

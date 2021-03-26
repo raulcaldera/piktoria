@@ -83,8 +83,8 @@ export class PostUpvoteService {  constructor(
 				let dbDownvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postDownvote.postId, user : postDownvote.userId}});
 
 				if (dbDownvote == undefined) {
-				console.log("Nothing to downvote");
-				return {downvoted: false, msg: "Nothing to downvote"};		
+					console.log("Nothing to downvote");
+					return {downvoted: false, msg: "Nothing to downvote"};		
 				}
 
 				await getConnection()
