@@ -28,26 +28,34 @@ export class CommentService {
 		let auth = await this.verify(req.cookies?.JWT, comment.userId);
 
 		if (auth) {
-		  try {
-			let commentRelation = await this.commentRepository.save(comment);
-		
-			await getConnection()
-			.createQueryBuilder()
-			.relation(Post, "comment")
-			.of(comment.postId)         // We add into the post with this postId ...
-			.add(commentRelation.id);   // ... a comment with this id
-		
-			await getConnection()
-			.createQueryBuilder()
-			.relation(User, "comment")
-			.of(comment.userId)         // We add into the user with this userId ...
-			.add(commentRelation.id);   // ... a comment with this id 
+			const post = await this.commentRepository.findOne({relations: ['post','user'],  where: { post : comment.postId }});
+			
+			if (post !== undefined) {
+				try {
+					let commentRelation = await this.commentRepository.save(comment);
+				
+					await getConnection()
+					.createQueryBuilder()
+					.relation(Post, "comment")
+					.of(comment.postId)         // We add into the post with this postId ...
+					.add(commentRelation.id);   // ... a comment with this id
+				
+					await getConnection()
+					.createQueryBuilder()
+					.relation(User, "comment")
+					.of(comment.userId)         // We add into the user with this userId ...
+					.add(commentRelation.id);   // ... a comment with this id 
 
-			return {posted: true, msg: "Comment created"};
-		  } catch(err) {
-			console.log('Error posting comment: ' + err);
-			return {posted: false, msg: err}; 
-		  }
+					return {posted: true, msg: "Comment created"};
+				} catch(err) {
+
+					console.log('Error posting comment: ' + err);
+
+					return {posted: false, msg: err}; 
+				}
+			} else {
+				return {posted: false, msg: "This post does not exist"};	      
+			}
 	  } else {
        		return {posted: false, msg: "User not authorized to perform this operation"};	      
 	  }
