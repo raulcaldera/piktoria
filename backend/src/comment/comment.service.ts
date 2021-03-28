@@ -28,37 +28,30 @@ export class CommentService {
 		let auth = await this.verify(req.cookies?.JWT, comment.userId);
 
 		if (auth) {
-			const post = await this.commentRepository.findOne({relations: ['post','user'],  where: { post : comment.postId }});
+			try {
+				var commentRelation = await this.commentRepository.save(comment);
 			
-			if (post !== undefined) {
-				try {
-					let commentRelation = await this.commentRepository.save(comment);
-				
-					await getConnection()
-					.createQueryBuilder()
-					.relation(Post, "comment")
-					.of(comment.postId)         // We add into the post with this postId ...
-					.add(commentRelation.id);   // ... a comment with this id
-				
-					await getConnection()
-					.createQueryBuilder()
-					.relation(User, "comment")
-					.of(comment.userId)         // We add into the user with this userId ...
-					.add(commentRelation.id);   // ... a comment with this id 
+				await getConnection()
+				.createQueryBuilder()
+				.relation(Post, "comment")
+				.of(comment.postId)         // We add into the post with this postId ...
+				.add(commentRelation.id);   // ... a comment with this id
+			
+				await getConnection()
+				.createQueryBuilder()
+				.relation(User, "comment")
+				.of(comment.userId)         // We add into the user with this userId ...
+				.add(commentRelation.id);   // ... a comment with this id 
 
-					return {posted: true, msg: "Comment created"};
-				} catch(err) {
-
-					console.log('Error posting comment: ' + err);
-
-					return {posted: false, msg: err}; 
-				}
-			} else {
-				return {posted: false, msg: "This post does not exist"};	      
+				return {posted: true, msg: "Comment created"};
+			} catch(err) {
+				console.log('Error posting comment: ' + err);
+				await this.commentRepository.delete({id: commentRelation.id});
+				return {posted: false, msg: err}; 
 			}
-	  } else {
-       		return {posted: false, msg: "User not authorized to perform this operation"};	      
-	  }
+		} else {
+			return {posted: false, msg: "User not authorized to perform this operation"};	      
+		}
 	}
 	
 	async getCommentById(id: number) {
@@ -66,16 +59,19 @@ export class CommentService {
 	}
 
 	async getCommentByPostId(postId: number) {
-		return await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }}); 
+		const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }}); 
+		return {postId : postId, commentCount: postComments.length , postComments : postComments}
 	}
 
 	async getCommentByUserId(userId: number) {
-		return await this.commentRepository.find({relations: ['post','user'],  where: { user : userId }}); 
+		const userComments = await this.commentRepository.find({relations: ['post','user'],  where: { user : userId }});
+		return {userId : userId, commentCount: userComments.length , userComments : userComments}
+
 	}	  
 
 	async updateComment(updatedComment : {id: number , comment: string }, req) {
 		let comment = await this.commentRepository.findOne({relations: ['post','user'],  where: { id : updatedComment.id }});
-		let auth = await this.verify(req.cookies?.JWT, comment.user.id);
+		let auth = await this.verify(req.cookies?.JWT, comment?.user?.id);
 
 		if (auth) { 
 			try {
@@ -97,16 +93,11 @@ export class CommentService {
 
 	async deleteComment(id: number, req) {
 		let comment = await this.commentRepository.findOne({relations: ['post','user'],  where: { id : id }});
-		let auth = await this.verify(req.cookies?.JWT, comment.user.id);
+		let auth = await this.verify(req.cookies?.JWT, comment?.user?.id);
 
 		if (auth) { 
 			try {		
-				await getConnection()
-				.createQueryBuilder()
-				.delete()
-				.from(Comment)
-				.where("id = :id", { id: id })
-				.execute();
+				await this.commentRepository.delete({id: id});
 				return {deleted: true, msg: "Comment deleted"};
 			} catch(err) {
 				return {deleted: false, msg: err};

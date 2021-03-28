@@ -35,7 +35,7 @@ export class PostUpvoteService {  constructor(
 			}
 
 			try {
-				let postUpvoteRelation = await this.postUpvoteRepository.save({}); 
+				var postUpvoteRelation = await this.postUpvoteRepository.save({}); 
 
 				await getConnection()
 				.createQueryBuilder()
@@ -52,6 +52,7 @@ export class PostUpvoteService {  constructor(
 				return {upvoted: true, postUpvoteId: postUpvoteRelation.id, msg: "Post Upvoted"};	
 			} catch(err) {
 				console.log('Error upvoting post: ' + err);
+				await this.postUpvoteRepository.delete({id: postUpvoteRelation.id});
 				return {upvoted: false, postUpvoteId: false, msg: err};	            
 			}
 		} else {
@@ -87,13 +88,14 @@ export class PostUpvoteService {  constructor(
 					return {downvoted: false, msg: "Nothing to downvote"};		
 				}
 
-				await getConnection()
+				/*await getConnection()
 				.createQueryBuilder()
 				.delete()
 				.from(PostUpvote)
 				.where("id = :id", { id: dbDownvote.id })
-				.execute();	
-
+				.execute();*/
+				
+				await this.postUpvoteRepository.delete({id: dbDownvote.id});
 				return {downvoted: true, msg: "Post Downvoted"};	
 			} catch(err) {
 				console.log('Error downvoting post: ' + err);

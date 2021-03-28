@@ -39,7 +39,7 @@ export class CommentUpvoteService {  constructor(
             }
 
             try {
-                let commentUpvoteRelation = await this.commentUpvoteRepository.save({}); 
+                var commentUpvoteRelation = await this.commentUpvoteRepository.save({}); 
 
                 await getConnection()
                 .createQueryBuilder()
@@ -62,6 +62,7 @@ export class CommentUpvoteService {  constructor(
                 return {upvoted: true, commentUpvoteId: commentUpvoteRelation.id, msg: "Comment Upvoted"};	
             } catch(err) {
                 console.log('Error upvoting comment: ' + err);
+				await this.commentUpvoteRepository.delete({id: commentUpvoteRelation.id});
                 return {upvoted: false, commentUpvoteId: false, msg: err};	            
             }
         } else {
@@ -100,13 +101,14 @@ export class CommentUpvoteService {  constructor(
                     return {downvoted: false, msg: "Nothing to downvote"};		
                 }
 
-                await getConnection()
+                /*await getConnection()
                 .createQueryBuilder()
                 .delete()
                 .from(CommentUpvote)
                 .where("id = :id", { id: dbDownvote.id })
-                .execute();	
-
+                .execute();*/
+                
+				await this.commentUpvoteRepository.delete({id: dbDownvote.id});
                 return {downvoted: true, msg: "Comment Downvoted"};	
             } catch(err) {
                 console.log('Error downvoting comment: ' + err);
