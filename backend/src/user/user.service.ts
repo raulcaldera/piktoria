@@ -80,6 +80,7 @@ export class UserService {
 
 	async getOneById(id: number) {
 		return await this.userRepository.findOne({ id: id });
+
 	}
 
 	/*Update Username*/

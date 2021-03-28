@@ -47,9 +47,10 @@ export class UserController {
     async logout(@Res() res: Response) {
         try {
             res.cookie('JWT', '', { maxAge: 0, httpOnly: true });
-            return res.send();
+            return res.send({logedOut: true, msg: "User logged out"});
         } catch (err) {
             console.log('Error in logOut: ' + err);
+            return res.send({logedOut: false, msg: err});
         }
     }
 
@@ -80,8 +81,18 @@ export class UserController {
     /*Delete*/
     @Delete('/:id')
     @UseGuards(AuthGuard)
-    deleteUser(@Param('id') id: number, @Req() req: Request) {        
-        return this.userService.deleteUser(id, req);  
+    async deleteUser(@Param('id') id: number, @Req() req: Request, @Res() res: Response) {
+        try {
+            let msg = await this.userService.deleteUser(id, req);
+            if (msg.deleted) {
+                res.cookie('JWT', '', { maxAge: 0, httpOnly: true });
+            }
+            return res.send(msg)
+        } catch (err) {
+            console.log('Error in logOut: ' + err);
+            return res.send({deleted: false, msg: err});
+        }      
+        
     }
 
 }

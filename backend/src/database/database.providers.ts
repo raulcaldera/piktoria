@@ -5,6 +5,8 @@ export const databaseProviders = [
     provide: 'DATABASE_CONNECTION',
     useFactory: async () => await createConnection({
       type: 'postgres',
+      /*Docker */
+      /*host: 'db',*/
       host: 'localhost',
       port: 5432,
       username: 'root',
