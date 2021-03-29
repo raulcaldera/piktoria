@@ -1,10 +1,18 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import React from 'react';
+import RenderPost from '../Post/RenderPost';
 
-const Post = () => {
+const Post = () => { 
     let { postId } = useParams();
 
     return (
-        <p>This is post: {postId}</p>
+        <div className="container">
+            <div className="row align-items-start">
+                <div className="Posts">   
+                    <RenderPost postId={postId} />             
+                </div>                
+            </div>                    
+        </div>                               
     )    
 }
 
