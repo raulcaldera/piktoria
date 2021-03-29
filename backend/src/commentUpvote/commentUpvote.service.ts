@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ICommentUpvote } from '../commentUpvote/interfaces/commentUpvote.interface';
 import { Repository, getConnection } from 'typeorm';
-import { Post } from '../post/post.entity';
 import { User } from '../user/user.entity';
 import { Comment } from '../comment/comment.entity';
 import { CommentUpvote } from '../commentUpvote/commentUpvote.entity';
@@ -29,8 +28,8 @@ export class CommentUpvoteService {  constructor(
 
         if (auth) {
             let dbUpvote = await this.commentUpvoteRepository.findOne({
-                relations: ['post','user','comment'],  
-                where: { post : commentUpvote.postId, user : commentUpvote.userId, comment : commentUpvote.commentId }
+                relations: ['user','comment'],  
+                where: { user : commentUpvote.userId, comment : commentUpvote.commentId }
             });
 
             if (dbUpvote !== undefined) {
@@ -45,13 +44,7 @@ export class CommentUpvoteService {  constructor(
                 .createQueryBuilder()
                 .relation(User, "commentUpvote")
                 .of(commentUpvote.userId)         // We add into the user with this userId ...
-                .add(commentUpvoteRelation.id);     // ... a comment upvote with this id	  
-                
-                await getConnection()
-                .createQueryBuilder()
-                .relation(Post, "commentUpvote")
-                .of(commentUpvote.postId)         // We add into the post with this postId ...
-                .add(commentUpvoteRelation.id);     // ... a comment upvote with this id	  
+                .add(commentUpvoteRelation.id);     // ... a comment upvote with this id	    
                 
                 await getConnection()
                 .createQueryBuilder()
@@ -71,17 +64,17 @@ export class CommentUpvoteService {  constructor(
     }  
 
     async getUpvoteById(id: number) {
-        return await this.commentUpvoteRepository.findOne({relations: ['post','user','comment'],  where: { id : id }});
+        return await this.commentUpvoteRepository.findOne({relations: ['user','comment'],  where: { id : id }});
     }
     
     async getCommentUpvotes(commentId: number) {
-        const upvotes = await this.commentUpvoteRepository.find({relations: ['post','user','comment'],  where: { comment : commentId }});
+        const upvotes = await this.commentUpvoteRepository.find({relations: ['user','comment'],  where: { comment : commentId }});
         return {commentId : commentId, commentUpvoteCount: upvotes.length , upvotes : upvotes}
     
     }
 
     async getCommentUpvotesByUserId(userId: number) {
-        const upvotes = await this.commentUpvoteRepository.find({relations: ['post','user','comment'],  where: { user : userId }});
+        const upvotes = await this.commentUpvoteRepository.find({relations: ['user','comment'],  where: { user : userId }});
         return {userId : userId, commentUpvoteCount: upvotes.length , upvotes : upvotes}
 
     }
@@ -92,21 +85,14 @@ export class CommentUpvoteService {  constructor(
         if (auth) {
             try {
                 let dbDownvote = await this.commentUpvoteRepository.findOne({
-                    relations: ['post','user','comment'],  
-                    where: { post : commentDownvote.postId, user : commentDownvote.userId, comment : commentDownvote.commentId }
+                    relations: ['user','comment'],  
+                    where: { user : commentDownvote.userId, comment : commentDownvote.commentId }
                 });
 
                 if (dbDownvote == undefined) {
                     console.log("Nothing to downvote");
                     return {downvoted: false, msg: "Nothing to downvote"};		
                 }
-
-                /*await getConnection()
-                .createQueryBuilder()
-                .delete()
-                .from(CommentUpvote)
-                .where("id = :id", { id: dbDownvote.id })
-                .execute();*/
                 
 				await this.commentUpvoteRepository.delete({id: dbDownvote.id});
                 return {downvoted: true, msg: "Comment Downvoted"};	

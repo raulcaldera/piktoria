@@ -87,13 +87,6 @@ export class PostUpvoteService {  constructor(
 					console.log("Nothing to downvote");
 					return {downvoted: false, msg: "Nothing to downvote"};		
 				}
-
-				/*await getConnection()
-				.createQueryBuilder()
-				.delete()
-				.from(PostUpvote)
-				.where("id = :id", { id: dbDownvote.id })
-				.execute();*/
 				
 				await this.postUpvoteRepository.delete({id: dbDownvote.id});
 				return {downvoted: true, msg: "Post Downvoted"};	

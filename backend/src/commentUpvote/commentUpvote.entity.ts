@@ -13,10 +13,6 @@ export class CommentUpvote {
   @JoinColumn({name : 'commentId'})
   comment: CommentEntity;
 
-  @ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  @JoinColumn({name : 'postId'})
-  post: PostEntity;
-
   @ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
   @JoinColumn({name : 'userId'})
   user: UserEntity;

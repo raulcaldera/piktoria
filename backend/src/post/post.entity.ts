@@ -27,8 +27,5 @@ export class Post {
 
   @OneToMany(() => PostUpvoteEntity, postUpvote => postUpvote.post , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
   postUpvote: PostUpvoteEntity[];
-  
-  @OneToMany(() => CommentUpvoteEntity, commentUpvote => commentUpvote.post , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  commentUpvote: CommentUpvoteEntity[];
 
 }
