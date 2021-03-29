@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <div className="container-fluid">
             <div className="row align-items-start">
-                <div className="Posts">
+                <div className="PostSection">
                     {posts.map(post => 
                         <RenderPost postId={post.id} />
                     )}

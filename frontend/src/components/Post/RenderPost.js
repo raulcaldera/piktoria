@@ -22,16 +22,16 @@ const RenderPost = (props) => {
     return (
         <div className="Post">
             {posts.map(post => 
-                <p key={postId}>
+                <div key={postId}>
                     <a href={`/post/${post.id}`}>Title: {post.title}</a><br></br> 
                     Body: {post.body}<br></br> 
                     Author: {post.author.username}<br></br>
                     Timestamp: {post.timestamp}<br></br>
                     Upvotes: {postUpvotes.postUpvoteCount}<br></br>
                     Comments: {postComments.commentCount}<br></br>
-                </p>
+                </div>
             )}
-        </div>                           
+        </div>                   
     )    
 }
 

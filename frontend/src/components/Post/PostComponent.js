@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import React from 'react';
 import RenderPost from '../Post/RenderPost';
+import RenderComment from '../Post/RenderComment';
 
 const Post = () => { 
     let { postId } = useParams();
@@ -8,10 +9,15 @@ const Post = () => {
     return (
         <div className="container">
             <div className="row align-items-start">
-                <div className="Posts">   
+                <div className="PostSection">   
                     <RenderPost postId={postId} />             
                 </div>                
-            </div>                    
+            </div>
+            <div className="row align-items-start">
+                <div className="CommentSection">   
+                    <RenderComment postId={postId} />             
+                </div>                
+            </div>                       
         </div>                               
     )    
 }
