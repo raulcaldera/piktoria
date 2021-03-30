@@ -25,7 +25,7 @@ const RenderPost = (props) => {
                 <div key={postId}>
                     <a href={`/post/${post.id}`}>Title: {post.title}</a><br></br> 
                     Body: {post.body}<br></br> 
-                    Author: {post.author.username}<br></br>
+                    <a href={`/user/${post.author.id}`}>Author: {post.author.username}</a><br></br>
                     Timestamp: {post.timestamp}<br></br>
                     Upvotes: {postUpvotes.postUpvoteCount}<br></br>
                     Comments: {postComments.commentCount}<br></br>

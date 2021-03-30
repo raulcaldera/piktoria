@@ -7,7 +7,7 @@ const Post = () => {
     let { postId } = useParams();
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row align-items-start">
                 <div className="PostSection">   
                     <RenderPost postId={postId} />             
