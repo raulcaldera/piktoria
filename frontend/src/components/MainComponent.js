@@ -4,6 +4,7 @@ import Post from './Post/PostComponent';
 import Profile from './Profile/ProfileComponent';
 import User from './User/UserComponent';
 import Header from './Header/HeaderComponent';
+import Footer from './Footer/FooterComponent';
 import { Switch, Route } from 'react-router-dom';
 
 const Main = () => {
@@ -25,6 +26,7 @@ const Main = () => {
                 </Route>
                 <Route path="*">Not found</Route>
             </Switch> 
+            <Footer />
         </div>               
     );
 }
