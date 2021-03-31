@@ -10,14 +10,19 @@ const RenderPost = (props) => {
     const [postComments, setPostComments] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;                    
         (async () => {
             let postData = await AxiosApi.get('/post/' + postId).then(({ data }) => data);
-            setPost([postData]);
             let postCommentData = await AxiosApi.get('/comment/post/' + postId).then(({ data }) => data);
-            setPostComments(postCommentData);
             let postUpvoteData = await AxiosApi.get('/postupvotes/post/' + postId).then(({ data }) => data);
-            setPostUpvotes(postUpvoteData);
-        })();     
+            
+            if (isMounted) {
+                setPost([postData]);
+                setPostComments(postCommentData);
+                setPostUpvotes(postUpvoteData);
+            }
+        })(); 
+        return () => { isMounted = false };
     }, [postId]);
 
     return (

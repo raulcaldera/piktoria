@@ -6,10 +6,14 @@ const Home = () => {
     const [posts, setPost] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
         (async () => {
             let postData = await AxiosApi.get('/post').then(({ data }) => data);
-            setPost(postData);
+            if (isMounted) {
+                setPost(postData);
+            }
         })();
+        return () => { isMounted = false };
     });
 
     return (

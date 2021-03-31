@@ -9,20 +9,27 @@ import { Switch, Route } from 'react-router-dom';
 
 const Main = () => {
     const [auth, setAuth] = useState(false); 
+    const [user, setUser] = useState({userId: null, username: ''}); 
 
     useEffect(() => {
         var localAuth = localStorage.getItem("auth");
         localAuth = (localAuth === 'true'); /*convert to boolean*/
         setAuth(localAuth);   
+
+        var localUserId = localStorage.getItem("userId");     
+        var localUsername = localStorage.getItem("username");
+        setUser({userId: localUserId, username: localUsername});     
     }, []);
 
     useEffect(() => {
         localStorage.setItem("auth", auth);
-    }, [auth]);  
+        localStorage.setItem("userId", user.userId);
+        localStorage.setItem("username", user.username);
+    }, [auth, user]);  
 
     return(
         <div>
-            <Header auth={auth} setAuth={setAuth}/>
+            <Header auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
             <Switch>
                 <Route exact path="/">
                     <Home />
@@ -30,8 +37,8 @@ const Main = () => {
                 <Route exact path="/post/:postId">
                     <Post />
                 </Route>
-                <Route exact path="/profile">
-                    <Profile />
+                <Route exact path="/profile/:userId">
+                    <Profile user={user} setUser={setUser}/>
                 </Route>
                 <Route exact path="/user/:userId">
                     <User />

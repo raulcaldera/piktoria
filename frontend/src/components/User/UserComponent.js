@@ -9,10 +9,14 @@ const User = () => {
     const [posts, setPost] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
         (async () => {
             let postData = await AxiosApi.get('/post/author/' + userId).then(({ data }) => data);
-            setPost(postData);
+            if (isMounted) {
+                setPost(postData);
+            }
         })();
+        return () => { isMounted = false };
     });
 
     return (
@@ -20,7 +24,7 @@ const User = () => {
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
-                        <RenderPost postId={post.id} />
+                        <RenderPost key={post.id} postId={post.id} />
                     )}
                 </div>                
             </div>                    

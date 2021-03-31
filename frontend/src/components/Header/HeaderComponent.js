@@ -5,8 +5,11 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
 import { NavLink } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
 import styles from "./Header.module.css";
+import { useHistory } from "react-router-dom";
 
 const Header = (props) => {
+
+    const history = useHistory();
 
     const [isNavOpen, setNav] = useState(false);
     const [isLoginModalOpen, setLoginModal] = useState(false);
@@ -16,6 +19,8 @@ const Header = (props) => {
     const [modalMsg, setModalMsg] = useState('');
     const auth = props.auth;
     const setAuth = props.setAuth;  
+    const user = props.user;
+    const setUser = props.setUser;  
 
     const toggleNav = () => {
         setNav(!isNavOpen);
@@ -47,6 +52,7 @@ const Header = (props) => {
             if (res.data.logedIn && res.status === 200) {
                 toggleLoginModal();
                 setAuth(true);
+                setUser({ userId: res.data.userId, username: res.data.username });
             } else {
                 setModalMsg(res.data.msg);
             }
@@ -61,6 +67,7 @@ const Header = (props) => {
             if (res.data.signedUp && res.status === 200) {
                 toggleSignupModal();
                 setAuth(true);
+                setUser({ userId: res.data.userId, username: res.data.username });
             } else {
                 setModalMsg(res.data.msg);
             }
@@ -74,6 +81,8 @@ const Header = (props) => {
         .then(function (res) {
             if (res.data.logedOut && res.status === 200) {
                 setAuth(false);
+                setUser({ userId: null, username: '' });
+                history.push("/");                
             } else {
                 setModalMsg(res.data.msg);
             }
@@ -82,7 +91,6 @@ const Header = (props) => {
     }    
 
     const RenderNavButtons = () => {
-    
         if(!auth) {
             return (
                 <React.Fragment>
@@ -107,7 +115,7 @@ const Header = (props) => {
                 <React.Fragment>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink className="nav-link " to="/profile">
+                            <NavLink className="nav-link " to={`/profile/${user.userId}`}>
                                 <span className="fa fa-user fa-lg"></span> Profile
                             </NavLink>
                         </NavItem>                        
