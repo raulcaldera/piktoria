@@ -3,25 +3,29 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
         Button, Modal, ModalHeader, ModalBody,
         Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import styles from "./Header.module.css"
+import AxiosApi from '../AxiosApi';
+import styles from "./Header.module.css";
 
 const Header = () => {
     const [isNavOpen, setNav] = useState(false);
     const [isLoginModalOpen, setLoginModal] = useState(false);
     const [isSignupModalOpen, setSignupModal] = useState(false);
-    const [logInData, setlogInData] = useState({ email: '', password: '' })
-    const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' })
- 
+    const [logInData, setlogInData] = useState({ email: '', password: '' });
+    const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' });
+    const [modalMsg, setModalMsg] = useState('');
+
     const toggleNav = () => {
         setNav(!isNavOpen);
     };
     
     const toggleLoginModal = () => {
         setLoginModal(!isLoginModalOpen);
+        setModalMsg('');
     };
 
     const toggleSignupModal = () => {
         setSignupModal(!isSignupModalOpen);
+        setModalMsg('');
     };
     
     const handleLoginInputChange = (event) => {
@@ -40,14 +44,50 @@ const Header = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        toggleLoginModal();
-        alert("Email: " + logInData.email + " Password: " + logInData.password);
+        AxiosApi.post('/user/login/', {
+            email: logInData.email,
+            password: logInData.password
+        })
+        .then(function (res) {
+            if (res.data.logedIn && res.status === 200) {
+                toggleLoginModal();
+                console.log(res);
+                console.log(res.data.msg);
+                /*cookies.set('jwt', res.data.jwt)*/
+            } else {
+                console.log(res);
+                console.log(res.data.msg);
+                setModalMsg(res.data.msg);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        toggleSignupModal();
-        alert("Username: " + signUpData.username + "Email: " + signUpData.email + " Password: " + signUpData.password);
+        AxiosApi.post('/user/signup/', {
+            username: signUpData.username,
+            email: signUpData.email,
+            password: signUpData.password
+        })
+        .then(function (res) {
+            if (res.data.signedUp && res.status === 200) {
+                toggleSignupModal();
+                console.log(res);
+                console.log(res.data.msg);
+                console.log(document.cookies);
+                /*cookies.set('jwt', res.data.jwt)*/
+            } else {
+                console.log(res);
+                console.log(res.data.msg);
+                setModalMsg(res.data.msg);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });        
     }    
 
     return(
@@ -96,7 +136,8 @@ const Header = () => {
                             <Input type="password" onChange={handleLoginInputChange} name="password"/>
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Log In</Button>
-                    </Form>                    
+                    </Form>
+                    {modalMsg}                       
                 </ModalBody>               
             </Modal>
             <Modal isOpen={isSignupModalOpen} toggle={toggleSignupModal}>
@@ -116,7 +157,8 @@ const Header = () => {
                             <Input type="password" onChange={handleSignupInputChange} name="password"/>
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Sign Up</Button>
-                    </Form>                    
+                    </Form>
+                    {modalMsg}          
                 </ModalBody>               
             </Modal>
         </React.Fragment>

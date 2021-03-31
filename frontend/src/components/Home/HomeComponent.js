@@ -17,7 +17,7 @@ const Home = () => {
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
-                        <RenderPost postId={post.id} />
+                        <RenderPost key={post.id} postId={post.id} />
                     )}
                 </div>                
             </div>                    

@@ -37,22 +37,22 @@ export class UserService {
 		const dbEmail = await this.userRepository.findOne({email: user?.email});
 	
 		if (dbUser !== undefined) {
-			return {signedUp: false, jwt: false , msg: "User already exists"};
+			return {signedUp: false, jwt: false, userId: false,  msg: "User already exists"};
 		}
 
 		if (dbEmail !== undefined) {
-			return {signedUp: false, jwt: false , msg: "Email already exists"};
+			return {signedUp: false, jwt: false, userId: false,  msg: "Email already exists"};
 		}
 	
 		user.password = hashedPassword;
 		const insertedUser = await this.userRepository.save(user);
 	
 		if (!insertedUser) {
-			return {signedUp: false, jwt: false, msg: "User creation error"};
+			return {signedUp: false, jwt: false, userId: false,  msg: "User creation error"};
 		}
 
 		const token = await this.createJwt(insertedUser.id, insertedUser.username);
-		return {signedUp: true, jwt: token, msg: "Signed Up!"};
+		return {signedUp: true, jwt: token, userId: insertedUser.id, msg: "Signed Up!"};
 	
 	  }
 
@@ -64,13 +64,13 @@ export class UserService {
 			const validPassword = await bcrypt.compare(user.password, dbUser.password);
 			if (validPassword) {
 				const token = await this.createJwt(dbUser.id, dbUser.username);
-				return {logedIn: true, jwt: token, msg: "Loged In!"};
+				return {logedIn: true, jwt: token, userId: dbUser.id, msg: "Loged In!"};
 			} else {
-				return {logedIn: false, jwt: false, msg: "Invalid password"};
+				return {logedIn: false, jwt: false, userId: false, msg: "Invalid password"};
 			}
 		}
 
-		return {logedIn: false, jwt: false, msg: "User not found"};
+		return {logedIn: false, jwt: false, userId: false, msg: "User not found"};
 	}  
 
 	/*Read*/

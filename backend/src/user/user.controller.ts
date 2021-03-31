@@ -19,7 +19,7 @@ export class UserController {
             }
 
             res.cookie('JWT', signupRes.jwt, { maxAge: 900000, httpOnly: true });
-            res.send(signupRes);
+            res.status(200).send(signupRes);
         } catch (err) {
             console.log('Error in signUp: ' + err);
         }
@@ -36,7 +36,7 @@ export class UserController {
             }
 
             res.cookie('JWT', loginRes.jwt, { maxAge: 900000, httpOnly: true });
-            res.send(loginRes);
+            res.status(200).send(loginRes);
         } catch (err) {
             console.log('Error in logIn: ' + err);
         }
@@ -56,6 +56,7 @@ export class UserController {
 
     /*Read*/
     @Get('/')
+    @UseGuards(AuthGuard)
     getAll() {
         return this.userService.getAll();
     }
