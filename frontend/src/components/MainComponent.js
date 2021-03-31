@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './Home/HomeComponent';
 import Post from './Post/PostComponent';
 import Profile from './Profile/ProfileComponent';
@@ -8,9 +8,21 @@ import Footer from './Footer/FooterComponent';
 import { Switch, Route } from 'react-router-dom';
 
 const Main = () => {
+    const [auth, setAuth] = useState(false); 
+
+    useEffect(() => {
+        var localAuth = localStorage.getItem("auth");
+        localAuth = (localAuth === 'true'); /*convert to boolean*/
+        setAuth(localAuth);   
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("auth", auth);
+    }, [auth]);  
+
     return(
         <div>
-            <Header />
+            <Header auth={auth} setAuth={setAuth}/>
             <Switch>
                 <Route exact path="/">
                     <Home />

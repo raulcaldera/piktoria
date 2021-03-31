@@ -6,13 +6,16 @@ import { NavLink } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = (props) => {
+
     const [isNavOpen, setNav] = useState(false);
     const [isLoginModalOpen, setLoginModal] = useState(false);
     const [isSignupModalOpen, setSignupModal] = useState(false);
     const [logInData, setlogInData] = useState({ email: '', password: '' });
     const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' });
     const [modalMsg, setModalMsg] = useState('');
+    const auth = props.auth;
+    const setAuth = props.setAuth;  
 
     const toggleNav = () => {
         setNav(!isNavOpen);
@@ -29,97 +32,110 @@ const Header = () => {
     };
     
     const handleLoginInputChange = (event) => {
-        setlogInData({
-            ...logInData,
-            [event.target.name] : event.target.value
-        })
+        setlogInData({...logInData, [event.target.name] : event.target.value})
     }     
 
     const handleSignupInputChange = (event) => {
-        setSignUpData({
-            ...signUpData,
-            [event.target.name] : event.target.value
-        })
+        setSignUpData({...signUpData, [event.target.name] : event.target.value})
     }   
 
     const handleLogin = (event) => {
         event.preventDefault();
-        AxiosApi.post('/user/login/', {
-            email: logInData.email,
-            password: logInData.password
-        })
+        
+        AxiosApi.post('/user/login/', { email: logInData.email, password: logInData.password })
         .then(function (res) {
             if (res.data.logedIn && res.status === 200) {
                 toggleLoginModal();
-                console.log(res);
-                console.log(res.data.msg);
-                /*cookies.set('jwt', res.data.jwt)*/
+                setAuth(true);
             } else {
-                console.log(res);
-                console.log(res.data.msg);
                 setModalMsg(res.data.msg);
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch(function (error) { console.log(error) });
     }
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        AxiosApi.post('/user/signup/', {
-            username: signUpData.username,
-            email: signUpData.email,
-            password: signUpData.password
-        })
+        AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
         .then(function (res) {
             if (res.data.signedUp && res.status === 200) {
                 toggleSignupModal();
-                console.log(res);
-                console.log(res.data.msg);
-                console.log(document.cookies);
-                /*cookies.set('jwt', res.data.jwt)*/
+                setAuth(true);
             } else {
-                console.log(res);
-                console.log(res.data.msg);
                 setModalMsg(res.data.msg);
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });        
+        .catch(function (error) { console.log(error) });        
+    }  
+
+    const handleLogOut = (event) => {
+        event.preventDefault();
+        AxiosApi.post('/user/logout/')
+        .then(function (res) {
+            if (res.data.logedOut && res.status === 200) {
+                setAuth(false);
+            } else {
+                setModalMsg(res.data.msg);
+            }
+        })
+        .catch(function (error) { console.log(error) });        
     }    
+
+    const RenderNavButtons = () => {
+    
+        if(!auth) {
+            return (
+                <React.Fragment>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <Button outline onClick={toggleLoginModal}>
+                                <span className="fa fa-sign-in fa-lg"></span> Log In
+                            </Button>
+                        </NavItem>
+                    </Nav>
+                    <Nav className="ml" navbar>
+                        <NavItem>
+                            <Button outline onClick={toggleSignupModal}>
+                                <span className="fa fa-sign-in fa-lg"></span> Sign Up
+                            </Button>
+                        </NavItem>
+                    </Nav>
+            </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <Nav navbar>
+                        <NavItem>
+                            <NavLink className="nav-link " to="/profile">
+                                <span className="fa fa-user fa-lg"></span> Profile
+                            </NavLink>
+                        </NavItem>                        
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <Button outline onClick={handleLogOut}>
+                                <span className="fa fa-sign-out fa-lg"></span> Log Out
+                            </Button>
+                        </NavItem>
+                    </Nav>
+                </React.Fragment>
+            );
+        }      
+    }
 
     return(
         <React.Fragment>
             <Navbar light className={styles.navbar} expand="md">
                 <div className="container-fluid">
                     <NavbarToggler onClick={toggleNav} />
-                    <NavbarBrand className="mr-auto" href="/">
-                        Brand
+                    <NavbarBrand className="mr-auto">
+                        <NavLink className="nav-link " to="/">
+                            Brand
+                        </NavLink>
                     </NavbarBrand>
                     <Collapse isOpen={isNavOpen} navbar>
-                        <Nav navbar>
-                        <NavItem>
-                            <NavLink className="nav-link " to="/">
-                                <span className="fa fa-home fa-lg"></span> Home
-                            </NavLink>
-                        </NavItem>                        
-                        </Nav>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Button outline onClick={toggleLoginModal}>
-                                    <span className="fa fa-sign-in fa-lg"></span> Log In
-                                </Button>
-                            </NavItem>
-                        </Nav>
-                        <Nav className="ml" navbar>
-                            <NavItem>
-                                <Button outline onClick={toggleSignupModal}>
-                                    <span className="fa fa-sign-in fa-lg"></span> Sign Up
-                                </Button>
-                            </NavItem>
-                        </Nav>
+                        <RenderNavButtons />
                     </Collapse> 
                 </div>    
             </Navbar>

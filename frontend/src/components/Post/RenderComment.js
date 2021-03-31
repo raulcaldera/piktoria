@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AxiosApi from '../AxiosApi';
 import RenderCommentUpvotes from '../Post/RenderCommentUpvotes';
+import { Link } from 'react-router-dom';
 
 const RenderComment = (props) => {
     let postId = props.postId;
@@ -18,7 +19,7 @@ const RenderComment = (props) => {
                 {postComments.map(comment => 
                     <div key={comment.id}>
                         Comment: {comment.comment}<br></br> 
-                        Author: {comment.user.username}<br></br>
+                        <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
                         Timestamp: {comment.timestamp}<br></br>
                         Upvotes: <RenderCommentUpvotes commentId={comment.id} /><br></br>
                     </div>

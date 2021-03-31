@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
 
 const RenderPost = (props) => {
@@ -23,9 +24,9 @@ const RenderPost = (props) => {
         <div className="Post">
             {posts.map(post => 
                 <div key={postId}>
-                    <a href={`/post/${post.id}`}>Title: {post.title}</a><br></br> 
+                    <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
                     Body: {post.body}<br></br> 
-                    <a href={`/user/${post.author.id}`}>Author: {post.author.username}</a><br></br>
+                    <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
                     Timestamp: {post.timestamp}<br></br>
                     Upvotes: {postUpvotes.postUpvoteCount}<br></br>
                     Comments: {postComments.commentCount}<br></br>

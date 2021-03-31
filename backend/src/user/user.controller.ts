@@ -47,7 +47,7 @@ export class UserController {
     async logout(@Res() res: Response) {
         try {
             res.cookie('JWT', '', { maxAge: 0, httpOnly: true });
-            return res.send({logedOut: true, msg: "User loged out"});
+            return res.status(200).send({logedOut: true, msg: "User loged out"});
         } catch (err) {
             console.log('Error in logOut: ' + err);
             return res.send({logedOut: false, msg: err});
