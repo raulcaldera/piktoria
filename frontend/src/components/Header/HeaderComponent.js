@@ -9,8 +9,6 @@ import { useHistory } from "react-router-dom";
 
 const Header = (props) => {
 
-    const history = useHistory();
-
     const [isNavOpen, setNav] = useState(false);
     const [isLoginModalOpen, setLoginModal] = useState(false);
     const [isSignupModalOpen, setSignupModal] = useState(false);
@@ -20,7 +18,8 @@ const Header = (props) => {
     const auth = props.auth;
     const setAuth = props.setAuth;  
     const user = props.user;
-    const setUser = props.setUser;  
+    const setUser = props.setUser;
+    const history = useHistory();  
 
     const toggleNav = () => {
         setNav(!isNavOpen);

@@ -5,6 +5,7 @@ import Profile from './Profile/ProfileComponent';
 import User from './User/UserComponent';
 import Header from './Header/HeaderComponent';
 import Footer from './Footer/FooterComponent';
+import { PrivateRoute } from './PrivateRoute';
 import { Switch, Route } from 'react-router-dom';
 
 const Main = () => {
@@ -37,12 +38,10 @@ const Main = () => {
                 <Route exact path="/post/:postId">
                     <Post />
                 </Route>
-                <Route exact path="/profile/:userId">
-                    <Profile user={user} setUser={setUser}/>
-                </Route>
                 <Route exact path="/user/:userId">
                     <User />
                 </Route>
+                <PrivateRoute exact path='/profile/:userId' component={Profile} params={{user: user, auth: auth}} />
                 <Route path="*">Not found</Route>
             </Switch> 
             <Footer />

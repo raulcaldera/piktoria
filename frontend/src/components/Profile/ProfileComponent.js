@@ -19,20 +19,26 @@ const Profile = (props) => {
         return () => { isMounted = false };
     });
 
-    return (
-        <React.Fragment>
-            <p>Hello {props.user.username}, with Id {props.user.userId}!!</p>
-            <div className="container-fluid">
-                <div className="row align-items-start">
-                    <div className="PostSection">
-                        {posts.map(post => 
-                            <RenderPost key={post.id} postId={post.id} />
-                        )}
-                    </div>                
-                </div>                    
-            </div>   
-        </React.Fragment>
-    )    
+    if (parseInt(userId) === parseInt(props.user.userId)) {
+        return (
+            <React.Fragment>
+                <p>Hello {props.user.username}, with Id {props.user.userId}!!</p>
+                <div className="container-fluid">
+                    <div className="row align-items-start">
+                        <div className="PostSection">
+                            {posts.map(post => 
+                                <RenderPost key={post.id} postId={post.id} />
+                            )}
+                        </div>                
+                    </div>                    
+                </div>   
+            </React.Fragment>
+        ) 
+    } else {
+        return (
+            <p>Not authorized</p>
+        )         
+    }
 }
 
 export default Profile;
