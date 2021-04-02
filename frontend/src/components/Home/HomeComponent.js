@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
 
-const Home = () => {
+const Home = (props) => {
     const [posts, setPost] = useState([]);
+    const userPostUpvotes = props.userPostUpvotes;
+
 
     useEffect(() => {
         let isMounted = true;
@@ -13,17 +15,19 @@ const Home = () => {
                 setPost(postData);
             }
         })();
+
         return () => { isMounted = false };
     });
 
     return (
         <div className="container-fluid">
+            <p>{userPostUpvotes}</p>  
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
                         <RenderPost key={post.id} postId={post.id} />
                     )}
-                </div>                
+                </div>              
             </div>                    
         </div>
     )    

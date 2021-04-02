@@ -6,8 +6,8 @@ import Unauthorized from '../UnauthorizedComponent';
 
 const Profile = (props) => {
     let { userId } = useParams();
-
     const [posts, setPost] = useState([]);
+    const userPostUpvotes = props.userPostUpvotes;
 
     useEffect(() => {
         let isMounted = true;
@@ -17,12 +17,14 @@ const Profile = (props) => {
                 setPost(postData);
             }
         })();
+
         return () => { isMounted = false };
     });
 
     if (parseInt(userId) === parseInt(props.user.userId)) {
         return (
             <React.Fragment>
+                <p>{userPostUpvotes}</p>      
                 <p>Hello {props.user.username}, with Id {props.user.userId}!!</p>
                 <div className="container-fluid">
                     <div className="row align-items-start">
@@ -30,7 +32,7 @@ const Profile = (props) => {
                             {posts.map(post => 
                                 <RenderPost key={post.id} postId={post.id} />
                             )}
-                        </div>                
+                        </div>             
                     </div>                    
                 </div>   
             </React.Fragment>

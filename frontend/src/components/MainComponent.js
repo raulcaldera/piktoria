@@ -12,7 +12,7 @@ import AxiosApi from './AxiosApi';
 const Main = () => {
     const [auth, setAuth] = useState(false); 
     const [user, setUser] = useState({userId: '', username: ''});
-    const [postUpvotes, setPostUpvotes] = useState([]);  
+    const [userPostUpvotes, setUserPostUpvotes] = useState([]);  
 
     useEffect(() => {
         var localAuth = localStorage.getItem("auth");
@@ -35,34 +35,39 @@ const Main = () => {
             (async () => {
                 let data = await AxiosApi.get('/postupvotes/user/' + user.userId).then(({ data }) => data);
                 if (isMounted) {
-                    console.log(data.upvotes);
-                    setPostUpvotes(data.upvotes);
+                    setUserPostUpvotes(handleUserPostUpvotes(data.upvotes)) 
                 }
             })();
         } else {
             if (isMounted) {
-                setPostUpvotes([]);
+                setUserPostUpvotes([]);
             }            
         }
         return () => { isMounted = false };
     }, [auth, user]);
 
-    console.log(postUpvotes);
+    const handleUserPostUpvotes = (upvotes) => {
+        let upvotedPostIds = [];
+        upvotes.map(postUpvote => 
+            upvotedPostIds = [...upvotedPostIds, postUpvote.post.id]
+        );
+        return upvotedPostIds;
+    }
 
     return(
         <div>
             <Header auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <Home userPostUpvotes={userPostUpvotes}/>
                 </Route>
                 <Route exact path="/post/:postId">
-                    <Post />
+                    <Post userPostUpvotes={userPostUpvotes}/>
                 </Route>
                 <Route exact path="/user/:userId">
-                    <User />
+                    <User userPostUpvotes={userPostUpvotes}/>
                 </Route>
-                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} />
+                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} userPostUpvotes={userPostUpvotes}/>
                 <Route path="*">Not found</Route>
             </Switch> 
             <Footer />

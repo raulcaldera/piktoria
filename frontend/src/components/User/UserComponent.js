@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
 
-const User = () => {
+const User = (props) => {
     let { userId } = useParams();
-
     const [posts, setPost] = useState([]);
+    const userPostUpvotes = props.userPostUpvotes;
 
     useEffect(() => {
         let isMounted = true;
@@ -16,17 +16,19 @@ const User = () => {
                 setPost(postData);
             }
         })();
+
         return () => { isMounted = false };
     });
 
     return (
         <div className="container-fluid">
+            <p>{userPostUpvotes}</p>
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
                         <RenderPost key={post.id} postId={post.id} />
                     )}
-                </div>                
+                </div>               
             </div>                    
         </div>    
     )    
