@@ -19,6 +19,8 @@ const Header = (props) => {
     const setAuth = props.setAuth;  
     const user = props.user;
     const setUser = props.setUser;
+    const setUserPostUpvotes = props.setUserPostUpvotes;
+    const setUserCommentUpvotes = props.setUserCommentUpvotes;
     const history = useHistory();  
 
     const toggleNav = () => {
@@ -85,6 +87,8 @@ const Header = (props) => {
                 if (res.data.logedOut && res.status === 200) {
                     setAuth(false);
                     setUser({ userId: '', username: '' });
+                    setUserPostUpvotes([]);
+                    setUserCommentUpvotes([]);
                     history.push("/");                
                 } else {
                     setModalMsg(res.data.msg);

@@ -12,7 +12,8 @@ import AxiosApi from './AxiosApi';
 const Main = () => {
     const [auth, setAuth] = useState(false); 
     const [user, setUser] = useState({userId: '', username: ''});
-    const [userPostUpvotes, setUserPostUpvotes] = useState([]);  
+    const [userPostUpvotes, setUserPostUpvotes] = useState([]);
+    const [userCommentUpvotes, setUserCommentUpvotes] = useState([]);    
 
     useEffect(() => {
         var localAuth = localStorage.getItem("auth");
@@ -33,14 +34,17 @@ const Main = () => {
         let isMounted = true;
         if (user.userId) {
             (async () => {
-                let data = await AxiosApi.get('/postupvotes/user/' + user.userId).then(({ data }) => data);
+                let postUpvoteData = await AxiosApi.get('/postupvotes/user/' + user.userId).then(({ data }) => data);
+                let commentUpvoteData = await AxiosApi.get('/commentupvotes/user/' + user.userId).then(({ data }) => data);
                 if (isMounted) {
-                    setUserPostUpvotes(handleUserPostUpvotes(data.upvotes)) 
+                    setUserPostUpvotes(handleUserPostUpvotes(postUpvoteData.upvotes));
+                    setUserCommentUpvotes(handleUserCommentUpvotes(commentUpvoteData.upvotes));
                 }
             })();
         } else {
             if (isMounted) {
                 setUserPostUpvotes([]);
+                setUserCommentUpvotes([]);
             }            
         }
         return () => { isMounted = false };
@@ -54,20 +58,28 @@ const Main = () => {
         return upvotedPostIds;
     }
 
+    const handleUserCommentUpvotes = (upvotes) => {
+        let upvotedCommentIds = [];
+        upvotes.map(commentUpvote => 
+            upvotedCommentIds = [...upvotedCommentIds, commentUpvote.comment.id]
+        );
+        return upvotedCommentIds;
+    }
+
     return(
         <div>
-            <Header auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
+            <Header auth={auth} setAuth={setAuth} user={user} setUser={setUser} setUserPostUpvotes={setUserPostUpvotes} setUserCommentUpvotes={setUserCommentUpvotes}/>
             <Switch>
                 <Route exact path="/">
-                    <Home userPostUpvotes={userPostUpvotes}/>
+                    <Home auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes} />
                 </Route>
                 <Route exact path="/post/:postId">
-                    <Post userPostUpvotes={userPostUpvotes}/>
+                    <Post auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
                 </Route>
                 <Route exact path="/user/:userId">
-                    <User userPostUpvotes={userPostUpvotes}/>
+                    <User auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
                 </Route>
-                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} userPostUpvotes={userPostUpvotes}/>
+                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
                 <Route path="*">Not found</Route>
             </Switch> 
             <Footer />

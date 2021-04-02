@@ -2,10 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Unauthorized from './UnauthorizedComponent';
 
-export const PrivateRoute = ({ component: Component, auth, user, userPostUpvotes, ...rest }) => (
+export const PrivateRoute = ({ component: Component, auth, user, userPostUpvotes, userCommentUpvotes, ...rest }) => (
     <Route {...rest} render={(props) => (
         auth === true
-        ? <Component {...props} user={user} userPostUpvotes={userPostUpvotes} />
+        ? <Component {...props} user={user} auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
         : <Unauthorized />
     )} />
   );    

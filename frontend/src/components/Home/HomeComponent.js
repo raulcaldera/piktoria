@@ -5,6 +5,8 @@ import RenderPost from '../Post/RenderPost';
 const Home = (props) => {
     const [posts, setPost] = useState([]);
     const userPostUpvotes = props.userPostUpvotes;
+    const userCommentUpvotes = props.userCommentUpvotes;
+    const auth = props.auth;
 
 
     useEffect(() => {
@@ -21,11 +23,12 @@ const Home = (props) => {
 
     return (
         <div className="container-fluid">
-            <p>{userPostUpvotes}</p>  
+            <p>Post upvotes: {userPostUpvotes}</p>
+            <p>Comment upvotes: {userCommentUpvotes}</p>  
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
-                        <RenderPost key={post.id} postId={post.id} />
+                        <RenderPost key={post.id} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
                     )}
                 </div>              
             </div>                    
