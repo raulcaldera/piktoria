@@ -45,48 +45,53 @@ const Header = (props) => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        
-        AxiosApi.post('/user/login/', { email: logInData.email, password: logInData.password })
-        .then(function (res) {
-            if (res.data.logedIn && res.status === 200) {
-                toggleLoginModal();
-                setAuth(true);
-                setUser({ userId: res.data.userId, username: res.data.username });
-            } else {
-                setModalMsg(res.data.msg);
-            }
-        })
-        .catch(function (error) { console.log(error) });
+        (async () => {
+            await AxiosApi.post('/user/login/', { email: logInData.email, password: logInData.password })
+            .then(function (res) {
+                if (res.data.logedIn && res.status === 200) {
+                    toggleLoginModal();
+                    setAuth(true);
+                    setUser({ userId: res.data.userId, username: res.data.username });
+                } else {
+                    setModalMsg(res.data.msg);
+                }
+            })
+            .catch(function (error) { console.log(error) });
+        })(); 
     }
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
-        .then(function (res) {
-            if (res.data.signedUp && res.status === 200) {
-                toggleSignupModal();
-                setAuth(true);
-                setUser({ userId: res.data.userId, username: res.data.username });
-            } else {
-                setModalMsg(res.data.msg);
-            }
-        })
-        .catch(function (error) { console.log(error) });        
+        (async () => {
+            await AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
+            .then(function (res) {
+                if (res.data.signedUp && res.status === 200) {
+                    toggleSignupModal();
+                    setAuth(true);
+                    setUser({ userId: res.data.userId, username: res.data.username });
+                } else {
+                    setModalMsg(res.data.msg);
+                }
+            })
+            .catch(function (error) { console.log(error) });
+        })();          
     }  
 
     const handleLogOut = (event) => {
         event.preventDefault();
-        AxiosApi.post('/user/logout/')
-        .then(function (res) {
-            if (res.data.logedOut && res.status === 200) {
-                setAuth(false);
-                setUser({ userId: null, username: '' });
-                history.push("/");                
-            } else {
-                setModalMsg(res.data.msg);
-            }
-        })
-        .catch(function (error) { console.log(error) });        
+        (async () => {
+            await AxiosApi.post('/user/logout/')
+            .then(function (res) {
+                if (res.data.logedOut && res.status === 200) {
+                    setAuth(false);
+                    setUser({ userId: '', username: '' });
+                    history.push("/");                
+                } else {
+                    setModalMsg(res.data.msg);
+                }
+            })
+            .catch(function (error) { console.log(error) });  
+        })();      
     }    
 
     const RenderNavButtons = () => {

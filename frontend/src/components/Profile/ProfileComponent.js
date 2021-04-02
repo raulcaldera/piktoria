@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
+import Unauthorized from '../UnauthorizedComponent';
 
 const Profile = (props) => {
     let { userId } = useParams();
@@ -36,7 +37,7 @@ const Profile = (props) => {
         ) 
     } else {
         return (
-            <p>Not authorized</p>
+            <Unauthorized />
         )         
     }
 }

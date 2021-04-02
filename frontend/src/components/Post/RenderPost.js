@@ -35,6 +35,7 @@ const RenderPost = (props) => {
                     Timestamp: {post.timestamp}<br></br>
                     Upvotes: {postUpvotes.postUpvoteCount}<br></br>
                     Comments: {postComments.commentCount}<br></br>
+                    <p>----------------------</p>
                 </div>
             )}
         </div>                   

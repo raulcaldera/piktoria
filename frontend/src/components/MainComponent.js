@@ -7,10 +7,12 @@ import Header from './Header/HeaderComponent';
 import Footer from './Footer/FooterComponent';
 import { PrivateRoute } from './PrivateRoute';
 import { Switch, Route } from 'react-router-dom';
+import AxiosApi from './AxiosApi';
 
 const Main = () => {
     const [auth, setAuth] = useState(false); 
-    const [user, setUser] = useState({userId: null, username: ''}); 
+    const [user, setUser] = useState({userId: '', username: ''});
+    const [postUpvotes, setPostUpvotes] = useState([]);  
 
     useEffect(() => {
         var localAuth = localStorage.getItem("auth");
@@ -19,14 +21,33 @@ const Main = () => {
 
         var localUserId = localStorage.getItem("userId");     
         var localUsername = localStorage.getItem("username");
-        setUser({userId: localUserId, username: localUsername});     
+        setUser({userId: localUserId, username: localUsername}); 
+    
     }, []);
 
     useEffect(() => {
         localStorage.setItem("auth", auth);
         localStorage.setItem("userId", user.userId);
         localStorage.setItem("username", user.username);
-    }, [auth, user]);  
+
+        let isMounted = true;
+        if (user.userId) {
+            (async () => {
+                let data = await AxiosApi.get('/postupvotes/user/' + user.userId).then(({ data }) => data);
+                if (isMounted) {
+                    console.log(data.upvotes);
+                    setPostUpvotes(data.upvotes);
+                }
+            })();
+        } else {
+            if (isMounted) {
+                setPostUpvotes([]);
+            }            
+        }
+        return () => { isMounted = false };
+    }, [auth, user]);
+
+    console.log(postUpvotes);
 
     return(
         <div>
@@ -41,7 +62,7 @@ const Main = () => {
                 <Route exact path="/user/:userId">
                     <User />
                 </Route>
-                <PrivateRoute exact path='/profile/:userId' component={Profile} params={{user: user, auth: auth}} />
+                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} />
                 <Route path="*">Not found</Route>
             </Switch> 
             <Footer />
