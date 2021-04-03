@@ -23,7 +23,7 @@ const User = (props) => {
         })();
 
         return () => { isMounted = false };
-    });
+    },[userId]);
 
     return (
         <div className="container-fluid">

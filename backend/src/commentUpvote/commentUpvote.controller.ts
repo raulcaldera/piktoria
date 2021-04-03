@@ -11,8 +11,13 @@ export class CommentUpvoteController {
     /*Upvote Comment*/
     @Post()
     @UseGuards(AuthGuard)
-    upvoteComment(@Body() CreateCommentUpvoteDto: CreateCommentUpvoteDto, @Req() req: Request) {
-        return this.CommentUpvoteService.upvoteComment(CreateCommentUpvoteDto, req);
+    async upvoteComment(@Body() CreateCommentUpvoteDto: CreateCommentUpvoteDto, @Req() req: Request, @Res() res: Response) {
+        let  upvoteRes = await this.CommentUpvoteService.upvoteComment(CreateCommentUpvoteDto, req);
+        if (upvoteRes.upvoted) {
+            res.status(200).send(upvoteRes);
+        } else {
+            res.send(upvoteRes);
+        }
     }
 
     /*Get Upvote by Id*/
@@ -36,8 +41,13 @@ export class CommentUpvoteController {
     /*Downvote Comment*/
     @Delete()
     @UseGuards(AuthGuard)
-    DownvoteComment(@Body() CreateCommentUpvoteDto: CreateCommentUpvoteDto, @Req() req: Request) {
-        return this.CommentUpvoteService.DownvoteComment(CreateCommentUpvoteDto, req);
+    async DownvoteComment(@Body() CreateCommentUpvoteDto: CreateCommentUpvoteDto, @Req() req: Request, @Res() res: Response) {
+        let  downvoteRes = await this.CommentUpvoteService.DownvoteComment(CreateCommentUpvoteDto, req);
+        if (downvoteRes.downvoted) {
+            res.status(200).send(downvoteRes);
+        } else {
+            res.send(downvoteRes);
+        }        
     }    
 
 }

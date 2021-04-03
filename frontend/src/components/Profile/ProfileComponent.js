@@ -23,7 +23,7 @@ const Profile = (props) => {
         })();
 
         return () => { isMounted = false };
-    });
+    },[userId]);
 
     if (parseInt(userId) === parseInt(props.user.userId)) {
         return (

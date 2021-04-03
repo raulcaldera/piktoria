@@ -1,34 +1,114 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
-import RenderCommentUpvotes from '../Post/RenderCommentUpvotes';
 import { Link } from 'react-router-dom';
 
-const RenderComment = (props) => {
-    let postId = props.postId;
+const RenderComment= (props) => {
+    let commentId = props.commentId;
     let userCommentUpvotes = props.userCommentUpvotes;
-    const auth = props.auth;
+    let setUserCommentUpvotes = props.setUserCommentUpvotes;
+    let auth = props.auth;
+    let user = props.user; 
 
-    const [postComments, setPostComments] = useState([]);
+    const [comments, setComment] = useState([]);
+    const [commentUpvotes, setCommentUpvotes] = useState();
+    const [isCommentUpvoted, setIsCommentUpvoted] = useState(false);
 
     useEffect(() => {
+        let isMounted = true;     
         (async () => {
-            let postCommentData = await AxiosApi.get('/comment/post/' + postId).then(({ data }) => data);
-            setPostComments(postCommentData.postComments);
+            let commentData = await AxiosApi.get('/comment/' + commentId).then(({ data }) => data);
+            let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
+
+            if (isMounted) {
+                setComment([commentData]);
+                setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
+            }
         })();  
         
-        
-    }, [postId]);
+        if (isMounted) {
+            if (userCommentUpvotes.includes(parseInt(commentId))) {
+                setIsCommentUpvoted(true);
+            } else {
+                setIsCommentUpvoted(false);
+            }
+        }
+
+        return () => { isMounted = false };
+    }, [commentId, userCommentUpvotes]);
+
+    const handleDownvote = (event) => {
+        event.preventDefault();
+        console.log({commentId: commentId, userId: user.userId});
+        (async () => {
+            await AxiosApi.delete('/commentupvotes/', {data: {commentId: commentId, userId: user.userId}})
+            .then(function (res) {
+                if (res.data.downvoted && res.status === 200) {
+                    console.log(res.data);
+                    (async () => {
+                        let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
+                        setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
+                        setIsCommentUpvoted(false);
+                        const newUserCommentUpvotes = userCommentUpvotes.filter((item) => item !== commentId);
+                        setUserCommentUpvotes(newUserCommentUpvotes);
+                    })();
+                } else {
+                    console.log(res);
+                }
+            })
+            .catch(function (error) { console.log(error) });  
+        })();      
+    }
+
+    const handleUpvote = (event) => {
+        event.preventDefault();
+        console.log({commentId: commentId, userId: user.userId});
+        (async () => {
+            await AxiosApi.post('/commentupvotes/', {commentId: commentId, userId: user.userId})
+            .then(function (res) {
+                if (res.data.upvoted && res.status === 200) {
+                    console.log(res.data);
+                    (async () => {
+                        let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
+                        setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
+                        setIsCommentUpvoted(true);
+                        setUserCommentUpvotes([...userCommentUpvotes, commentId]);
+                    })();
+                } else {
+                    console.log(res);
+                }
+            })
+            .catch(function (error) { console.log(error) });  
+        })();      
+    }
+
+    const UpvoteBtn = () => {
+        if (auth) {
+            if(isCommentUpvoted) {
+                return (
+                    <Button onClick={handleDownvote}> Downvote </Button>
+                )
+            } else {
+                return (
+                    <Button onClick={handleUpvote}> Upvote </Button>
+                )
+            }
+        } else {
+            return null;
+        }
+    }
 
     return (
         <div className="Comment">
-                {postComments.map(comment => 
-                    <div key={comment.id}>
-                        Comment: {comment.comment}<br></br> 
-                        <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
-                        Timestamp: {comment.timestamp}<br></br>
-                        Upvotes: <RenderCommentUpvotes auth={auth} commentId={comment.id} userCommentUpvotes={userCommentUpvotes} /><br></br>
-                    </div>
-                )}
+            {comments.map(comment => 
+                <div key={commentId}>
+                    Comment: {comment.comment}<br></br> 
+                    <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
+                    Timestamp: {comment.timestamp}<br></br>
+                    Upvotes: {commentUpvotes}<br></br>
+                    <UpvoteBtn />
+                </div>
+             )}                    
         </div>                   
     )    
 }

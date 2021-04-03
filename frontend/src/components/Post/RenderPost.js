@@ -7,8 +7,8 @@ const RenderPost = (props) => {
     let postId = parseInt(props.postId);
     let userPostUpvotes = props.userPostUpvotes;
     let setUserPostUpvotes = props.setUserPostUpvotes;
-    const auth = props.auth;
-    const user = props.user;  
+    let auth = props.auth;
+    let user = props.user;  
 
     const [posts, setPost] = useState([]);
     const [postUpvotes, setPostUpvotes] = useState([]);
@@ -44,7 +44,7 @@ const RenderPost = (props) => {
         event.preventDefault();
         console.log({postId: postId, userId: user.userId});
         (async () => {
-            await AxiosApi.delete('/postupvotes/', {data: { postId: postId, userId: user.userId }})
+            await AxiosApi.delete('/postupvotes/', {data: {postId: postId, userId: user.userId}})
             .then(function (res) {
                 if (res.data.downvoted && res.status === 200) {
                     console.log(res.data);
@@ -67,7 +67,7 @@ const RenderPost = (props) => {
         event.preventDefault();
         console.log({postId: postId, userId: user.userId});
         (async () => {
-            await AxiosApi.post('/postupvotes/', { postId: postId, userId: user.userId })
+            await AxiosApi.post('/postupvotes/', {postId: postId, userId: user.userId})
             .then(function (res) {
                 if (res.data.upvoted && res.status === 200) {
                     console.log(res.data);
@@ -84,61 +84,39 @@ const RenderPost = (props) => {
             .catch(function (error) { console.log(error) });  
         })();      
     }
-    
-    if (auth) {
-        if(isPostUpvoted) {
-            return (
-                <div className="Post">
-                    {posts.map(post => 
-                        <div key={postId}>
-                            <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
-                            Body: {post.body}<br></br> 
-                            <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                            Timestamp: {post.timestamp}<br></br>
-                            Upvotes: {postUpvotes}<br></br>
-                            Comments: {postCommentCount}<br></br>
-                        </div>
-                    )}
-                    <Button onClick={handleDownvote}>Downvote</Button>
-                    <p>----------------------</p>
-                </div>                   
-            )
-        } else {
-            return (
-                <div className="Post">
-                    {posts.map(post => 
-                        <div key={postId}>
-                            <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
-                            Body: {post.body}<br></br> 
-                            <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                            Timestamp: {post.timestamp}<br></br>
-                            Upvotes: {postUpvotes}<br></br>
-                            Comments: {postCommentCount}<br></br>
-                        </div>
-                    )}
-                    <Button onClick={handleUpvote}>Upvote</Button>
-                    <p>----------------------</p>
-                </div>                   
-            )
-        }
-    } else {
-        return (
-            <div className="Post">
-                {posts.map(post => 
-                    <div key={postId}>
-                        <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
-                        Body: {post.body}<br></br> 
-                        <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                        Timestamp: {post.timestamp}<br></br>
-                        Upvotes: {postUpvotes}<br></br>
-                        Comments: {postCommentCount}<br></br>
-                    </div>
-                )}
-                <p>----------------------</p>
-            </div>                   
-        )        
-    }
 
+    const UpvoteBtn = () => {
+        if (auth) {
+            if(isPostUpvoted) {
+                return (
+                    <Button onClick={handleDownvote}> Downvote </Button>
+                )
+            } else {
+                return (
+                    <Button onClick={handleUpvote}> Upvote </Button>
+                )
+            }
+        } else {
+            return null;
+        }
+    }
+    
+    return (
+        <div key={postId} className="Post">
+            {posts.map(post => 
+                <div key={postId}>
+                    <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
+                    Body: {post.body}<br></br> 
+                    <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
+                    Timestamp: {post.timestamp}<br></br>
+                    Upvotes: {postUpvotes}<br></br>
+                    Comments: {postCommentCount}<br></br>
+                    <UpvoteBtn />
+                </div>
+            )}
+            <p>----------------------</p>
+        </div>                   
+    )
 }
 
 export default RenderPost;

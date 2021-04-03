@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import React from 'react';
 import RenderPost from '../Post/RenderPost';
-import RenderComment from '../Post/RenderComment';
+import Comment from '../Post/CommentComponent';
 
 const Post = (props) => { 
     let { postId } = useParams();
     const userPostUpvotes = props.userPostUpvotes;
-    const userCommentUpvotes = props.userCommentUpvotes;
     const setUserPostUpvotes = props.setUserPostUpvotes;
+    const userCommentUpvotes = props.userCommentUpvotes;
+    const setUserCommentUpvotes = props.setUserCommentUpvotes;
     const auth = props.auth;
     const user = props.user;  
 
@@ -17,13 +18,11 @@ const Post = (props) => {
             <p>Comment upvotes: {userCommentUpvotes}</p> 
             <div className="row align-items-start">
                 <div className="PostSection">   
-                    <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
+                    <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
                 </div>                
             </div>
             <div className="row align-items-start">
-                <div className="CommentSection">   
-                    <RenderComment auth={auth} postId={postId} userCommentUpvotes={userCommentUpvotes} />             
-                </div>                
+                <Comment user={user} auth={auth} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes}/>                          
             </div>                       
         </div>                               
     )    

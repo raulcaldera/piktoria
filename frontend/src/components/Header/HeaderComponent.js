@@ -12,7 +12,7 @@ const Header = (props) => {
     const [isNavOpen, setNav] = useState(false);
     const [isLoginModalOpen, setLoginModal] = useState(false);
     const [isSignupModalOpen, setSignupModal] = useState(false);
-    const [logInData, setlogInData] = useState({ email: '', password: '' });
+    const [logInData, setLogInData] = useState({ email: '', password: '' });
     const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' });
     const [modalMsg, setModalMsg] = useState('');
     const auth = props.auth;
@@ -38,7 +38,7 @@ const Header = (props) => {
     };
     
     const handleLoginInputChange = (event) => {
-        setlogInData({...logInData, [event.target.name] : event.target.value})
+        setLogInData({...logInData, [event.target.name] : event.target.value})
     }     
 
     const handleSignupInputChange = (event) => {
@@ -89,6 +89,9 @@ const Header = (props) => {
                     setUser({ userId: '', username: '' });
                     setUserPostUpvotes([]);
                     setUserCommentUpvotes([]);
+                    setLogInData({ email: '', password: '' });
+                    setSignUpData({ username: '', email: '', password: '' });
+                    setModalMsg('');
                     history.push("/");                
                 } else {
                     setModalMsg(res.data.msg);

@@ -21,7 +21,7 @@ const Home = (props) => {
         })();
 
         return () => { isMounted = false };
-    });
+    },[]);
 
     return (
         <div className="container-fluid">

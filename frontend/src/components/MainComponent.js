@@ -93,6 +93,7 @@ const Main = () => {
                         userPostUpvotes={userPostUpvotes} 
                         setUserPostUpvotes={setUserPostUpvotes} 
                         userCommentUpvotes={userCommentUpvotes}
+                        setUserCommentUpvotes={setUserCommentUpvotes} 
                     />
                 </Route>
                 <Route exact path="/user/:userId">
