@@ -11,8 +11,13 @@ export class CommentController {
 
     @Post()
     @UseGuards(AuthGuard)
-    postComment(@Body() createCommentDto: CreateCommentDto, @Req() req: Request) {
-      return this.commentService.postComment(createCommentDto, req);
+    async postComment(@Body() createCommentDto: CreateCommentDto, @Req() req: Request, @Res() res: Response) {
+      let  commentRes = await this.commentService.postComment(createCommentDto, req);
+      if (commentRes.posted) {
+        res.status(200).send(commentRes);
+      } else {
+        res.send(commentRes);
+      }
     }
   
     @Get('/:id')
