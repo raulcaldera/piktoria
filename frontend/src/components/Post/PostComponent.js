@@ -7,7 +7,9 @@ const Post = (props) => {
     let { postId } = useParams();
     const userPostUpvotes = props.userPostUpvotes;
     const userCommentUpvotes = props.userCommentUpvotes;
+    const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
+    const user = props.user;  
 
     return (
         <div className="container-fluid">
@@ -15,7 +17,7 @@ const Post = (props) => {
             <p>Comment upvotes: {userCommentUpvotes}</p> 
             <div className="row align-items-start">
                 <div className="PostSection">   
-                    <RenderPost auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} />
+                    <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
                 </div>                
             </div>
             <div className="row align-items-start">

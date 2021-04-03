@@ -6,7 +6,9 @@ const Home = (props) => {
     const [posts, setPost] = useState([]);
     const userPostUpvotes = props.userPostUpvotes;
     const userCommentUpvotes = props.userCommentUpvotes;
+    const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
+    const user = props.user;    
 
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const Home = (props) => {
             <div className="row align-items-start">
                 <div className="PostSection">
                     {posts.map(post => 
-                        <RenderPost key={post.id} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
+                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
                     )}
                 </div>              
             </div>                    

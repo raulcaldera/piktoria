@@ -9,7 +9,9 @@ const Profile = (props) => {
     const [posts, setPost] = useState([]);
     const userPostUpvotes = props.userPostUpvotes;
     const userCommentUpvotes = props.userCommentUpvotes;
+    const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
+    const user = props.user;    
 
     useEffect(() => {
         let isMounted = true;
@@ -28,12 +30,12 @@ const Profile = (props) => {
             <React.Fragment>
             <p>Post upvotes: {userPostUpvotes}</p>
             <p>Comment upvotes: {userCommentUpvotes}</p>  
-                <p>Hello {props.user.username}, with Id {props.user.userId}!!</p>
+                <p>Hello {user.username}, with Id {user.userId}!!</p>
                 <div className="container-fluid">
                     <div className="row align-items-start">
                         <div className="PostSection">
                             {posts.map(post => 
-                                <RenderPost key={post.id} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} />
+                                <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
                             )}
                         </div>             
                     </div>                    

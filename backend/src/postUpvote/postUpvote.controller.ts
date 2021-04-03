@@ -11,8 +11,14 @@ export class PostUpvoteController {
     /*Upvote Post*/
     @Post()
     @UseGuards(AuthGuard)
-    upvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request) {
-        return this.postUpvoteService.upvotePost(CreatePostUpvoteDto, req);
+    async upvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request, @Res() res: Response) {
+        let  upvoteRes = await this.postUpvoteService.upvotePost(CreatePostUpvoteDto, req);
+        if (upvoteRes.upvoted) {
+            res.status(200).send(upvoteRes);
+        } else {
+            res.send(upvoteRes);
+        }
+
     }
 
     /*Get Upvote by Id*/
@@ -36,8 +42,13 @@ export class PostUpvoteController {
     /*Downvote Post*/
     @Delete()
     @UseGuards(AuthGuard)
-    DownvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request) {
-        return this.postUpvoteService.DownvotePost(CreatePostUpvoteDto, req);
+    async DownvotePost(@Body() CreatePostUpvoteDto: CreatePostUpvoteDto, @Req() req: Request, @Res() res: Response) {
+        let  downvoteRes = await this.postUpvoteService.DownvotePost(CreatePostUpvoteDto, req);
+        if (downvoteRes.downvoted) {
+            res.status(200).send(downvoteRes);
+        } else {
+            res.send(downvoteRes);
+        }
     }
     
 }

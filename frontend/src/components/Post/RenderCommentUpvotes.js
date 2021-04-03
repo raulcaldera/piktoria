@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 
 const RenderCommentUpvotes = (props) => {
@@ -22,15 +23,15 @@ const RenderCommentUpvotes = (props) => {
         })();     
     }, [commentId, userCommentUpvotes]);
 
-    const UpvoteHandler = () => {
+    const UpvoteBtn = () => {
         if (auth) {
             if(isCommentUpvoted) {
                 return (
-                    <p>THIS COMMENT IS UPVOTED!!!!</p>
+                    <Button> Downvote </Button>
                 )
             } else {
                 return (
-                    <p>THIS COMMENT IS NOT UPVOTED!!!!</p>
+                    <Button> Upvote </Button>
                 )
             }
         } else {
@@ -41,7 +42,7 @@ const RenderCommentUpvotes = (props) => {
     return (
         <div className="CommentUpvote">
             {commentUpvotes}
-            <UpvoteHandler />
+            <UpvoteBtn />
         </div>                   
     )    
 }

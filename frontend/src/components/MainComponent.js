@@ -20,7 +20,7 @@ const Main = () => {
         localAuth = (localAuth === 'true'); /*convert to boolean*/
         setAuth(localAuth);   
 
-        var localUserId = localStorage.getItem("userId");     
+        var localUserId = parseInt(localStorage.getItem("userId"));     
         var localUsername = localStorage.getItem("username");
         setUser({userId: localUserId, username: localUsername}); 
     
@@ -68,18 +68,49 @@ const Main = () => {
 
     return(
         <div>
-            <Header auth={auth} setAuth={setAuth} user={user} setUser={setUser} setUserPostUpvotes={setUserPostUpvotes} setUserCommentUpvotes={setUserCommentUpvotes}/>
+            <Header 
+                auth={auth} 
+                setAuth={setAuth} 
+                user={user} 
+                setUser={setUser} 
+                setUserPostUpvotes={setUserPostUpvotes} 
+                setUserCommentUpvotes={setUserCommentUpvotes}
+            />
             <Switch>
                 <Route exact path="/">
-                    <Home auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes} />
+                    <Home 
+                        user={user} 
+                        auth={auth} 
+                        userPostUpvotes={userPostUpvotes} 
+                        setUserPostUpvotes={setUserPostUpvotes} 
+                        userCommentUpvotes={userCommentUpvotes}
+                     />
                 </Route>
                 <Route exact path="/post/:postId">
-                    <Post auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
+                    <Post 
+                        user={user} 
+                        auth={auth} 
+                        userPostUpvotes={userPostUpvotes} 
+                        setUserPostUpvotes={setUserPostUpvotes} 
+                        userCommentUpvotes={userCommentUpvotes}
+                    />
                 </Route>
                 <Route exact path="/user/:userId">
-                    <User auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
+                    <User 
+                        user={user} 
+                        auth={auth} 
+                        userPostUpvotes={userPostUpvotes} 
+                        setUserPostUpvotes={setUserPostUpvotes} 
+                        userCommentUpvotes={userCommentUpvotes}
+                    />
                 </Route>
-                <PrivateRoute exact path='/profile/:userId' component={Profile} user={user} auth={auth} userPostUpvotes={userPostUpvotes} userCommentUpvotes={userCommentUpvotes}/>
+                <PrivateRoute exact path='/profile/:userId' component={Profile}
+                    user={user} 
+                    auth={auth} 
+                    userPostUpvotes={userPostUpvotes}  
+                    setUserPostUpvotes={setUserPostUpvotes} 
+                    userCommentUpvotes={userCommentUpvotes}
+                />
                 <Route path="*">Not found</Route>
             </Switch> 
             <Footer />
