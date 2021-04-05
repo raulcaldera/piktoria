@@ -19,7 +19,7 @@ export class Post {
   @JoinColumn({name : 'authorId'})
   author: UserEntity;
 
-  @Column('date')
+  @Column('timestamptz')
   timestamp: Date;
 
   @OneToMany(() => CommentEntity, comment => comment.post, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})

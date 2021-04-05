@@ -18,10 +18,10 @@ const CommentForm = (props) => {
     
     const handleCommentPost = (event) => {
         event.preventDefault();
-        console.log({ comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ssZ") });
+        console.log({ comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss") });
         if (commentData) {
             (async () => {
-                await AxiosApi.post('/comment/', { comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ssZ") })
+                await AxiosApi.post('/comment/', { comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss") })
                 .then(function (res) {
                     if (res.data.posted && res.status === 200) {
                         console.log(res.data);

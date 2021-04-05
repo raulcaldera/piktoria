@@ -8,19 +8,18 @@ import styles from "./Header.module.css";
 import { useHistory } from "react-router-dom";
 
 const Header = (props) => {
-
-    const [isNavOpen, setNav] = useState(false);
-    const [isLoginModalOpen, setLoginModal] = useState(false);
-    const [isSignupModalOpen, setSignupModal] = useState(false);
-    const [logInData, setLogInData] = useState({ email: '', password: '' });
-    const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' });
-    const [modalMsg, setModalMsg] = useState('');
     const auth = props.auth;
     const setAuth = props.setAuth;  
     const user = props.user;
     const setUser = props.setUser;
     const setUserPostUpvotes = props.setUserPostUpvotes;
     const setUserCommentUpvotes = props.setUserCommentUpvotes;
+    const [isNavOpen, setNav] = useState(false);
+    const [isLoginModalOpen, setLoginModal] = useState(false);
+    const [isSignupModalOpen, setSignupModal] = useState(false);
+    const [logInData, setLogInData] = useState({ email: '', password: '' });
+    const [signUpData, setSignUpData] = useState({ username: '', email: '', password: '' });
+    const [modalMsg, setModalMsg] = useState('');
     const history = useHistory();  
 
     const toggleNav = () => {

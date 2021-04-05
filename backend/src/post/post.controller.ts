@@ -11,8 +11,13 @@ export class PostController {
     /*Create*/
     @Post()
     @UseGuards(AuthGuard)
-    createPost(@Body() createPostDto: CreatePostDto, @Req() req: Request) {
-      return this.postService.createPost(createPostDto, req);
+    async createPost(@Body() createPostDto: CreatePostDto, @Req() req: Request, @Res() res: Response) {
+      let postRes = await this.postService.createPost(createPostDto, req);
+      if (postRes.posted) {
+        res.status(200).send(postRes);
+      } else {
+        res.send(postRes);
+      }      
     }
 
     /*Read*/

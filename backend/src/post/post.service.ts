@@ -46,7 +46,7 @@ export class PostService {  constructor(
   }
 
   async getAll() {
-    return await this.postRepository.find({relations: ['author']});
+    return await this.postRepository.find({relations: ['author'], order: {timestamp: "DESC"}});
   }
 
   async getPostById(id: number) {
@@ -54,7 +54,7 @@ export class PostService {  constructor(
   }
 
   async getPostsByAuthorId(authorId: number) {
-    return await this.postRepository.find({relations: ['author'],  where: { author : authorId }});
+    return await this.postRepository.find({relations: ['author'],  where: { author : authorId }, order: {timestamp: "DESC"}});
   }  
 
   async updatePostTitle(updatedPost : { id: number , title: string }, req) {
