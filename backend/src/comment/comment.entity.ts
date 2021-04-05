@@ -19,7 +19,7 @@ export class Comment {
   @Column('text')
   comment: string;
 
-  @Column('date')
+  @Column('timestamptz')
   timestamp: Date;
 
   @OneToMany(() => CommentUpvoteEntity, commentUpvote => commentUpvote.comment , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})

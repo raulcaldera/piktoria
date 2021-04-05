@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import RenderComment from './RenderComment';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 const CommentForm = (props) => {
     const postId = parseInt(props.postId);
     const user = props.user; 
     const setPostComments = props.setPostComments;
     const auth = props.auth;
-     
+
     const [commentData, setCommentData] = useState('');
 
     const handleCommentInputChange = (event) => {
@@ -18,10 +18,10 @@ const CommentForm = (props) => {
     
     const handleCommentPost = (event) => {
         event.preventDefault();
-        console.log({ comment: commentData, postId: postId, userId: user.userId, timestamp: moment().format('YYYY-MM-DD') });
+        console.log({ comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ssZ") });
         if (commentData) {
             (async () => {
-                await AxiosApi.post('/comment/', { comment: commentData, postId: postId, userId: user.userId, timestamp: moment().format('YYYY-MM-DD') })
+                await AxiosApi.post('/comment/', { comment: commentData, postId: postId, userId: user.userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ssZ") })
                 .then(function (res) {
                     if (res.data.posted && res.status === 200) {
                         console.log(res.data);
@@ -37,7 +37,6 @@ const CommentForm = (props) => {
                 .catch(function (error) { console.log(error) });
             })();   
         }
-        
     }
 
     if (auth) {
@@ -62,7 +61,7 @@ const Comment = (props) => {
     let userCommentUpvotes = props.userCommentUpvotes;
     let setUserCommentUpvotes = props.setUserCommentUpvotes;
     const auth = props.auth;
-    const user = props.user;  
+    const user = props.user; 
 
     const [postComments, setPostComments] = useState([]);
 

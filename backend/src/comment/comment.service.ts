@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { IComment } from './interfaces/comment.interface';
-import { Repository, getConnection, Connection } from 'typeorm';
+import { Repository, getConnection, Connection, getRepository } from 'typeorm';
 import { Comment } from './comment.entity';
 import { Post } from '../post/post.entity';
 import { User } from '../user/user.entity';
@@ -59,12 +59,12 @@ export class CommentService {
 	}
 
 	async getCommentByPostId(postId: number) {
-		const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }}); 
+		const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }, order: {timestamp: "DESC"}}); 
 		return {postId : postId, commentCount: postComments.length , postComments : postComments}
 	}
 
 	async getCommentByUserId(userId: number) {
-		const userComments = await this.commentRepository.find({relations: ['post','user'],  where: { user : userId }});
+		const userComments = await this.commentRepository.find({relations: ['post','user'],  where: { user : userId }, order: {timestamp: "DESC"}});
 		return {userId : userId, commentCount: userComments.length , userComments : userComments}
 
 	}	  
