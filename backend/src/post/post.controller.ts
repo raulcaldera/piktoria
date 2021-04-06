@@ -39,22 +39,36 @@ export class PostController {
     /*Update*/
     @Put('/title')
     @UseGuards(AuthGuard)
-    updatePostTitle(@Body() updatedPost : { id: number , title: string}, @Req() req: Request) {
-      return this.postService.updatePostTitle(updatedPost, req);
-        
+    async updatePostTitle(@Body() updatedPost : { id: number , title: string}, @Req() req: Request, @Res() res: Response) {
+      let postRes = await this.postService.updatePostTitle(updatedPost, req);
+      if (postRes.updated) {
+        res.status(200).send(postRes);
+      } else {
+        res.send(postRes);
+      } 
     }
 
     @Put('/body')
     @UseGuards(AuthGuard)
-    updatePostBody(@Body() updatedPost : { id: number , body: string }, @Req() req: Request) {
-      return this.postService.updatePostBody(updatedPost, req);  
+    async updatePostBody(@Body() updatedPost : { id: number , body: string }, @Req() req: Request, @Res() res: Response) {
+      let postRes = await this.postService.updatePostBody(updatedPost, req);
+      if (postRes.updated) {
+        res.status(200).send(postRes);
+      } else {
+        res.send(postRes);
+      }   
     }  
   
     /*Delete*/
     @Delete('/:id')
     @UseGuards(AuthGuard)
-    deletePost(@Param('id') id: number, @Req() req: Request) {
-      return this.postService.deletePost(id, req);  
+    async deletePost(@Param('id') id: number, @Req() req: Request, @Res() res: Response) {
+      let postRes = await this.postService.deletePost(id, req);
+      if (postRes.deleted) {
+        res.status(200).send(postRes);
+      } else {
+        res.send(postRes);
+      }  
     }
 
 }

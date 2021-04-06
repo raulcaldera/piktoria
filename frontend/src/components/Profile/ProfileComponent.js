@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import AxiosApi from '../AxiosApi';
-import RenderPost from '../Post/RenderPost';
+import RenderProfilePost from './RenderProfilePost';
 import Unauthorized from '../UnauthorizedComponent';
 import moment from 'moment-timezone';
 
@@ -107,7 +107,7 @@ const Profile = (props) => {
                     <div className="row align-items-start">
                         <div className="PostSection">
                             {posts.map(post => 
-                                <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
+                                <RenderProfilePost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
                             )}
                         </div>             
                     </div>                    
