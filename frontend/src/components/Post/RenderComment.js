@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import { Link } from 'react-router-dom';
+import EditCommentBtn from './EditComment';
+import DeleteCommentBtn from './DeleteComment';
 
 const RenderComment= (props) => {
     let commentId = props.commentId;
+    let postId = props.postId;
     let userCommentUpvotes = props.userCommentUpvotes;
     let setUserCommentUpvotes = props.setUserCommentUpvotes;
+    let setPostComments = props.setPostComments;
     let auth = props.auth;
     let user = props.user; 
 
@@ -102,7 +106,8 @@ const RenderComment= (props) => {
         <div className="Comment">
             {comments.map(comment => 
                 <div key={commentId}>
-                    Comment: {comment.comment}<br></br> 
+                    <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/> 
+                    Comment: {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br> 
                     <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
                     Timestamp: {comment.timestamp}<br></br>
                     Upvotes: {commentUpvotes}<br></br>

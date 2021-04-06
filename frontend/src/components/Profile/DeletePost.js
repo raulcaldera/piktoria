@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-const DeleteBtn = (props) => {
+const DeletePostBtn = (props) => {
     let postId = parseInt(props.postId);
     const setPost = props.setPost;
     const setIsPostUpvoted = props.setIsPostUpvoted;
@@ -48,4 +48,4 @@ const DeleteBtn = (props) => {
     )
 }
 
-export default DeleteBtn;
+export default DeletePostBtn;

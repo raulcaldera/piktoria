@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
-import DeleteBtn from './DeletePost';
+import DeletePostBtn from './DeletePost';
 import EditTitleBtn from './EditPostTitle';
 import EditBodyBtn from './EditPostBody';
 
@@ -109,7 +109,7 @@ const RenderProfilePost = (props) => {
         <div key={postId} className="Post">
             {posts.map(post => 
                 <div key={postId}>
-                    <DeleteBtn postId={postId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
+                    <DeletePostBtn postId={postId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
                     <Link to={`/post/${post.id}`}>Title: {post.title}</Link><span> </span><EditTitleBtn postId={postId} title={post.title} setPost={setPost}/><br></br> 
                     Body: {post.body} <span> </span><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
                     <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>

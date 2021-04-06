@@ -37,13 +37,23 @@ export class CommentController {
   
     @Put()
     @UseGuards(AuthGuard)
-    updateComment(@Body() updatedComment : {id: number , comment: string }, @Req() req: Request) {
-      return this.commentService.updateComment(updatedComment, req);  
+    async updateComment(@Body() updatedComment : {id: number , comment: string }, @Req() req: Request, @Res() res: Response) {
+      let commentRes = await this.commentService.updateComment(updatedComment, req);
+      if (commentRes.updated) {
+        res.status(200).send(commentRes);
+      } else {
+        res.send(commentRes);
+      }  
     }
   
     @Delete('/:id')
     @UseGuards(AuthGuard)
-    deleteComment(@Param('id') id: number, @Req() req: Request) {
-      return this.commentService.deleteComment(id, req);  
+    async deleteComment(@Param('id') id: number, @Req() req: Request, @Res() res: Response) {
+      let commentRes = await this.commentService.deleteComment(id, req);  
+      if (commentRes.deleted) {
+        res.status(200).send(commentRes);
+      } else {
+        res.send(commentRes);
+      }
     }    
 }

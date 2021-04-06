@@ -83,7 +83,7 @@ const Comment = (props) => {
                 </div>
                 {postComments.map(comment => 
                     <div key={comment.id}>
-                        <RenderComment user={user} auth={auth} commentId={comment.id} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} /><br></br>
+                        <RenderComment user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/><br></br>
                     </div>
                 )}
         </div>                 
