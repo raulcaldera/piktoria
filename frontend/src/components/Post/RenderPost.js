@@ -14,10 +14,12 @@ const RenderPost = (props) => {
     const [postUpvotes, setPostUpvotes] = useState([]);
     const [postCommentCount, setPostComments] = useState([]);
     const [isPostUpvoted, setIsPostUpvoted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let isMounted = true;                    
         (async () => {
+            setLoading(true);
             let postData = await AxiosApi.get('/post/' + postId).then(({ data }) => data);
             let postCommentData = await AxiosApi.get('/comment/post/' + postId).then(({ data }) => data);
             let postUpvoteData = await AxiosApi.get('/postupvotes/post/' + postId).then(({ data }) => data);
@@ -27,6 +29,7 @@ const RenderPost = (props) => {
                 setPostComments(postCommentData.commentCount);
                 setPostUpvotes(postUpvoteData.postUpvoteCount);
             }
+            setLoading(false);
         })();
 
         if (isMounted) {
@@ -101,22 +104,28 @@ const RenderPost = (props) => {
         }
     }
     
-    return (
-        <div key={postId} className="Post">
-            {posts.map(post => 
-                <div key={postId}>
-                    <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
-                    Body: {post.body}<br></br> 
-                    <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                    Timestamp: {post.timestamp}<br></br>
-                    Upvotes: {postUpvotes}<br></br>
-                    Comments: {postCommentCount}<br></br>
-                    <UpvoteBtn />
-                </div>
-            )}
-            <p>----------------------</p>
-        </div>                   
-    )
+    if (loading) {
+        return (
+            <p1>Loading...</p1>
+        )
+    } else {
+        return (
+            <div key={postId} className="Post">
+                {posts.map(post => 
+                    <div key={postId}>
+                        <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
+                        Body: {post.body}<br></br> 
+                        <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
+                        Timestamp: {post.timestamp}<br></br>
+                        Upvotes: {postUpvotes}<br></br>
+                        Comments: {postCommentCount}<br></br>
+                        <UpvoteBtn />
+                    </div>
+                )}
+                <p>----------------------</p>
+            </div>                   
+        )
+    }
 }
 
 export default RenderPost;

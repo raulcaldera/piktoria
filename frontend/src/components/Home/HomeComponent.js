@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
+import Pagination from '../Pagination';
 
 const Home = (props) => {
-    const [posts, setPost] = useState([]);
     const userPostUpvotes = props.userPostUpvotes;
     const userCommentUpvotes = props.userCommentUpvotes;
     const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
     const user = props.user;    
-
+    const [posts, setPost] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(5);
 
     useEffect(() => {
         let isMounted = true;
@@ -23,17 +25,26 @@ const Home = (props) => {
         return () => { isMounted = false };
     },[]);
 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    
     return (
         <div className="container-fluid">
             <p>Post upvotes: {userPostUpvotes}</p>
             <p>Comment upvotes: {userCommentUpvotes}</p>  
             <div className="row align-items-start">
                 <div className="PostSection">
-                    {posts.map(post => 
+                    {currentPosts.map(post => 
                         <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
                     )}
-                </div>              
-            </div>                    
+                </div>          
+            </div> 
+            <div className="PaginationSection">
+                    <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+            </div>                       
         </div>
     )    
 }

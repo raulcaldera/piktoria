@@ -17,9 +17,11 @@ const RenderComment= (props) => {
     const [comments, setComment] = useState([]);
     const [commentUpvotes, setCommentUpvotes] = useState();
     const [isCommentUpvoted, setIsCommentUpvoted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        let isMounted = true;     
+        let isMounted = true;   
+        setLoading(true);  
         (async () => {
             let commentData = await AxiosApi.get('/comment/' + commentId).then(({ data }) => data);
             let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
@@ -28,6 +30,7 @@ const RenderComment= (props) => {
                 setComment([commentData]);
                 setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
             }
+        setLoading(false);
         })();  
         
         if (isMounted) {
@@ -102,20 +105,26 @@ const RenderComment= (props) => {
         }
     }
 
-    return (
-        <div className="Comment">
-            {comments.map(comment => 
-                <div key={commentId}>
-                    <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/> 
-                    Comment: {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br> 
-                    <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
-                    Timestamp: {comment.timestamp}<br></br>
-                    Upvotes: {commentUpvotes}<br></br>
-                    <UpvoteBtn />
-                </div>
-             )}                    
-        </div>                   
-    )    
+    if (loading) {
+        return (
+            <p>Loading...</p>
+        )
+    } else {
+        return (
+            <div className="Comment">
+                {comments.map(comment => 
+                    <div key={commentId}>
+                        <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/> 
+                        Comment: {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br> 
+                        <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
+                        Timestamp: {comment.timestamp}<br></br>
+                        Upvotes: {commentUpvotes}<br></br>
+                        <UpvoteBtn />
+                    </div>
+                )}                    
+            </div>                   
+        )    
+    }
 }
 
 export default RenderComment;

@@ -5,6 +5,7 @@ import AxiosApi from '../AxiosApi';
 import RenderProfilePost from './RenderProfilePost';
 import Unauthorized from '../UnauthorizedComponent';
 import moment from 'moment-timezone';
+import Pagination from '../Pagination';
 
 const NewPost = (props) => {
     const userId = parseInt(props.userId); 
@@ -74,12 +75,14 @@ const NewPost = (props) => {
 
 const Profile = (props) => {
     let { userId } = useParams();
-    const [posts, setPost] = useState([]);
     const userPostUpvotes = props.userPostUpvotes;
     const userCommentUpvotes = props.userCommentUpvotes;
     const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
-    const user = props.user;    
+    const user = props.user;
+    const [posts, setPost] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(5);
 
     useEffect(() => {
         let isMounted = true;
@@ -92,6 +95,12 @@ const Profile = (props) => {
 
         return () => { isMounted = false };
     },[userId]);
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     if (parseInt(userId) === parseInt(props.user.userId)) {
         return (
@@ -106,10 +115,13 @@ const Profile = (props) => {
                 <div className="container-fluid">
                     <div className="row align-items-start">
                         <div className="PostSection">
-                            {posts.map(post => 
+                            {currentPosts.map(post => 
                                 <RenderProfilePost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
                             )}
                         </div>             
+                    </div>
+                    <div className="PaginationSection">
+                        <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
                     </div>                    
                 </div>   
             </React.Fragment>

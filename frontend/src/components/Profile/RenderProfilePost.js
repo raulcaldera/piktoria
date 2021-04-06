@@ -18,10 +18,12 @@ const RenderProfilePost = (props) => {
     const [postUpvotes, setPostUpvotes] = useState([]);
     const [postCommentCount, setPostComments] = useState([]);
     const [isPostUpvoted, setIsPostUpvoted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let isMounted = true;                    
         (async () => {
+            setLoading(true);
             let postData = await AxiosApi.get('/post/' + postId).then(({ data }) => data);
             let postCommentData = await AxiosApi.get('/comment/post/' + postId).then(({ data }) => data);
             let postUpvoteData = await AxiosApi.get('/postupvotes/post/' + postId).then(({ data }) => data);
@@ -31,6 +33,7 @@ const RenderProfilePost = (props) => {
                 setPostComments(postCommentData.commentCount);
                 setPostUpvotes(postUpvoteData.postUpvoteCount);
             }
+            setLoading(false);
         })();
 
         if (isMounted) {
@@ -104,24 +107,30 @@ const RenderProfilePost = (props) => {
             return null;
         }
     }
-
-    return (
-        <div key={postId} className="Post">
-            {posts.map(post => 
-                <div key={postId}>
-                    <DeletePostBtn postId={postId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
-                    <Link to={`/post/${post.id}`}>Title: {post.title}</Link><span> </span><EditTitleBtn postId={postId} title={post.title} setPost={setPost}/><br></br> 
-                    Body: {post.body} <span> </span><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
-                    <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                    Timestamp: {post?.timestamp}<br></br>
-                    Upvotes: {postUpvotes}<br></br>
-                    Comments: {postCommentCount}<br></br>
-                    <UpvoteBtn />
-                    <p>----------------------</p>
-                </div>
-            )}
-        </div>                   
-    )
+    
+    if (loading) {
+        return (
+            <p>Loading...</p>
+        )
+    } else {
+        return (
+            <div key={postId} className="Post">
+                {posts.map(post => 
+                    <div key={postId}>
+                        <DeletePostBtn postId={postId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
+                        <Link to={`/post/${post.id}`}>Title: {post.title}</Link><span> </span><EditTitleBtn postId={postId} title={post.title} setPost={setPost}/><br></br> 
+                        Body: {post.body} <span> </span><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
+                        <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
+                        Timestamp: {post?.timestamp}<br></br>
+                        Upvotes: {postUpvotes}<br></br>
+                        Comments: {postCommentCount}<br></br>
+                        <UpvoteBtn />
+                        <p>----------------------</p>
+                    </div>
+                )}
+            </div>                   
+        )
+    }
 }
 
 export default RenderProfilePost;

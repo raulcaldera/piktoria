@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Input } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import RenderComment from './RenderComment';
 import moment from 'moment-timezone';
+import Pagination from '../Pagination';
 
 const CommentForm = (props) => {
     const postId = parseInt(props.postId);
@@ -62,8 +63,9 @@ const Comment = (props) => {
     let setUserCommentUpvotes = props.setUserCommentUpvotes;
     const auth = props.auth;
     const user = props.user; 
-
     const [postComments, setPostComments] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [commentsPerPage] = useState(5);
 
     useEffect(() => {
         let isMounted = true;  
@@ -76,18 +78,27 @@ const Comment = (props) => {
         return () => { isMounted = false };  
     }, [postId]);
 
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const currentComments = postComments.slice(indexOfFirstComment, indexOfLastComment);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className="CommentSection">
-                <div className="CommentForm">
-                    <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
+            <div className="CommentForm">
+                <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
+            </div>
+            {currentComments.map(comment => 
+                <div key={comment.id}>
+                    <RenderComment user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/><br></br>
                 </div>
-                {postComments.map(comment => 
-                    <div key={comment.id}>
-                        <RenderComment user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/><br></br>
-                    </div>
-                )}
-        </div>                 
-    )    
+            )}
+            <div className="PaginationSection">
+                <Pagination postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>
+            </div>
+        </div>                
+)    
 }
 
 export default Comment;
