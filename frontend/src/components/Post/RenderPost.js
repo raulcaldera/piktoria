@@ -116,7 +116,7 @@ const RenderPost = (props) => {
                 {posts.map(post => 
                     <div key={postId}>
                         <Link to={`/post/${post.id}`}>Title: {post.title}</Link><br></br> 
-                        Body: {post.body}<br></br> 
+                        <img src={`http://localhost:3001/${post.body}`} alt={post.body}/><br></br> 
                         <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
                         Timestamp: {post.timestamp}<br></br>
                         Upvotes: {postUpvotes}<br></br>

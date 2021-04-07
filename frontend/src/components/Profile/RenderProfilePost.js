@@ -121,7 +121,7 @@ const RenderProfilePost = (props) => {
                     <div key={postId}>
                         <DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
                         <Link to={`/post/${post.id}`}>Title: {post.title}</Link><span> </span><EditTitleBtn postId={postId} title={post.title} setPost={setPost}/><br></br> 
-                        Body: {post.body} <span> </span><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
+                        <img src={`http://localhost:3001/${post.body}`} alt={post.body}/><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
                         <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
                         Timestamp: {post?.timestamp}<br></br>
                         Upvotes: {postUpvotes}<br></br>
