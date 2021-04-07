@@ -4,6 +4,9 @@ import { PostService } from './post.service';
 import { CreatePostDto } from './dto/createPost.dto';
 import { Request, Response } from 'express';
 import { FileInterceptor } from "@nestjs/platform-express";
+import { diskStorage } from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import path = require('path');
 
 @Controller('/post')
 export class PostController {
@@ -12,13 +15,20 @@ export class PostController {
     /*Create*/
     @Post()
     @UseGuards(AuthGuard)
-    @UseInterceptors(
-      FileInterceptor('body', {
-        dest: "./uploads",
-      })
-    )
+    @UseInterceptors(FileInterceptor('body', {
+      storage: diskStorage({
+        destination: (req, file, cb) => {
+          cb(null, './uploads/')
+        },
+        filename: (req, file, cb) => {
+          const filename: string = path.parse(file.originalname).name.replace(/\s/g,'') + uuidv4();
+          const extension: string = path.parse(file.originalname).ext;
+          cb(null, `${filename}${extension}`);
+        }
+      }),
+    }))
     async createPost(@Body() body, @Req() req: Request, @Res() res: Response, @UploadedFile() file: Express.Multer.File) {
-      const createPostDto = {title: body.title, body: file.path, authorId: body.authorId, timestamp: body.timestamp }
+      const createPostDto = {title: body.title, body: file.filename, authorId: body.authorId, timestamp: body.timestamp }
       let postRes = await this.postService.createPost(createPostDto, req);
       if (postRes.posted) {
         res.status(200).send(postRes);

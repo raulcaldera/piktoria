@@ -6,10 +6,16 @@ import { PostUpvoteModule } from './postUpvote/postUpvote.module';
 import { CommentUpvoteModule } from './commentUpvote/commentUpvote.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-//import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 
 @Module({
-  imports: [CommentModule, PostModule, UserModule, PostUpvoteModule, CommentUpvoteModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
+    CommentModule, PostModule, UserModule, PostUpvoteModule, CommentUpvoteModule],
   controllers: [AppController],
   providers: [AppService],
 })
