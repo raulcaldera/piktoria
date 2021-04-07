@@ -95,7 +95,7 @@ const Comment = (props) => {
                 </div>
             )}
             <div className="PaginationSection">
-                <Pagination postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>
+                <Pagination currentPage={currentPage} postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>
             </div>
         </div>                
 )    

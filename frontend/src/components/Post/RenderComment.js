@@ -20,9 +20,9 @@ const RenderComment= (props) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        let isMounted = true;   
-        setLoading(true);  
+        let isMounted = true;    
         (async () => {
+            setLoading(true); 
             let commentData = await AxiosApi.get('/comment/' + commentId).then(({ data }) => data);
             let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
 
@@ -30,7 +30,7 @@ const RenderComment= (props) => {
                 setComment([commentData]);
                 setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
             }
-        setLoading(false);
+            setLoading(false);
         })();  
         
         if (isMounted) {
@@ -107,7 +107,9 @@ const RenderComment= (props) => {
 
     if (loading) {
         return (
-            <p>Loading...</p>
+            <div>
+                <p1>Loading...</p1><br></br>
+            </div>
         )
     } else {
         return (

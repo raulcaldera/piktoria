@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 const DeletePostBtn = (props) => {
     let postId = parseInt(props.postId);
+    let userId = parseInt(props.userId);
     const setPost = props.setPost;
     const setIsPostUpvoted = props.setIsPostUpvoted;
     const setPostComments = props.setPostComments;
@@ -16,6 +17,7 @@ const DeletePostBtn = (props) => {
     
     const handleDeletion = (event) => {
         event.preventDefault();
+        console.log(userId);
         (async () => {
             await AxiosApi.delete(`/post/${postId}`, {data: {postId: postId}})
             .then(function (res) {
@@ -28,6 +30,7 @@ const DeletePostBtn = (props) => {
                 } else {
                     console.log(res);
                 }
+                window.location.href=`/profile/${userId}`;
             })
             .catch(function (error) { console.log(error) });  
         })();      

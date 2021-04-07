@@ -43,7 +43,7 @@ const Home = (props) => {
                 </div>          
             </div> 
             <div className="PaginationSection">
-                    <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                    <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
             </div>                       
         </div>
     )    

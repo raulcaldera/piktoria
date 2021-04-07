@@ -31,6 +31,7 @@ const DeleteCommentBtn = (props) => {
                         let postCommentData = await AxiosApi.get('/comment/post/' + postId).then(({ data }) => data);
                         setPostComments(postCommentData.postComments);
                     })();
+                    window.location.href=`/post/${postId}`;
                 } else {
                     console.log(res);
                 }
