@@ -107,7 +107,7 @@ const RenderPost = (props) => {
     if (loading) {
         return (
             <div>
-                <p1>Loading...</p1><br></br>
+                <p>Loading...</p><br></br>
             </div>
         )
     } else {

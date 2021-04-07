@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Popover, PopoverHeader, PopoverBody, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const Pagination = (props) => {
     let postsPerPage = props.postsPerPage;
@@ -8,7 +8,26 @@ const Pagination = (props) => {
     let currentPage = props.currentPage;
     let totalPages = Math.ceil(totalPosts/postsPerPage);
 
+    const [leftPopoverOpen, setLeftPopoverOpen] = useState(false);
+    const [rightPopoverOpen, setRightPopoverOpen] = useState(false);
+    const [goToPage, setGoToPage] = useState(1);
+
+    const toggleLeftPopover = () => setLeftPopoverOpen(!leftPopoverOpen);
+    const toggleRightPopover = () => setRightPopoverOpen(!rightPopoverOpen);
+
     const pageNumbers = [];
+    const totalPageNumbers = [];
+
+    const handleGoToInputChange = (event) => {
+        setGoToPage(parseInt(event.target.value));
+    }     
+
+    const handleGoTo = (event) => {
+        event.preventDefault();
+        console.log(goToPage);
+        console.log(typeof(goToPage));
+        paginate(goToPage);
+    }
 
     if (totalPages >= 5) {
         if (currentPage < 5 && totalPages >= (currentPage + 3)) {
@@ -29,9 +48,13 @@ const Pagination = (props) => {
             }
         }
     } else {
-        for (let i = 1; i <= Math.ceil(totalPosts/postsPerPage); i++)  {
+        for (let i = 1; i <= totalPages; i++)  {
             pageNumbers.push(i);
         }
+    }
+
+    for (let i = 1; i <= totalPages; i++)  {
+        totalPageNumbers.push(i);
     }
 
     if (totalPages >= 5 ) {
@@ -55,9 +78,25 @@ const Pagination = (props) => {
                             ))
                         )}
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button>
+                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                    
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
@@ -102,9 +141,25 @@ const Pagination = (props) => {
                             ))
                         )}
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button> 
+                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                                                
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
@@ -176,9 +231,25 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button>  
+                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                                               
                         </li>
                         {pageNumbers.map(number =>
                             (number === currentPage ? (
@@ -196,9 +267,25 @@ const Pagination = (props) => {
                             ))
                         )}
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button>  
+                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                                               
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
@@ -228,9 +315,25 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button>    
+                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                                             
                         </li>
                         {pageNumbers.map(number =>
                             (number === currentPage ? (
@@ -317,9 +420,25 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                         <li className="goTo">
-                            <Button className="page-link">
+                            <Button id="PopoverLegacy" className="page-link">
                                 ...
-                            </Button>                    
+                            </Button>       
+                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                                <PopoverHeader>Go To</PopoverHeader>
+                                <PopoverBody>
+                                    <Form onSubmit={handleGoTo}>
+                                        <FormGroup>
+                                            <Label htmlFor="page">Page</Label>
+                                            <Input type="select" onChange={handleGoToInputChange} name="select">
+                                                {totalPageNumbers.map(number => (
+                                                    <option key={number} value={number}>{number}</option>
+                                                ))}
+                                            </Input>
+                                        </FormGroup>
+                                        <Button type="submit" value="submit" color="primary">Go</Button>
+                                    </Form>
+                                </PopoverBody>
+                            </Popover>                                          
                         </li>
                         {pageNumbers.map(number =>
                             (number === currentPage ? (
