@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, UseInterceptors, UploadedFile, Req, Res } from '@nestjs/common';
 import { AuthGuard } from 'src/core/guards/auth.guard';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/createPost.dto';
 import { Request, Response } from 'express';
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller('/post')
 export class PostController {
@@ -11,13 +12,19 @@ export class PostController {
     /*Create*/
     @Post()
     @UseGuards(AuthGuard)
-    async createPost(@Body() createPostDto: CreatePostDto, @Req() req: Request, @Res() res: Response) {
+    @UseInterceptors(
+      FileInterceptor('body', {
+        dest: "./uploads",
+      })
+    )
+    async createPost(@Body() body, @Req() req: Request, @Res() res: Response, @UploadedFile() file: Express.Multer.File) {
+      const createPostDto = {title: body.title, body: file.path, authorId: body.authorId, timestamp: body.timestamp }
       let postRes = await this.postService.createPost(createPostDto, req);
       if (postRes.posted) {
         res.status(200).send(postRes);
       } else {
         res.send(postRes);
-      }      
+      }
     }
 
     /*Read*/

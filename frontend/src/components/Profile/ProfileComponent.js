@@ -11,26 +11,43 @@ const NewPost = (props) => {
     const userId = parseInt(props.userId); 
     const setPost = props.setPost;
     const [isNewPostModalOpen, setNewPostModal] = useState(false);
-    const [newPostData, setNewPostData] = useState({ title: '', body: '' });
+    const [newPostTitleData, setNewPostTitleData] = useState('');
+    const [newPostImageData, setNewPostImageData] = useState({});
     const [modalMsg, setModalMsg] = useState('');
 
     const toggleNewPostModal = () => {
         setNewPostModal(!isNewPostModalOpen);
         setModalMsg('');
+        setNewPostTitleData('');
+        setNewPostImageData({});
     };
     
-    const handleNewPostInputChange = (event) => {
-        setNewPostData({...newPostData, [event.target.name] : event.target.value});
+    const handleNewPostTitleInputChange = (event) => {
+        setNewPostTitleData(event.target.value);
+    }
+
+    const handleFile = (event) => {
+        console.log(event.target.files[0]);
+        setNewPostImageData(event.target.files[0])
     }
 
     const handleNewPost = (event) => {
         event.preventDefault();
-        console.log({ title: newPostData.title, body: newPostData.body, authorId: userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss")});
-        if (!newPostData.title || !newPostData.body) {
+        if (!newPostTitleData|| !newPostImageData) {
             setModalMsg('Please enter all the fields :)');
+        } else if (newPostImageData.type !== "image/jpeg" && newPostImageData.type !== "image/png") {
+            setModalMsg('The image must be a png or jpeg file');
         } else {
+            const formData = new FormData();
+            formData.append('title', newPostTitleData);
+            formData.append('body', newPostImageData);
+            formData.append('authorId', userId);
+            formData.append('timestamp', moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss"));
+            const config = {     
+                headers: { 'content-type': 'multipart/form-data' }
+            };
             (async () => {
-                await AxiosApi.post('/post/', {title: newPostData.title, body: newPostData.body, authorId: userId, timestamp: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss") })
+                await AxiosApi.post('/post/', formData, config)
                 .then(function (res) {
                     if (res.data.posted && res.status === 200) {
                         console.log(res.data);
@@ -44,9 +61,9 @@ const NewPost = (props) => {
                     }
                 })
                 .catch(function (error) { console.log(error) });
-            })();      
+            })(); 
         } 
-    }  
+    } 
 
     return (
         <React.Fragment>
@@ -57,11 +74,11 @@ const NewPost = (props) => {
                     <Form onSubmit={handleNewPost}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
-                            <Input type="text" onChange={handleNewPostInputChange} name="title"/>
+                            <Input type="text" onChange={handleNewPostTitleInputChange} name="title"/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="body">Body</Label>
-                            <Input type="text" onChange={handleNewPostInputChange} name="body"/>
+                            <Input type="file" onChange={handleFile} name="body" />
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Post!</Button>
                     </Form>
