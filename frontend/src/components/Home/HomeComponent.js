@@ -42,8 +42,10 @@ const Home = (props) => {
                     )}
                 </div>          
             </div> 
-            <div className="PaginationSection">
+            <div className="row align-items-start">
+                <div className="PaginationSection">
                     <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                </div>
             </div>                       
         </div>
     )    

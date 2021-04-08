@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Card, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import DeletePostBtn from './DeletePost';
 import EditTitleBtn from './EditPostTitle';
@@ -104,7 +104,7 @@ const RenderProfilePost = (props) => {
                 )
             }
         } else {
-            return null;
+            return <span>Upvotes </span>;
         }
     }
     
@@ -118,17 +118,28 @@ const RenderProfilePost = (props) => {
         return (
             <div key={postId} className="Post">
                 {posts.map(post => 
-                    <div key={postId}>
-                        <DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} /><br></br> 
-                        <Link to={`/post/${post.id}`}>Title: {post.title}</Link><span> </span><EditTitleBtn postId={postId} title={post.title} setPost={setPost}/><br></br> 
-                        <img src={`http://localhost:3001/${post.body}`} alt={post.body}/><EditBodyBtn postId={postId} body={post.body} setPost={setPost}/><br></br> 
-                        <Link to={`/user/${post.author.id}`}>Author: {post.author.username}</Link><br></br>
-                        Timestamp: {post?.timestamp}<br></br>
-                        Upvotes: {postUpvotes}<br></br>
-                        Comments: {postCommentCount}<br></br>
-                        <UpvoteBtn />
-                        <p>----------------------</p>
-                    </div>
+                    <Card key={postId}>
+                        <CardBody> 
+                            <DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} />
+                            <CardTitle tag="h5">
+                                <span><Link to={`/post/${post.id}`}>{post.title}</Link> <EditTitleBtn postId={postId} title={post.title} setPost={setPost}/></span>
+                            </CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">
+                                <Link to={`/user/${post.author.id}`}>{post.author.username}</Link>
+                            </CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">
+                                {post.timestamp}
+                            </CardSubtitle>
+                        </CardBody>
+                        <CardBody>
+                            <EditBodyBtn postId={postId} body={post.body} setPost={setPost}/>
+                            <img width="100%" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                        </CardBody>
+                        <CardBody>
+                            <span>{postUpvotes} <UpvoteBtn /> </span>
+                            <span>{postCommentCount} Comments</span>
+                        </CardBody>
+                    </Card> 
                 )}
             </div>                   
         )

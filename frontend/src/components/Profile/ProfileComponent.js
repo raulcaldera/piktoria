@@ -26,17 +26,16 @@ const NewPost = (props) => {
         setNewPostTitleData(event.target.value);
     }
 
-    const handleFile = (event) => {
-        console.log(event.target.files[0]);
-        setNewPostImageData(event.target.files[0])
+    const handleNewPostFileInputChange = (event) => {
+        setNewPostImageData(event.target.files[0]);
     }
 
     const handleNewPost = (event) => {
         event.preventDefault();
         if (!newPostTitleData|| !newPostImageData) {
             setModalMsg('Please enter all the fields :)');
-        } else if (newPostImageData.type !== "image/jpeg" && newPostImageData.type !== "image/png") {
-            setModalMsg('The image must be a png or jpeg file');
+        } else if (newPostImageData.type !== "image/jpeg" && newPostImageData.type !== "image/png" && newPostImageData.type !== "image/gif") {
+            setModalMsg('The image must be a png, jpg, or gif file');
         } else {
             const formData = new FormData();
             formData.append('title', newPostTitleData);
@@ -78,7 +77,7 @@ const NewPost = (props) => {
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="body">Body</Label>
-                            <Input type="file" onChange={handleFile} name="body" />
+                            <Input type="file" onChange={handleNewPostFileInputChange} name="body" />
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Post!</Button>
                     </Form>
@@ -122,14 +121,14 @@ const Profile = (props) => {
     if (parseInt(userId) === parseInt(props.user.userId)) {
         return (
             <React.Fragment>
-                <p>Post upvotes: {userPostUpvotes}</p>
-                <p>Comment upvotes: {userCommentUpvotes}</p>  
-                <p>Hello {user.username}, with Id {user.userId}!!</p>
-                <div className="NewPost">
-                    <NewPost userId={userId} setPost={setPost}/>     
-                </div>
-                <br></br>   
                 <div className="container-fluid">
+                    <p>Post upvotes: {userPostUpvotes}</p>
+                    <p>Comment upvotes: {userCommentUpvotes}</p>  
+                    <p>Hello {user.username}, with Id {user.userId}!!</p>
+                    <div className="NewPost">
+                        <NewPost userId={userId} setPost={setPost}/>     
+                    </div>
+                    <br></br>   
                     <div className="row align-items-start">
                         <div className="PostSection">
                             {currentPosts.map(post => 
@@ -137,9 +136,11 @@ const Profile = (props) => {
                             )}
                         </div>             
                     </div>
-                    <div className="PaginationSection">
-                        <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
-                    </div>                    
+                    <div className="row align-items-start">
+                        <div className="PaginationSection">
+                            <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                        </div>  
+                    </div>                  
                 </div>   
             </React.Fragment>
         ) 

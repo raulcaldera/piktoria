@@ -4,11 +4,10 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } 
 
 const EditBodyBtn = (props) => {
     let postId = parseInt(props.postId);
-    const body = props.body; 
     const setPost = props.setPost;
     const [isBodyModalOpen, setBodyModal] = useState(false);
     const [modalMsg, setModalMsg] = useState('');
-    const [bodyData, setBodyData] = useState('');
+    const [imageData, setImageData] = useState({});
 
     const toggleBodyModal = () => {
         setBodyModal(!isBodyModalOpen);
@@ -16,19 +15,27 @@ const EditBodyBtn = (props) => {
 
     };
 
-    const handleBodyChange = (event) => {
-        setBodyData(event.target.value);
+    const handleFileInputChange = (event) => {
+        setImageData(event.target.files[0]);
     }
 
     
     const handleBody = (event) => {
         event.preventDefault();
-        console.log({postId: postId, body: bodyData});
-        if (!bodyData) {
-            setModalMsg('Please enter something :)');
+        console.log({postId: postId, body: imageData});
+        if (imageData.type !== "image/jpeg" && imageData.type !== "image/png" && imageData.type !== "image/gif") {
+            setModalMsg('The image must be a png, jpg, or gif file');
+        } else if (!imageData) {
+            setModalMsg('Please upload something :)');
         } else {
+            const formData = new FormData();
+            formData.append('id', postId);
+            formData.append('body', imageData);
+            const config = {     
+                headers: { 'content-type': 'multipart/form-data' }
+            };
             (async () => {
-                await AxiosApi.put('/post/body', {id: postId, body: bodyData})
+                await AxiosApi.put('/post/body', formData, config)
                 .then(function (res) {
                     if (res.data.updated && res.status === 200) {
                         console.log(res.data);
@@ -54,8 +61,8 @@ const EditBodyBtn = (props) => {
                 <ModalBody>
                     <Form onSubmit={handleBody}>
                         <FormGroup>
-                            <Label htmlFor="body">Body</Label>
-                            <Input type="text" placeholder={body} onChange={handleBodyChange} name="body"/>
+                        <Label htmlFor="body">Body</Label>
+                            <Input type="file" onChange={handleFileInputChange} name="body" />
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Update!</Button>
                     </Form>

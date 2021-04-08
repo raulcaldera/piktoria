@@ -67,13 +67,26 @@ export class PostController {
 
     @Put('/body')
     @UseGuards(AuthGuard)
-    async updatePostBody(@Body() updatedPost : { id: number , body: string }, @Req() req: Request, @Res() res: Response) {
+    @UseInterceptors(FileInterceptor('body', {
+      storage: diskStorage({
+        destination: (req, file, cb) => {
+          cb(null, './uploads/')
+        },
+        filename: (req, file, cb) => {
+          const filename: string = path.parse(file.originalname).name.replace(/\s/g,'') + uuidv4();
+          const extension: string = path.parse(file.originalname).ext;
+          cb(null, `${filename}${extension}`);
+        }
+      }),
+    }))
+    async updatePostBody(@Body() body, @Req() req: Request, @Res() res: Response, @UploadedFile() file: Express.Multer.File) {
+      const updatedPost = {id: body.id, body: file.filename }      
       let postRes = await this.postService.updatePostBody(updatedPost, req);
       if (postRes.updated) {
         res.status(200).send(postRes);
       } else {
         res.send(postRes);
-      }   
+      } 
     }  
   
     /*Delete*/

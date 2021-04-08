@@ -60,7 +60,7 @@ const Pagination = (props) => {
     if (totalPages >= 5 ) {
         if (currentPage === 1) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         {pageNumbers.map(number =>
                             (number === currentPage ? (
@@ -109,11 +109,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )
         } else if (currentPage > 1 && currentPage < 5 && totalPages > 5 && (currentPage + 3) < totalPages) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -172,11 +172,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )
         } else if (currentPage > 1 && currentPage < 5 && totalPages > 5 && (currentPage + 3) > totalPages) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -214,11 +214,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )        
         } else if (currentPage > 4 && currentPage < (totalPages - 3)) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -298,11 +298,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             ) 
         } else if (currentPage > (totalPages - 4) && currentPage >= 5  && currentPage < totalPages) {   
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -361,11 +361,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )                     
         } else if (currentPage > (totalPages - 4) && currentPage < 5  && currentPage < totalPages) {   
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -403,11 +403,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )                     
         } else if (currentPage === totalPages) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -456,11 +456,11 @@ const Pagination = (props) => {
                             ))
                         )}
                     </ul>
-                </nav> 
+                </div> 
             )           
         } else {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -498,13 +498,13 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav> 
+                </div> 
             )             
         }
     } else if (totalPages < 5 && totalPages > 1) {
         if (currentPage === 1) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         {pageNumbers.map(number =>
                             (number === currentPage ? (
@@ -532,11 +532,11 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav>
+                </div>
             )
         } else if (currentPage === totalPages) {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -564,11 +564,11 @@ const Pagination = (props) => {
                             ))
                         )}
                     </ul>
-                </nav> 
+                </div> 
             )           
         } else {
             return (
-                <nav>
+                <div>
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
@@ -606,7 +606,7 @@ const Pagination = (props) => {
                             </Button>                    
                         </li>
                     </ul>
-                </nav> 
+                </div> 
             )             
         }
     } else return null;

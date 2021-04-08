@@ -43,9 +43,11 @@ const User = (props) => {
                         <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
                     )}
                 </div>               
-            </div>   
-            <div className="PaginationSection">
-                <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+            </div>
+            <div className="row align-items-start">   
+                <div className="PaginationSection">
+                    <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                </div>  
             </div>                   
         </div>    
     )    
