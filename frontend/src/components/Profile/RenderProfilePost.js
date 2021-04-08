@@ -11,8 +11,6 @@ import { FadeLoader } from "react-spinners";
 const RenderProfilePost = (props) => {
     let postId = parseInt(props.postId);
     let userPostUpvotes = props.userPostUpvotes;
-    let setUserPostUpvotes = props.setUserPostUpvotes;
-
     let auth = props.auth;
     let user = props.user;
 
@@ -39,7 +37,7 @@ const RenderProfilePost = (props) => {
         })();
 
         if (isMounted) {
-            if (userPostUpvotes.includes(parseInt(postId))) {
+            if (userPostUpvotes?.includes(parseInt(postId))) {
                 setIsPostUpvoted(true);
             } else {
                 setIsPostUpvoted(false);
@@ -61,8 +59,8 @@ const RenderProfilePost = (props) => {
                         let postUpvoteData = await AxiosApi.get('/postupvotes/post/' + postId).then(({ data }) => data);
                         setPostUpvotes(postUpvoteData.postUpvoteCount);
                         setIsPostUpvoted(false);
-                        const newUserPostUpvotes = userPostUpvotes.filter((item) => item !== postId);
-                        setUserPostUpvotes(newUserPostUpvotes);
+                        const newUserPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes")).filter((item) => item !== postId);
+                        localStorage.setItem("userPostUpvotes", JSON.stringify(newUserPostUpvotes));
                     })();
                 } else {
                     console.log(res);
@@ -84,7 +82,8 @@ const RenderProfilePost = (props) => {
                         let postUpvoteData = await AxiosApi.get('/postupvotes/post/' + postId).then(({ data }) => data);
                         setPostUpvotes(postUpvoteData.postUpvoteCount);
                         setIsPostUpvoted(true);
-                        setUserPostUpvotes([...userPostUpvotes, postId]);
+                        const newUserPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
+                        localStorage.setItem("userPostUpvotes", JSON.stringify([...newUserPostUpvotes, postId]));
                     })();
                 } else {
                     console.log(res);
@@ -135,7 +134,7 @@ const RenderProfilePost = (props) => {
                         </CardBody>
                         <CardBody>
                             <span>{postUpvotes} <UpvoteBtn /> </span>
-                            <span>{postCommentCount} <span class="far fa-comment-alt fa-lg"></span></span>
+                            <span>{postCommentCount} <span className="far fa-comment-alt fa-lg"></span></span>
                         </CardBody>
                     </Card> 
                 )}

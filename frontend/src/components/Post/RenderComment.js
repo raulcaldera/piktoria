@@ -12,7 +12,6 @@ const RenderComment= (props) => {
     let commentId = props.commentId;
     let postId = props.postId;
     let userCommentUpvotes = props.userCommentUpvotes;
-    let setUserCommentUpvotes = props.setUserCommentUpvotes;
     let setPostComments = props.setPostComments;
     let auth = props.auth;
     let user = props.user; 
@@ -37,7 +36,7 @@ const RenderComment= (props) => {
         })();  
         
         if (isMounted) {
-            if (userCommentUpvotes.includes(parseInt(commentId))) {
+            if (userCommentUpvotes?.includes(parseInt(commentId))) {
                 setIsCommentUpvoted(true);
             } else {
                 setIsCommentUpvoted(false);
@@ -60,7 +59,7 @@ const RenderComment= (props) => {
                         setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
                         setIsCommentUpvoted(false);
                         const newUserCommentUpvotes = userCommentUpvotes.filter((item) => item !== commentId);
-                        setUserCommentUpvotes(newUserCommentUpvotes);
+                        localStorage.setItem("userCommentUpvotes", JSON.stringify(newUserCommentUpvotes));
                     })();
                 } else {
                     console.log(res);
@@ -82,7 +81,8 @@ const RenderComment= (props) => {
                         let commentUpvoteData = await AxiosApi.get('/commentupvotes/comment/' + commentId).then(({ data }) => data);
                         setCommentUpvotes(commentUpvoteData.commentUpvoteCount);
                         setIsCommentUpvoted(true);
-                        setUserCommentUpvotes([...userCommentUpvotes, commentId]);
+                        const newUserCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
+                        localStorage.setItem("userCommentUpvotes", JSON.stringify([...newUserCommentUpvotes, commentId]));
                     })();
                 } else {
                     console.log(res);

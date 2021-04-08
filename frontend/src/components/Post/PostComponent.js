@@ -5,12 +5,11 @@ import Comment from '../Post/CommentComponent';
 
 const Post = (props) => { 
     let { postId } = useParams();
-    const userPostUpvotes = props.userPostUpvotes;
-    const setUserPostUpvotes = props.setUserPostUpvotes;
-    const userCommentUpvotes = props.userCommentUpvotes;
-    const setUserCommentUpvotes = props.setUserCommentUpvotes;
     const auth = props.auth;
     const user = props.user;  
+
+    const userCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
+    const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
 
     return (
         <div className="container-fluid">
@@ -18,12 +17,10 @@ const Post = (props) => {
             <p>Comment upvotes: {userCommentUpvotes}</p> 
             <div className="row align-items-start">
                 <div className="PostSection col-12 col-md-6">   
-                    <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
+                    <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} />
                 </div>                
             </div>
-            <div className="row align-items-start">
-                <Comment user={user} auth={auth} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes}/>                          
-            </div>                       
+            <Comment user={user} auth={auth} postId={postId} userCommentUpvotes={userCommentUpvotes} />                                                 
         </div>                               
     )    
 }

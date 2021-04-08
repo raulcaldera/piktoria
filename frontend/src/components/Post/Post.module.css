@@ -10,3 +10,7 @@
 .textarea {
   resize: none;
 }
+
+.pagination {
+  margin: 1em auto;   
+}

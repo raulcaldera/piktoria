@@ -3,17 +3,18 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
 import Pagination from '../Pagination';
+import styles from "./User.module.css";
 
 const User = (props) => {
     let { userId } = useParams();
-    const userPostUpvotes = props.userPostUpvotes;
-    const userCommentUpvotes = props.userCommentUpvotes;
-    const setUserPostUpvotes = props.setUserPostUpvotes;
     const auth = props.auth;
     const user = props.user;
     const [posts, setPost] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(5);    
+    const [postsPerPage] = useState(5);  
+    
+    const userCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
+    const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
 
     useEffect(() => {
         let isMounted = true;
@@ -40,12 +41,12 @@ const User = (props) => {
             <div className="row align-items-start">
                 <div className="PostSection col-12 col-md-6">
                     {currentPosts.map(post => 
-                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
+                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
                     )}
                 </div>               
             </div>
             <div className="row align-items-start">   
-                <div className="PaginationSection">
+                <div className={`PaginationSection ${styles.pagination}`}>
                     <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
                 </div>  
             </div>                   

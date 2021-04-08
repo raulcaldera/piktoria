@@ -6,3 +6,7 @@
 .cardBody {
     padding: 10px;
   }
+
+.pagination {
+    margin: 1em auto;   
+}

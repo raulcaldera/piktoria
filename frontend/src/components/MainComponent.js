@@ -12,8 +12,8 @@ import AxiosApi from './AxiosApi';
 const Main = () => {
     const [auth, setAuth] = useState(false); 
     const [user, setUser] = useState({userId: '', username: ''});
-    const [userPostUpvotes, setUserPostUpvotes] = useState([]);
-    const [userCommentUpvotes, setUserCommentUpvotes] = useState([]);    
+    const [, setUserPostUpvotes] = useState([]);
+    const [, setUserCommentUpvotes] = useState([]);    
 
     useEffect(() => {
         var localAuth = localStorage.getItem("auth");
@@ -23,6 +23,12 @@ const Main = () => {
         var localUserId = parseInt(localStorage.getItem("userId"));     
         var localUsername = localStorage.getItem("username");
         setUser({userId: localUserId, username: localUsername}); 
+
+        var localUserPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"))
+        setUserPostUpvotes(localUserPostUpvotes);
+
+        var localUserCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"))
+        setUserCommentUpvotes(localUserCommentUpvotes);
     
     }, []);
 
@@ -37,12 +43,16 @@ const Main = () => {
                 let postUpvoteData = await AxiosApi.get('/postupvotes/user/' + user.userId).then(({ data }) => data);
                 let commentUpvoteData = await AxiosApi.get('/commentupvotes/user/' + user.userId).then(({ data }) => data);
                 if (isMounted) {
+                    localStorage.setItem("userPostUpvotes", JSON.stringify(handleUserPostUpvotes(postUpvoteData.upvotes)));
+                    localStorage.setItem("userCommentUpvotes", JSON.stringify(handleUserCommentUpvotes(commentUpvoteData.upvotes)));
                     setUserPostUpvotes(handleUserPostUpvotes(postUpvoteData.upvotes));
                     setUserCommentUpvotes(handleUserCommentUpvotes(commentUpvoteData.upvotes));
                 }
             })();
         } else {
             if (isMounted) {
+                localStorage.setItem("userPostUpvotes", JSON.stringify([]));
+                localStorage.setItem("userCommentUpvotes", JSON.stringify([]));
                 setUserPostUpvotes([]);
                 setUserCommentUpvotes([]);
             }            
@@ -81,36 +91,23 @@ const Main = () => {
                     <Home 
                         user={user} 
                         auth={auth} 
-                        userPostUpvotes={userPostUpvotes} 
-                        setUserPostUpvotes={setUserPostUpvotes} 
-                        userCommentUpvotes={userCommentUpvotes}
                      />
                 </Route>
                 <Route exact path="/post/:postId">
                     <Post 
                         user={user} 
                         auth={auth} 
-                        userPostUpvotes={userPostUpvotes} 
-                        setUserPostUpvotes={setUserPostUpvotes} 
-                        userCommentUpvotes={userCommentUpvotes}
-                        setUserCommentUpvotes={setUserCommentUpvotes} 
                     />
                 </Route>
                 <Route exact path="/user/:userId">
                     <User 
                         user={user} 
-                        auth={auth} 
-                        userPostUpvotes={userPostUpvotes} 
-                        setUserPostUpvotes={setUserPostUpvotes} 
-                        userCommentUpvotes={userCommentUpvotes}
+                        auth={auth}
                     />
                 </Route>
                 <PrivateRoute exact path='/profile/:userId' component={Profile}
                     user={user} 
                     auth={auth} 
-                    userPostUpvotes={userPostUpvotes}  
-                    setUserPostUpvotes={setUserPostUpvotes} 
-                    userCommentUpvotes={userCommentUpvotes}
                 />
                 <Route path="*">Not found</Route>
             </Switch> 

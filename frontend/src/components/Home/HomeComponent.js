@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
 import Pagination from '../Pagination';
+import styles from "./Home.module.css";
 
 const Home = (props) => {
-    const userPostUpvotes = props.userPostUpvotes;
-    const userCommentUpvotes = props.userCommentUpvotes;
-    const setUserPostUpvotes = props.setUserPostUpvotes;
+    const userCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
+    const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
+
     const auth = props.auth;
     const user = props.user;    
     const [posts, setPost] = useState([]);
@@ -30,7 +31,7 @@ const Home = (props) => {
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    
+
     return (
         <div className="container-fluid">
             <p>Post upvotes: {userPostUpvotes}</p>
@@ -38,12 +39,12 @@ const Home = (props) => {
             <div className="row align-items-start">
                 <div className="PostSection col-12 col-md-6">
                     {currentPosts.map(post => 
-                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
+                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
                     )}
                 </div>          
             </div> 
             <div className="row align-items-start">
-                <div className="PaginationSection">
+                <div className={`PaginationSection ${styles.pagination}`}>
                     <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
                 </div>
             </div>                       

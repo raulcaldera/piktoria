@@ -61,7 +61,6 @@ const CommentForm = (props) => {
 const Comment = (props) => {
     let postId = props.postId;
     let userCommentUpvotes = props.userCommentUpvotes;
-    let setUserCommentUpvotes = props.setUserCommentUpvotes;
     const auth = props.auth;
     const user = props.user; 
     const [postComments, setPostComments] = useState([]);
@@ -86,17 +85,23 @@ const Comment = (props) => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="CommentSection col-12 col-md-6">
-            <div className="CommentForm">
-                <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
+        <React.Fragment>
+            <div className="row align-items-start">
+                <div className="CommentSection col-12 col-md-6">
+                    <div className="CommentForm">
+                        <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
+                    </div>
+                    {currentComments.map(comment => 
+                        <RenderComment key={comment.id} user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setPostComments={setPostComments}/>
+                    )}
+                </div> 
             </div>
-            {currentComments.map(comment => 
-                <RenderComment key={comment.id} user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/>
-            )}
-            <div className="PaginationSection">
-                <Pagination currentPage={currentPage} postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>
+            <div className="row align-items-start">
+                <div className={`PaginationSection ${styles.pagination}`}>
+                    <Pagination currentPage={currentPage} postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>
+                </div>  
             </div>
-        </div>                
+        </React.Fragment>          
 )    
 }
 
