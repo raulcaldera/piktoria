@@ -55,7 +55,7 @@ const EditBodyBtn = (props) => {
 
     return (
         <React.Fragment>
-            <Button onClick={toggleBodyModal}> Edit </Button>
+            <Button className="far fa-edit" onClick={toggleBodyModal} />
             <Modal isOpen={isBodyModalOpen} toggle={toggleBodyModal}>
                 <ModalHeader toggle={toggleBodyModal}>Edit post body</ModalHeader> 
                 <ModalBody>

@@ -107,14 +107,14 @@ const Header = (props) => {
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <Button outline onClick={toggleLoginModal}>
-                                <span className="fa fa-sign-in fa-lg"></span> Log In
+                                <span className="fas fa-sign-in-alt fa-lg"></span> Log In
                             </Button>
                         </NavItem>
                     </Nav>
                     <Nav className="ml" navbar>
                         <NavItem>
                             <Button outline onClick={toggleSignupModal}>
-                                <span className="fa fa-sign-in fa-lg"></span> Sign Up
+                                <span className="fas fa-sign-in-alt fa-lg"></span> Sign Up
                             </Button>
                         </NavItem>
                     </Nav>
@@ -133,7 +133,7 @@ const Header = (props) => {
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <Button outline onClick={handleLogOut}>
-                                <span className="fa fa-sign-out fa-lg"></span> Log Out
+                                <span className="fas fa-sign-out-alt fa-lg"></span> Log Out
                             </Button>
                         </NavItem>
                     </Nav>

@@ -38,7 +38,7 @@ const DeletePostBtn = (props) => {
 
     return (
         <React.Fragment>
-            <Button onClick={toggleDeleteModal}> Delete </Button>
+            <Button className="far fa-trash-alt" onClick={toggleDeleteModal} />
             <Modal isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
                 <ModalHeader toggle={toggleDeleteModal}>Delete Post</ModalHeader> 
                 <ModalBody>

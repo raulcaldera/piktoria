@@ -100,12 +100,12 @@ const Pagination = (props) => {
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -117,12 +117,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -163,12 +163,12 @@ const Pagination = (props) => {
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -180,12 +180,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -205,12 +205,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -222,12 +222,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         <li className="goTo">
@@ -289,12 +289,12 @@ const Pagination = (props) => {
                         </li>
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -306,12 +306,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         <li className="goTo">
@@ -352,12 +352,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -369,12 +369,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -394,12 +394,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -411,12 +411,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         <li className="goTo">
@@ -464,12 +464,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -489,12 +489,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -523,12 +523,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>
@@ -540,12 +540,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i>
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -572,12 +572,12 @@ const Pagination = (props) => {
                     <ul className="pagination">
                         <li className="lastItem">
                             <Button onClick={() => paginate(1)} className="page-link">
-                                --
+                                <i class="fas fa-angle-double-left"></i>
                             </Button>                    
                         </li>
                         <li className="prevItem">
                             <Button onClick={() => paginate(currentPage-1)} className="page-link">
-                                -
+                                <i class="fas fa-angle-left"></i> 
                             </Button>                    
                         </li>
                         {pageNumbers.map(number =>
@@ -597,12 +597,12 @@ const Pagination = (props) => {
                         )}
                         <li className="nextItem">
                             <Button onClick={() => paginate(currentPage+1)} className="page-link">
-                                +
+                                <i class="fas fa-angle-right"></i>
                             </Button>                    
                         </li>
                         <li className="lastItem">
                             <Button onClick={() => paginate(totalPages)} className="page-link">
-                                ++
+                                <i class="fas fa-angle-double-right"></i>
                             </Button>                    
                         </li>
                     </ul>

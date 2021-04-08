@@ -49,7 +49,7 @@ const EditCommentBtn = (props) => {
     if (userId === comment.user.id) {
         return (
             <React.Fragment>
-                <Button onClick={toggleCommentModal}> Edit </Button>
+                <Button onClick={toggleCommentModal}><span class="far fa-edit"></span></Button>
                 <Modal isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
                 <ModalHeader toggle={toggleCommentModal}>Edit comment</ModalHeader> 
                 <ModalBody>

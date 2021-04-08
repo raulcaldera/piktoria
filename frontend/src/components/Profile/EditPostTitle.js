@@ -19,7 +19,6 @@ const EditTitleBtn = (props) => {
         setTitleData(event.target.value);
     }
 
-    
     const handleTitle = (event) => {
         event.preventDefault();
         console.log({postId: postId, title: titleData});
@@ -47,7 +46,7 @@ const EditTitleBtn = (props) => {
 
     return (
         <React.Fragment>
-            <Button onClick={toggleTitleModal}> Edit </Button>
+            <Button className="far fa-edit" onClick={toggleTitleModal} />
             <Modal isOpen={isTitleModalOpen} toggle={toggleTitleModal}>
                 <ModalHeader toggle={toggleTitleModal}>Edit post title</ModalHeader> 
                 <ModalBody>

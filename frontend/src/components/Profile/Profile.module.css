@@ -1,0 +1,8 @@
+.timestamp {
+    float: right;
+    display: inline;
+  }
+
+.cardBody {
+    padding: 10px;
+  }

@@ -130,7 +130,7 @@ const Profile = (props) => {
                     </div>
                     <br></br>   
                     <div className="row align-items-start">
-                        <div className="PostSection">
+                        <div className="PostSection col-12 col-md-6">
                             {currentPosts.map(post => 
                                 <RenderProfilePost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes} />
                             )}

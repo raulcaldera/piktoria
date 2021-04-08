@@ -4,6 +4,7 @@ import AxiosApi from '../AxiosApi';
 import RenderComment from './RenderComment';
 import moment from 'moment-timezone';
 import Pagination from '../Pagination';
+import styles from "./Post.module.css";
 
 const CommentForm = (props) => {
     const postId = parseInt(props.postId);
@@ -45,7 +46,7 @@ const CommentForm = (props) => {
             <React.Fragment>
                 <Form onSubmit={handleCommentPost}>
                     <FormGroup>
-                        <Input type="textarea" placeholder="Post a comment..." onChange={handleCommentInputChange} name="comment"/>
+                        <Input className={styles.textarea} type="textarea" placeholder="Post a comment..." onChange={handleCommentInputChange} name="comment"/>
                     </FormGroup>
                     <Button type="submit" value="submit" color="primary">Post</Button>
                 </Form>
@@ -85,14 +86,12 @@ const Comment = (props) => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="CommentSection">
+        <div className="CommentSection col-12 col-md-6">
             <div className="CommentForm">
                 <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
             </div>
             {currentComments.map(comment => 
-                <div key={comment.id}>
-                    <RenderComment user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/><br></br>
-                </div>
+                <RenderComment key={comment.id} user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setUserCommentUpvotes={setUserCommentUpvotes} setPostComments={setPostComments}/>
             )}
             <div className="PaginationSection">
                 <Pagination currentPage={currentPage} postsPerPage={commentsPerPage} totalPosts={postComments.length} paginate={paginate}/>

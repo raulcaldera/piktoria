@@ -36,7 +36,7 @@ const Home = (props) => {
             <p>Post upvotes: {userPostUpvotes}</p>
             <p>Comment upvotes: {userCommentUpvotes}</p>  
             <div className="row align-items-start">
-                <div className="PostSection">
+                <div className="PostSection col-12 col-md-6">
                     {currentPosts.map(post => 
                         <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} setUserPostUpvotes={setUserPostUpvotes}/>
                     )}

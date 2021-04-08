@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Card, CardBody, CardSubtitle } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import { Link } from 'react-router-dom';
 import EditCommentBtn from './EditComment';
 import DeleteCommentBtn from './DeleteComment';
+import styles from "./Post.module.css";
+import { FadeLoader } from "react-spinners";
+
 
 const RenderComment= (props) => {
     let commentId = props.commentId;
@@ -93,36 +96,40 @@ const RenderComment= (props) => {
         if (auth) {
             if(isCommentUpvoted) {
                 return (
-                    <Button onClick={handleDownvote}> Downvote </Button>
+                    <Button className="fa fa-arrow-down fa-lg" onClick={handleDownvote} />
                 )
             } else {
                 return (
-                    <Button onClick={handleUpvote}> Upvote </Button>
+                    <Button className="fa fa-arrow-up fa-lg" onClick={handleUpvote} />
                 )
             }
         } else {
-            return null;
+            return <span className="fa fa-arrow-up fa-lg"/>;
         }
     }
 
     if (loading) {
         return (
-            <div>
-                <p>Loading...</p><br></br>
-            </div>
+            <FadeLoader loading height={15} width={5} radius={2} margin={2} color='grey'/>
         )
     } else {
         return (
             <div className="Comment">
                 {comments.map(comment => 
-                    <div key={commentId}>
-                        <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/> 
-                        Comment: {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br> 
-                        <Link to={`/user/${comment.user.id}`}>Author: {comment.user.username}</Link><br></br>
-                        Timestamp: {comment.timestamp}<br></br>
-                        Upvotes: {commentUpvotes}<br></br>
-                        <UpvoteBtn />
-                    </div>
+                    <Card key={commentId}>
+                        <CardBody>
+                            <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/><br></br> 
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">
+                                <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
+                                <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
+                            </CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted"></CardSubtitle>
+                            <p>
+                                {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br>
+                            </p>
+                            <span>{commentUpvotes} <UpvoteBtn /> </span>
+                        </CardBody>
+                    </Card>
                 )}                    
             </div>                   
         )    

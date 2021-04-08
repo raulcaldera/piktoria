@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
+import styles from "./Post.module.css";
+import { FadeLoader } from "react-spinners";
+
 
 const RenderPost = (props) => {
     let postId = parseInt(props.postId);
@@ -92,23 +95,21 @@ const RenderPost = (props) => {
         if (auth) {
             if(isPostUpvoted) {
                 return (
-                    <Button onClick={handleDownvote}> Downvote </Button>
+                    <Button className="fa fa-arrow-down fa-lg" onClick={handleDownvote} />
                 )
             } else {
                 return (
-                    <Button onClick={handleUpvote}> Upvote </Button>
+                    <Button className="fa fa-arrow-up fa-lg" onClick={handleUpvote} />
                 )
             }
         } else {
-            return <span>Upvotes </span>;
+            return <span className="fa fa-arrow-up fa-lg"/>;
         }
     }
     
     if (loading) {
         return (
-            <div>
-                <p>Loading...</p><br></br>
-            </div>
+            <FadeLoader loading height={15} width={5} radius={2} margin={2} color='grey'/>
         )
     } else {
         return (
@@ -120,19 +121,18 @@ const RenderPost = (props) => {
                                 <Link to={`/post/${post.id}`}>{post.title}</Link>
                             </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">
-                                <Link to={`/user/${post.author.id}`}>{post.author.username}</Link>
-                            </CardSubtitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">
-                                {post.timestamp}
+                                    <Link to={`/user/${post.author.id}`}>By {post.author.username} </Link>
+                                    <p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                             </CardSubtitle>
                         </CardBody>
                         <CardBody>
-                            <img width="100%" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                            <div width="100%">
+                                <img width="100%" max-height="auto" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                            </div>
                         </CardBody>
                         <CardBody>
                             <span>{postUpvotes} <UpvoteBtn /> </span>
-                            <span>{postCommentCount} Comments</span>
-                            
+                            <span>{postCommentCount} <span class="far fa-comment-alt fa-lg"></span></span>
                         </CardBody>
                     </Card>
                 )}
