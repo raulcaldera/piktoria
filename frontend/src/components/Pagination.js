@@ -26,6 +26,8 @@ const Pagination = (props) => {
         event.preventDefault();
         console.log(goToPage);
         console.log(typeof(goToPage));
+        setLeftPopoverOpen(false);
+        setRightPopoverOpen(false);
         paginate(goToPage);
     }
 
@@ -81,7 +83,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button>
-                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>
@@ -144,7 +146,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button> 
-                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>
@@ -234,7 +236,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button>  
-                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>
@@ -270,7 +272,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button>  
-                            <Popover trigger="legacy" placement="bottom" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={rightPopoverOpen} target="PopoverLegacy" toggle={toggleRightPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>
@@ -318,7 +320,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button>    
-                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>
@@ -423,7 +425,7 @@ const Pagination = (props) => {
                             <Button id="PopoverLegacy" className="page-link">
                                 ...
                             </Button>       
-                            <Popover trigger="legacy" placement="bottom" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
+                            <Popover trigger="legacy" placement="top" isOpen={leftPopoverOpen} target="PopoverLegacy" toggle={toggleLeftPopover}>
                                 <PopoverHeader>Go To</PopoverHeader>
                                 <PopoverBody>
                                     <Form onSubmit={handleGoTo}>

@@ -1,3 +1,19 @@
-.pagination {
-    margin: 1em auto;   
+.postsContainer{
+    margin-bottom: 54px;
 }
+
+
+.paginationContainer{
+    display: block;
+    position: absolute;
+    bottom: 60px;
+    overflow: auto;
+}
+
+.pagination {
+    margin: 0 auto 1em auto;
+}
+
+.pagination ul {
+    margin: 0;   
+  }

@@ -3,14 +3,73 @@
     display: inline;
   }
 
-.cardBody {
-    padding: 10px;
-  }
-
 .textarea {
   resize: none;
 }
 
 .pagination {
-  margin: 1em auto;   
+  margin: 0 auto 1em auto;
+  overflow: auto;
+}
+
+.pagination ul {
+  margin: 0;   
+}
+
+.postCard {
+  margin-bottom: 1em;
+}
+
+.postCard .postCardBody {
+  padding: 10px 20px 0px 20px;
+}
+
+.postCard .postCardCount {
+  position: relative;
+}
+
+.postCardCount .postCardCountContainer {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: 20px;
+  transform: translateY(-50%);
+  
+}
+
+.commentCard {
+  margin-bottom: 1em;
+}
+
+.postCardTitle a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.postCardTitle a:hover, a:active {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.postCardAuthor a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.postCardAuthor a:hover, a:active {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.commentCardAuthor a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.commentCardAuthor a:hover, a:active {
+  opacity: 0.8;
+  transform: scale(1.05);
 }

@@ -117,24 +117,26 @@ const RenderProfilePost = (props) => {
         return (
             <div key={postId} className="Post">
                 {posts.map(post => 
-                    <Card key={postId}>
-                        <CardBody> 
+                    <Card key={postId} className={styles.postCard}>
+                        <CardBody className={styles.postCardBody}> 
                             <DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} />
-                            <CardTitle tag="h5">
+                            <CardTitle tag="h5" className={styles.postCardTitle}>
                                 <span><Link to={`/post/${post.id}`}>{post.title}</Link> <EditTitleBtn postId={postId} title={post.title} setPost={setPost}/></span>
                             </CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">
-                                <Link to={`/user/${post.author.id}`}>{post.author.username}</Link>
+                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
+                                <Link to={`/user/${post.author.id}`}>By {post.author.username}</Link>
                                 <p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                             </CardSubtitle>
                         </CardBody>
-                        <CardBody>
+                        <CardBody className={styles.postCardBody}>
                             <EditBodyBtn postId={postId} body={post.body} setPost={setPost}/>
                             <img width="100%" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
                         </CardBody>
-                        <CardBody>
-                            <span>{postUpvotes} <UpvoteBtn /> </span>
-                            <span>{postCommentCount} <span className="far fa-comment-alt fa-lg"></span></span>
+                        <CardBody className={styles.postCardCount}>
+                            <div className={styles.postCardCountContainer}>
+                                <span>{postUpvotes} <UpvoteBtn /> </span>
+                                <span>{postCommentCount} <span className="far fa-comment-alt fa-lg"></span></span>
+                            </div>
                         </CardBody>
                     </Card> 
                 )}

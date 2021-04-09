@@ -35,22 +35,27 @@ const User = (props) => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="container-fluid">
-            <p>Post upvotes: {userPostUpvotes}</p>
-            <p>Comment upvotes: {userCommentUpvotes}</p> 
-            <div className="row align-items-start">
-                <div className="PostSection col-12 col-md-6">
-                    {currentPosts.map(post => 
-                        <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
-                    )}
-                </div>               
+        <React.Fragment>
+            <div className={`container-fluid ${styles.postsContainer}`}>
+                <p>Post upvotes: {userPostUpvotes}</p>
+                <p>Comment upvotes: {userCommentUpvotes}</p> 
+                <div className="row align-items-start">
+                    <div className="PostSection col-12 col-md-4">
+                        {currentPosts.map(post => 
+                            <RenderPost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes}/>
+                        )}
+                    </div>               
+                </div>
+                  
+            </div> 
+            <div className={`container-fluid ${styles.paginationContainer}`}>
+                <div className="row align-items-start">   
+                    <div className={`PaginationSection ${styles.pagination}`}>
+                        <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                    </div>  
+                </div> 
             </div>
-            <div className="row align-items-start">   
-                <div className={`PaginationSection ${styles.pagination}`}>
-                    <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
-                </div>  
-            </div>                   
-        </div>    
+        </React.Fragment>   
     )    
 }
 

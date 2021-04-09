@@ -116,10 +116,10 @@ const RenderComment= (props) => {
         return (
             <div className="Comment">
                 {comments.map(comment => 
-                    <Card key={commentId}>
+                    <Card key={commentId} className={styles.postCard}>
                         <CardBody>
                             <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/><br></br> 
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">
+                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
                                 <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
                                 <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                             </CardSubtitle>

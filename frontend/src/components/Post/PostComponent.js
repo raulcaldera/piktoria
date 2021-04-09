@@ -16,7 +16,7 @@ const Post = (props) => {
             <p>Post upvotes: {userPostUpvotes}</p>
             <p>Comment upvotes: {userCommentUpvotes}</p> 
             <div className="row align-items-start">
-                <div className="PostSection col-12 col-md-6">   
+                <div className="PostSection col-12 col-md-4">   
                     <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} />
                 </div>                
             </div>

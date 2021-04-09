@@ -122,7 +122,7 @@ const Profile = (props) => {
     if (parseInt(userId) === parseInt(props.user.userId)) {
         return (
             <React.Fragment>
-                <div className="container-fluid">
+                <div className={`container-fluid ${styles.postsContainer}`}>
                     <p>Post upvotes: {userPostUpvotes}</p>
                     <p>Comment upvotes: {userCommentUpvotes}</p>  
                     <p>Hello {user.username}, with Id {user.userId}!!</p>
@@ -131,18 +131,20 @@ const Profile = (props) => {
                     </div>
                     <br></br>   
                     <div className="row align-items-start">
-                        <div className="PostSection col-12 col-md-6">
+                        <div className="PostSection col-12 col-md-4">
                             {currentPosts.map(post => 
                                 <RenderProfilePost key={post.id} user={user} auth={auth} postId={post.id} userPostUpvotes={userPostUpvotes} />
                             )}
                         </div>             
-                    </div>
+                    </div>                 
+                </div>  
+                <div className={`container-fluid ${styles.paginationContainer}`}>
                     <div className="row align-items-start">
                         <div className={`PaginationSection ${styles.pagination}`}>
                             <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
                         </div>  
-                    </div>                  
-                </div>   
+                    </div> 
+                </div> 
             </React.Fragment>
         ) 
     } else {
