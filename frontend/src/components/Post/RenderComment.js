@@ -118,14 +118,14 @@ const RenderComment= (props) => {
                 {comments.map(comment => 
                     <Card key={commentId} className={styles.postCard}>
                         <CardBody>
-                            <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/><br></br> 
+                            <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
                             <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
                                 <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
                                 <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                             </CardSubtitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted"></CardSubtitle>
                             <p>
-                                {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/><br></br>
+                                {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
                             </p>
                             <span>{commentUpvotes} <UpvoteBtn /> </span>
                         </CardBody>

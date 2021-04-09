@@ -1,8 +1,12 @@
+.postSeparator {
+  margin: 0px 0px 30px 0px;
+}
+
 .postsContainer{
   margin-bottom: 54px;
 }
 
-.paginationContainer{
+.paginationContainer {
   display: block;
   position: absolute;
   bottom: 60px;
@@ -30,6 +34,34 @@
   padding: 10px 20px 0px 20px;
 }
 
+.deletePost {
+  text-align: right;
+}
+
+.deletePost .deletePostBtn {
+  border-radius: 0px;
+  border: none;
+  margin: 10px 0px;
+  padding: 8px 30px;
+  background-color: rgba(255,0,0,0.75);
+}
+
+.deletePost .deletePostBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.deletePost .deletePostBtn:focus {
+  background-color: rgba(255,0,0,0.75);
+  border-color: rgba(255,0,0,0.75);
+}
+
+.deletePost .deletePostBtn:active {
+  background-color: rgba(255,0,0,0.75);
+  border-color: rgba(255,0,0,0.75);
+  outline:0;
+}
+
 .postCardCount {
   position: relative;
 }
@@ -40,7 +72,27 @@
   right: 0;
   margin-right: 20px;
   transform: translateY(-50%);
-  
+}
+
+.postCardCountContainer .upvoteBtn {
+  cursor: pointer;
+}
+
+.postCardCountContainer .upvoteBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.postCardCountContainer a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.postCardCountContainer a:hover, a:active {
+  opacity: 0.8;
+  color: black;
+  transform: scale(1.05);
 }
 
 .postCardTitle a:link, a:visited {
@@ -52,6 +104,58 @@
 .postCardTitle a:hover, a:active {
   opacity: 0.8;
   transform: scale(1.05);
+}
+
+.postCardTitle .editPostTitleBtn {
+  border-radius: 0px;
+  border: none;
+  margin: 0px 10px;
+  padding: 6px 12px;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.postCardTitle .editPostTitleBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.postCardTitle .editPostTitleBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.postCardTitle .editPostTitleBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.editPostBody {
+  text-align: right;
+}
+
+.postCardBody .editPostBody .editPostBodyBtn {
+  border-radius: 0px;
+  border: none;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.postCardBody .editPostBody .editPostBodyBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.postCardBody .editPostBody .editPostBodyBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.postCardBody .editPostBody .editPostBodyBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
 }
 
 .postCardAuthor a:link, a:visited {

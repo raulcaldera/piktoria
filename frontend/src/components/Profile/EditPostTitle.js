@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import styles from "./Profile.module.css";
 
 const EditTitleBtn = (props) => {
     let postId = parseInt(props.postId);
@@ -46,7 +47,7 @@ const EditTitleBtn = (props) => {
 
     return (
         <React.Fragment>
-            <Button className="far fa-edit" onClick={toggleTitleModal} />
+            <Button className={`far fa-edit ${styles.editPostTitleBtn}`} onClick={toggleTitleModal} />
             <Modal isOpen={isTitleModalOpen} toggle={toggleTitleModal}>
                 <ModalHeader toggle={toggleTitleModal}>Edit post title</ModalHeader> 
                 <ModalBody>

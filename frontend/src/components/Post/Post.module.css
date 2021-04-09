@@ -34,7 +34,27 @@
   right: 0;
   margin-right: 20px;
   transform: translateY(-50%);
-  
+}
+
+.postCardCountContainer .upvoteBtn {
+  cursor: pointer;
+}
+
+.postCardCountContainer .upvoteBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.postCardCountContainer a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.postCardCountContainer a:hover, a:active {
+  opacity: 0.8;
+  color: black;
+  transform: scale(1.05);
 }
 
 .commentCard {

@@ -129,7 +129,6 @@ const Profile = (props) => {
                     <div className="NewPost">
                         <NewPost userId={userId} setPost={setPost}/>     
                     </div>
-                    <br></br>   
                     <div className="row align-items-start">
                         <div className="PostSection col-12 col-md-4">
                             {currentPosts.map(post => 
