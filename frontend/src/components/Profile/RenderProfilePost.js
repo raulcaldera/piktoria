@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardTitle, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import DeletePostBtn from './DeletePost';
 import EditTitleBtn from './EditPostTitle';
@@ -19,6 +19,11 @@ const RenderProfilePost = (props) => {
     const [postCommentCount, setPostComments] = useState([]);
     const [isPostUpvoted, setIsPostUpvoted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isUpvoteModalOpen, setUpvoteModalOpen] = useState(false);
+
+    const toggleUpvoteModal = () => {
+        setUpvoteModalOpen(!isUpvoteModalOpen);
+    };
 
     useEffect(() => {
         let isMounted = true;                    
@@ -66,7 +71,14 @@ const RenderProfilePost = (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            }); 
         })();      
     }
 
@@ -89,7 +101,14 @@ const RenderProfilePost = (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            });
         })();      
     }
 
@@ -149,6 +168,12 @@ const RenderProfilePost = (props) => {
                                 </div>
                             </CardBody>
                         </Card>
+                        <Modal isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
+                            <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+                            <ModalBody>
+                                Looks like your session has expired. Please log in again to upvote or downvote this post.          
+                            </ModalBody>             
+                        </Modal>
                         <hr className={styles.postSeparator}></hr> 
                     </div>
                 )}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import RenderComment from './RenderComment';
 import moment from 'moment-timezone';
@@ -13,6 +13,11 @@ const CommentForm = (props) => {
     const auth = props.auth;
 
     const [commentData, setCommentData] = useState('');
+    const [isCommentModalOpen, setCommentModalOpen] = useState(false);
+
+    const toggleCommentModal = () => {
+        setCommentModalOpen(!isCommentModalOpen);
+    };
 
     const handleCommentInputChange = (event) => {
         setCommentData(event.target.value);
@@ -36,7 +41,14 @@ const CommentForm = (props) => {
                         console.log(res);
                     }
                 })
-                .catch(function (error) { console.log(error) });
+                .catch(function (error) { 
+                    if (error.response.status === 401) {
+                        console.log(error);
+                        toggleCommentModal();
+                    } else {
+                        console.log(error);
+                    }
+                });
             })();   
         }
     }
@@ -52,6 +64,12 @@ const CommentForm = (props) => {
                         <Button className={styles.postCommentBtn} type="submit" value="submit" color="primary">Post</Button>
                     </div>
                 </Form>
+                <Modal isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
+                    <ModalHeader toggle={toggleCommentModal}>Woops</ModalHeader> 
+                    <ModalBody>
+                        Looks like your session has expired. Please log in again to post a comment.          
+                    </ModalBody>             
+                </Modal>
             </React.Fragment>    
         ) 
     } else {

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardTitle, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardTitle, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import styles from "./Post.module.css";
 import { FadeLoader } from "react-spinners";
-
 
 const RenderPost = (props) => {
     let postId = parseInt(props.postId);
@@ -17,6 +16,11 @@ const RenderPost = (props) => {
     const [postCommentCount, setPostComments] = useState([]);
     const [isPostUpvoted, setIsPostUpvoted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isUpvoteModalOpen, setUpvoteModalOpen] = useState(false);
+
+    const toggleUpvoteModal = () => {
+        setUpvoteModalOpen(!isUpvoteModalOpen);
+    };
 
     useEffect(() => {
         let isMounted = true;                    
@@ -64,7 +68,14 @@ const RenderPost = (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            });
         })();      
     }
 
@@ -87,7 +98,14 @@ const RenderPost = (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            });
         })();      
     }
 
@@ -115,30 +133,38 @@ const RenderPost = (props) => {
         return (
             <div key={postId} className="Post">
                 {posts.map(post => 
-                    <Card key={postId} className={styles.postCard}>
-                        <CardBody className={styles.postCardBody}>
-                            <CardTitle tag="h5" className={styles.postCardTitle}>
-                                <Link to={`/post/${post.id}`}>{post.title}</Link>
-                            </CardTitle>
-                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
-                                By <Link to={`/user/${post.author.id}`}>{post.author.username} </Link>
-                                <p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
-                            </CardSubtitle>
-                        </CardBody>
-                        <CardBody className={styles.postCardBody}>
-                            <div width="100%">
-                                <a href={`/post/${post.id}`}>
-                                    <img width="100%" max-height="auto" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
-                                </a>
-                            </div>
-                        </CardBody>
-                        <CardBody className={styles.postCardCount}>
-                            <div className={styles.postCardCountContainer}>
-                                <span>{postUpvotes} <UpvoteBtn /> </span>
-                                <span>{postCommentCount} <a href={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></a></span>
-                            </div>
-                        </CardBody>
-                    </Card>
+                    <React.Fragment>
+                        <Card key={postId} className={styles.postCard}>
+                            <CardBody className={styles.postCardBody}>
+                                <CardTitle tag="h5" className={styles.postCardTitle}>
+                                    <Link to={`/post/${post.id}`}>{post.title}</Link>
+                                </CardTitle>
+                                <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
+                                    By <Link to={`/user/${post.author.id}`}>{post.author.username} </Link>
+                                    <p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
+                                </CardSubtitle>
+                            </CardBody>
+                            <CardBody className={styles.postCardBody}>
+                                <div width="100%">
+                                    <a href={`/post/${post.id}`}>
+                                        <img width="100%" max-height="auto" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                                    </a>
+                                </div>
+                            </CardBody>
+                            <CardBody className={styles.postCardCount}>
+                                <div className={styles.postCardCountContainer}>
+                                    <span>{postUpvotes} <UpvoteBtn /> </span>
+                                    <span>{postCommentCount} <a href={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></a></span>
+                                </div>
+                            </CardBody>
+                        </Card>
+                        <Modal isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
+                            <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+                            <ModalBody>
+                                Looks like your session has expired. Please log in again to upvote or downvote this post.          
+                            </ModalBody>             
+                        </Modal>
+                    </React.Fragment>
                 )}
             </div>                   
         )

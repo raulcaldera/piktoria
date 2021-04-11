@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import { Link } from 'react-router-dom';
 import EditCommentBtn from './EditComment';
@@ -20,6 +20,11 @@ const RenderComment= (props) => {
     const [commentUpvotes, setCommentUpvotes] = useState();
     const [isCommentUpvoted, setIsCommentUpvoted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isUpvoteModalOpen, setUpvoteModalOpen] = useState(false);
+
+    const toggleUpvoteModal = () => {
+        setUpvoteModalOpen(!isUpvoteModalOpen);
+    };
 
     useEffect(() => {
         let isMounted = true;    
@@ -65,7 +70,14 @@ const RenderComment= (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            }); 
         })();      
     }
 
@@ -88,7 +100,14 @@ const RenderComment= (props) => {
                     console.log(res);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    toggleUpvoteModal();
+                } else {
+                    console.log(error);
+                }
+            });
         })();      
     }
 
@@ -116,32 +135,40 @@ const RenderComment= (props) => {
         return (
             <div className="Comment">
                 {comments.map(comment => 
-                    <Card key={commentId} className={styles.commentCard}>
-                        <CardBody className={styles.commentCardBody}>
-                            <div className={styles.deletePost}>
-                                <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
-                            </div>
-                        </CardBody>
-                        <CardBody className={styles.commentCardBody}>
-                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
-                                <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
-                                <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
-                            </CardSubtitle>
-                        </CardBody>
-                        <CardBody className={styles.commentCardBody}>
-                            <div className={styles.commentCardComment}>
-                                <span>
-                                    {comment.comment}
-                                    <EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
-                                </span>
-                            </div>
-                        </CardBody>
-                        <CardBody className={styles.commentCardCount}>
-                            <div className={styles.commentCardCountContainer}>
-                                <span>{commentUpvotes} <UpvoteBtn /> </span>
-                            </div>
-                        </CardBody>
-                    </Card>
+                    <React.Fragment>
+                        <Card key={commentId} className={styles.commentCard}>
+                            <CardBody className={styles.commentCardBody}>
+                                <div className={styles.deletePost}>
+                                    <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
+                                </div>
+                            </CardBody>
+                            <CardBody className={styles.commentCardBody}>
+                                <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
+                                    <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
+                                    <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
+                                </CardSubtitle>
+                            </CardBody>
+                            <CardBody className={styles.commentCardBody}>
+                                <div className={styles.commentCardComment}>
+                                    <span>
+                                        {comment.comment}
+                                        <EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
+                                    </span>
+                                </div>
+                            </CardBody>
+                            <CardBody className={styles.commentCardCount}>
+                                <div className={styles.commentCardCountContainer}>
+                                    <span>{commentUpvotes} <UpvoteBtn /> </span>
+                                </div>
+                            </CardBody>
+                        </Card>
+                        <Modal isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
+                            <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+                            <ModalBody>
+                                Looks like your session has expired. Please log in again to upvote or downvote this post.          
+                            </ModalBody>             
+                        </Modal>
+                    </React.Fragment>
                 )}                    
             </div>                   
         )    
