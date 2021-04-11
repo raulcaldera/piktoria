@@ -97,11 +97,11 @@ const RenderProfilePost = (props) => {
         if (auth) {
             if(isPostUpvoted) {
                 return (
-                    <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtn}`} onClick={handleDownvote}/>
+                    <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtnDown}`} onClick={handleDownvote}/>
                 )
             } else {
                 return (
-                    <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtn}`} onClick={handleUpvote}/>
+                    <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtnUp}`} onClick={handleUpvote}/>
                 )
             }
         } else {
@@ -115,13 +115,13 @@ const RenderProfilePost = (props) => {
         )
     } else {
         return (
-            <div key={postId} className="Post">
+            <div key={postId} className={styles.post}>
                 {posts.map(post => 
-                    <React.Fragment>
+                   <div key={postId}>
                         <div className={styles.deletePost}>
                             <DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} />
                         </div>
-                        <Card key={postId} className={styles.postCard}>
+                        <Card className={styles.postCard}>
                             <CardBody className={styles.postCardBody}> 
                                 <CardTitle tag="h5" className={styles.postCardTitle}>
                                     <span>
@@ -150,7 +150,7 @@ const RenderProfilePost = (props) => {
                             </CardBody>
                         </Card>
                         <hr className={styles.postSeparator}></hr> 
-                    </React.Fragment>
+                    </div>
                 )}
             </div>                   
         )

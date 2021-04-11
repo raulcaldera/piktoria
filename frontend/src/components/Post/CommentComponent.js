@@ -48,9 +48,10 @@ const CommentForm = (props) => {
                     <FormGroup>
                         <Input className={styles.textarea} type="textarea" placeholder="Post a comment..." onChange={handleCommentInputChange} name="comment"/>
                     </FormGroup>
-                    <Button type="submit" value="submit" color="primary">Post</Button>
+                    <div className={styles.postCommentBtnContainer}>
+                        <Button className={styles.postCommentBtn} type="submit" value="submit" color="primary">Post</Button>
+                    </div>
                 </Form>
-                <br></br>
             </React.Fragment>    
         ) 
     } else {
@@ -87,10 +88,11 @@ const Comment = (props) => {
     return (
         <React.Fragment>
             <div className="row align-items-start">
-                <div className="CommentSection col-12 col-md-4">
-                    <div className="CommentForm">
+                <div className="CommentSection col-12 col-md-5">
+                    <div className={styles.commentForm}>
                         <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
                     </div>
+                    <hr className={styles.postSeparator}></hr>
                     {currentComments.map(comment => 
                         <RenderComment key={comment.id} user={user} auth={auth} commentId={comment.id} postId={postId} userCommentUpvotes={userCommentUpvotes} setPostComments={setPostComments}/>
                     )}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import styles from "./Post.module.css";
 
 const DeleteCommentBtn = (props) => {
     let postId = parseInt(props.postId);
@@ -11,9 +12,11 @@ const DeleteCommentBtn = (props) => {
     let setIsCommentUpvoted = props.setIsCommentUpvoted;
     let setPostComments = props.setPostComments;
     const [isDeleteModalOpen, setDeleteModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
 
     const toggleDeleteModal = () => {
         setDeleteModal(!isDeleteModalOpen);
+        setModalMsg('');
     };
     
     const handleDeletion = (event) => {
@@ -33,23 +36,31 @@ const DeleteCommentBtn = (props) => {
                     })();
                     window.location.href=`/post/${postId}`;
                 } else {
-                    console.log(res);
+                    setModalMsg(res.data.msg);
                 }
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    setModalMsg("Woops, looks like your session has expired. Please log in again to delete this comment.");
+                } else {
+                    console.log(error);
+                }
+            }); 
         })();
     }  
 
     if (userId === comment.user.id) {
         return (
             <React.Fragment>
-                <Button className="far fa-trash-alt" onClick={toggleDeleteModal} /><br></br>
+                <Button className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} /><br></br>
                 <Modal isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
                     <ModalHeader toggle={toggleDeleteModal}>Delete Comment</ModalHeader> 
                     <ModalBody>
                         Are you sure you want to delete this comment?
                         <Button onClick={handleDeletion}>Yes</Button>
-                        <Button onClick={toggleDeleteModal}> No</Button>           
+                        <Button onClick={toggleDeleteModal}> No</Button>    
+                        {modalMsg}       
                     </ModalBody>               
                 </Modal>
             </React.Fragment>

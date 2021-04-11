@@ -38,27 +38,56 @@
   text-align: right;
 }
 
-.deletePost .deletePostBtn {
+.newPost {
+  text-align: center;
+}
+
+.postsContainer .newPost .newPostBtn {
+  width: 40%;
   border-radius: 0px;
   border: none;
   margin: 10px 0px;
   padding: 8px 30px;
-  background-color: rgba(255,0,0,0.75);
+  background-color:rgba(0,128,0,0.75);
 }
 
-.deletePost .deletePostBtn:hover {
+.postsContainer .newPost .newPostBtn:hover {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
-.deletePost .deletePostBtn:focus {
-  background-color: rgba(255,0,0,0.75);
-  border-color: rgba(255,0,0,0.75);
+.postsContainer .newPost .newPostBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
 }
 
-.deletePost .deletePostBtn:active {
-  background-color: rgba(255,0,0,0.75);
-  border-color: rgba(255,0,0,0.75);
+.postsContainer .newPost .newPostBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.post .deletePost .deletePostBtn {
+  border-radius: 0px;
+  border: none;
+  margin: 10px 0px;
+  padding: 8px 30px;
+  background-color:rgba(255,0,0,0.75);
+}
+
+.post .deletePost .deletePostBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.post .deletePost .deletePostBtn:focus {
+  background-color:rgba(255,0,0,0.75);
+  border-color:rgba(255,0,0,0.75);
+}
+
+.post .deletePost .deletePostBtn:active {
+  background-color:rgba(255,0,0,0.75);
+  border-color:rgba(255,0,0,0.75);
   outline:0;
 }
 
@@ -74,12 +103,23 @@
   transform: translateY(-50%);
 }
 
-.postCardCountContainer .upvoteBtn {
+.postCardCountContainer .upvoteBtnUp {
   cursor: pointer;
 }
 
-.postCardCountContainer .upvoteBtn:hover {
+.postCardCountContainer .upvoteBtnUp:hover {
   opacity: 0.8;
+  color:rgba(0,128,0,0.75);
+  transform: scale(1.05);
+}
+
+.postCardCountContainer .upvoteBtnDown {
+  cursor: pointer;
+}
+
+.postCardCountContainer .upvoteBtnDown:hover {
+  opacity: 0.8;
+  color:rgba(255,0,0,0.75);
   transform: scale(1.05);
 }
 
@@ -106,7 +146,7 @@
   transform: scale(1.05);
 }
 
-.postCardTitle .editPostTitleBtn {
+.postCardBody .postCardTitle .editPostTitleBtn {
   border-radius: 0px;
   border: none;
   margin: 0px 10px;
@@ -114,17 +154,17 @@
   background-color:rgba(0,128,0,0.75);
 }
 
-.postCardTitle .editPostTitleBtn:hover {
+.postCardBody .postCardTitle .editPostTitleBtn:hover {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
-.postCardTitle .editPostTitleBtn:focus {
+.postCardBody .postCardTitle .editPostTitleBtn:focus {
   background-color: rgba(0,128,0,0.75);
   border-color: rgba(0,128,0,0.75);
 }
 
-.postCardTitle .editPostTitleBtn:active {
+.postCardBody .postCardTitle .editPostTitleBtn:active {
   background-color: rgba(0,128,0,0.75);
   border-color: rgba(0,128,0,0.75);
   outline:0;

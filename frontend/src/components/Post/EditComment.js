@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import styles from "./Post.module.css";
 
 const EditCommentBtn = (props) => {
     let userId = parseInt(props.userId);
@@ -32,16 +33,24 @@ const EditCommentBtn = (props) => {
                 .then(function (res) {
                     if (res.data.updated && res.status === 200) {
                         console.log(res.data);
+                        setCommentData('');
                         toggleCommentModal();
                         (async () => {
                             let commentData = await AxiosApi.get('/comment/' + comment.id).then(({ data }) => data);
                             setComment([commentData]);
                         })();
                     } else {
-                        console.log(res);
+                        setModalMsg(res.data.msg);
                     }
                 })
-                .catch(function (error) { console.log(error) });  
+                .catch(function (error) { 
+                    if (error.response.status === 401) {
+                        console.log(error);
+                        setModalMsg("Woops, looks like your session has expired. Please log in again to update this comment.");
+                    } else {
+                        console.log(error);
+                    }
+                }); 
             })();  
         }   
     }
@@ -49,7 +58,7 @@ const EditCommentBtn = (props) => {
     if (userId === comment.user.id) {
         return (
             <React.Fragment>
-                <Button onClick={toggleCommentModal}><span className="far fa-edit"></span></Button>
+                <Button className={`far fa-edit ${styles.editCommentTitleBtn}`} onClick={toggleCommentModal} />
                 <Modal isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
                 <ModalHeader toggle={toggleCommentModal}>Edit comment</ModalHeader> 
                 <ModalBody>

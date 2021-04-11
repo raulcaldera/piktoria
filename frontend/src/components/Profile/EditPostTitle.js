@@ -31,16 +31,24 @@ const EditTitleBtn = (props) => {
                 .then(function (res) {
                     if (res.data.updated && res.status === 200) {
                         console.log(res.data);
+                        setTitleData('');
                         toggleTitleModal();
                         (async () => {
                             let postData = await AxiosApi.get('/post/' + postId).then(({ data }) => data);
                             setPost([postData]);
                         })();
                     } else {
-                        console.log(res);
+                        setModalMsg(res.data.msg);
                     }
                 })
-                .catch(function (error) { console.log(error) });  
+                .catch(function (error) { 
+                    if (error.response.status === 401) {
+                        console.log(error);
+                        setModalMsg("Woops, looks like your session has expired. Please log in again to edit this post.");
+                    } else {
+                        console.log(error);
+                    }
+                });  
             })();  
         }   
     }  

@@ -11,9 +11,12 @@ const DeletePostBtn = (props) => {
     const setPostComments = props.setPostComments;
     const setPostUpvotes = props.setPostUpvotes;
     const [isDeleteModalOpen, setDeleteModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
     
     const toggleDeleteModal = () => {
         setDeleteModal(!isDeleteModalOpen);
+        setModalMsg('');
+
     };
     
     const handleDeletion = (event) => {
@@ -29,11 +32,18 @@ const DeletePostBtn = (props) => {
                     setPostComments([]);
                     setPostUpvotes([]);
                 } else {
-                    console.log(res);
+                    setModalMsg(res.data.msg);
                 }
                 window.location.href=`/profile/${userId}`;
             })
-            .catch(function (error) { console.log(error) });  
+            .catch(function (error) { 
+                if (error.response.status === 401) {
+                    console.log(error);
+                    setModalMsg("Woops, looks like your session has expired. Please log in again to delete this post.");
+                } else {
+                    console.log(error);
+                }
+            });  
         })();      
     }  
 
@@ -45,7 +55,8 @@ const DeletePostBtn = (props) => {
                 <ModalBody>
                     Are you sure you want to delete this post?
                     <Button onClick={handleDeletion}>Yes</Button>
-                    <Button onClick={toggleDeleteModal}> No</Button>           
+                    <Button onClick={toggleDeleteModal}> No</Button>   
+                    {modalMsg}        
                 </ModalBody>               
             </Modal>
         </React.Fragment>

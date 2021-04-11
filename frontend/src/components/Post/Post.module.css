@@ -1,3 +1,7 @@
+.postSeparator {
+  margin: 0px 0px 30px 0px;
+}
+
 .timestamp {
     float: right;
     display: inline;
@@ -36,12 +40,23 @@
   transform: translateY(-50%);
 }
 
-.postCardCountContainer .upvoteBtn {
+.postCardCountContainer .upvoteBtnUp {
   cursor: pointer;
 }
 
-.postCardCountContainer .upvoteBtn:hover {
+.postCardCountContainer .upvoteBtnUp:hover {
   opacity: 0.8;
+  color:rgba(0,128,0,0.75);
+  transform: scale(1.05);
+}
+
+.postCardCountContainer .upvoteBtnDown {
+  cursor: pointer;
+}
+
+.postCardCountContainer .upvoteBtnDown:hover {
+  opacity: 0.8;
+  color:rgba(255,0,0,0.75);
   transform: scale(1.05);
 }
 
@@ -55,10 +70,6 @@
   opacity: 0.8;
   color: black;
   transform: scale(1.05);
-}
-
-.commentCard {
-  margin-bottom: 1em;
 }
 
 .postCardTitle a:link, a:visited {
@@ -83,6 +94,59 @@
   transform: scale(1.05);
 }
 
+.commentCard {
+  margin-bottom: 1em;
+}
+
+.commentCard .commentCardBody {
+  padding: 10px 20px 0px 20px;
+}
+
+
+.commentCard .commentCardCount {
+  position: relative;
+}
+
+.commentCardCount .commentCardCountContainer {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: 20px;
+  transform: translateY(-50%);
+}
+
+.commentCardCountContainer .upvoteBtnUp {
+  cursor: pointer;
+}
+
+.commentCardCountContainer .upvoteBtnUp:hover {
+  opacity: 0.8;
+  color:rgba(0,128,0,0.75);
+  transform: scale(1.05);
+}
+
+.commentCardCountContainer .upvoteBtnDown {
+  cursor: pointer;
+}
+
+.commentCardCountContainer .upvoteBtnDown:hover {
+  opacity: 0.8;
+  color:rgba(255,0,0,0.75);
+  transform: scale(1.05);
+}
+
+.commentCardCountContainer a:link, a:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.commentCardCountContainer a:hover, a:active {
+  opacity: 0.8;
+  color: black;
+  transform: scale(1.05);
+}
+
 .commentCardAuthor a:link, a:visited {
   text-decoration: none;
   color: black;
@@ -92,4 +156,86 @@
 .commentCardAuthor a:hover, a:active {
   opacity: 0.8;
   transform: scale(1.05);
+}
+
+.deletePost {
+  text-align: right;
+}
+
+.commentCard .deletePost .deletePostBtn {
+  border-radius: 0px;
+  border: none;
+  padding: 8px 30px;
+  background-color:rgba(255,0,0,0.75);
+}
+
+.commentCard .deletePost .deletePostBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.commentCard .deletePost .deletePostBtn:focus {
+  background-color:rgba(255,0,0,0.75);
+  border-color:rgba(255,0,0,0.75);
+}
+
+.commentCard .deletePost .deletePostBtn:active {
+  background-color:rgba(255,0,0,0.75);
+  border-color:rgba(255,0,0,0.75);
+  outline:0;
+}
+
+.commentCardBody .commentCardComment .editCommentTitleBtn {
+  border-radius: 0px;
+  border: none;
+  margin: 0px 10px;
+  padding: 6px 12px;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.commentCardBody .commentCardComment .editCommentTitleBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.commentCardBody .commentCardComment .editCommentTitleBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.commentCardBody .commentCardComment .editCommentTitleBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.commentForm {
+  margin-bottom: 16px;
+}
+
+.commentForm .postCommentBtnContainer {
+  text-align: right;
+}
+
+.commentForm .postCommentBtnContainer .postCommentBtn {
+  border-radius: 0px;
+  border: none;
+  padding: 8px 30px;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.commentForm .postCommentBtnContainer .postCommentBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.commentForm .postCommentBtnContainer .postCommentBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.commentForm .postCommentBtnContainer .postCommentBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
 }

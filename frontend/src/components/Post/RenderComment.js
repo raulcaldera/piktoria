@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardBody, CardSubtitle } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import { Link } from 'react-router-dom';
 import EditCommentBtn from './EditComment';
@@ -96,15 +96,15 @@ const RenderComment= (props) => {
         if (auth) {
             if(isCommentUpvoted) {
                 return (
-                    <Button className="fa fa-arrow-down fa-lg" onClick={handleDownvote} />
+                    <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtnDown}`} onClick={handleDownvote}/>
                 )
             } else {
                 return (
-                    <Button className="fa fa-arrow-up fa-lg" onClick={handleUpvote} />
+                    <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtnUp}`} onClick={handleUpvote}/>
                 )
             }
         } else {
-            return <span className="fa fa-arrow-up fa-lg"/>;
+            return <i className="fas fa-arrow-up fa-lg"/>;
         }
     }
 
@@ -116,18 +116,30 @@ const RenderComment= (props) => {
         return (
             <div className="Comment">
                 {comments.map(comment => 
-                    <Card key={commentId} className={styles.postCard}>
-                        <CardBody>
-                            <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
-                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
+                    <Card key={commentId} className={styles.commentCard}>
+                        <CardBody className={styles.commentCardBody}>
+                            <div className={styles.deletePost}>
+                                <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
+                            </div>
+                        </CardBody>
+                        <CardBody className={styles.commentCardBody}>
+                            <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
                                 <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
                                 <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                             </CardSubtitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted"></CardSubtitle>
-                            <p>
-                                {comment.comment}<span> </span><EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
-                            </p>
-                            <span>{commentUpvotes} <UpvoteBtn /> </span>
+                        </CardBody>
+                        <CardBody className={styles.commentCardBody}>
+                            <div className={styles.commentCardComment}>
+                                <span>
+                                    {comment.comment}
+                                    <EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
+                                </span>
+                            </div>
+                        </CardBody>
+                        <CardBody className={styles.commentCardCount}>
+                            <div className={styles.commentCardCountContainer}>
+                                <span>{commentUpvotes} <UpvoteBtn /> </span>
+                            </div>
                         </CardBody>
                     </Card>
                 )}                    

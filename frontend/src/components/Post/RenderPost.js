@@ -95,15 +95,15 @@ const RenderPost = (props) => {
         if (auth) {
             if(isPostUpvoted) {
                 return (
-                    <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtn}`} onClick={handleDownvote}/>
+                    <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtnDown}`} onClick={handleDownvote}/>
                 )
             } else {
                 return (
-                    <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtn}`} onClick={handleUpvote}/>
+                    <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtnUp}`} onClick={handleUpvote}/>
                 )
             }
         } else {
-            return <span className="fas fa-arrow-up fa-lg"/>;
+            return <i className="fas fa-arrow-up fa-lg"/>;
         }
     }
     
