@@ -29,11 +29,13 @@ const Header = (props) => {
     const toggleLoginModal = () => {
         setLoginModal(!isLoginModalOpen);
         setModalMsg('');
+        setLogInData({ email: '', password: '' });
     };
 
     const toggleSignupModal = () => {
         setSignupModal(!isSignupModalOpen);
         setModalMsg('');
+        setSignUpData({ username: '', email: '', password: '' });
     };
     
     const handleLoginInputChange = (event) => {
@@ -46,36 +48,60 @@ const Header = (props) => {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        (async () => {
-            await AxiosApi.post('/user/login/', { email: logInData.email, password: logInData.password })
-            .then(function (res) {
-                if (res.data.logedIn && res.status === 200) {
-                    toggleLoginModal();
-                    setAuth(true);
-                    setUser({ userId: res.data.userId, username: res.data.username });
-                } else {
-                    setModalMsg(res.data.msg);
-                }
-            })
-            .catch(function (error) { console.log(error) });
-        })(); 
+        if (logInData.email && logInData.password) {
+            (async () => {
+                await AxiosApi.post('/user/login/', { email: logInData.email, password: logInData.password })
+                .then(function (res) {
+                    if (res.data.logedIn && res.status === 200) {
+                        toggleLoginModal();
+                        setAuth(true);
+                        setUser({ userId: res.data.userId, username: res.data.username });
+                        setModalMsg('');
+                    } else {
+                        setModalMsg(res.data.msg);
+                    }
+                })
+                .catch(function (error) { 
+                    if (error.response.status === 400) {
+                        console.log(error);
+                        setModalMsg('Something went wrong :/');
+                    } else {
+                        console.log(error);
+                    }
+                });
+            })(); 
+        } else {
+            setModalMsg('Please enter all the fields');
+        }    
     }
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        (async () => {
-            await AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
-            .then(function (res) {
-                if (res.data.signedUp && res.status === 200) {
-                    toggleSignupModal();
-                    setAuth(true);
-                    setUser({ userId: res.data.userId, username: res.data.username });
-                } else {
-                    setModalMsg(res.data.msg);
-                }
-            })
-            .catch(function (error) { console.log(error) });
-        })();          
+        if (signUpData.username && signUpData.email && signUpData.password) {
+            (async () => {
+                await AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
+                .then(function (res) {
+                    if (res.data.signedUp && res.status === 200) {
+                        toggleSignupModal();
+                        setAuth(true);
+                        setUser({ userId: res.data.userId, username: res.data.username });
+                        setModalMsg('');
+                    } else {
+                        setModalMsg(res.data.msg);
+                    }
+                })
+                .catch(function (error) { 
+                    if (error.response.status === 400) {
+                        console.log(error);
+                        setModalMsg('Something went wrong :/');
+                    } else {
+                        console.log(error);
+                    }
+                });
+            })();
+        } else {
+            setModalMsg('Please enter all the fields');
+        }          
     }  
 
     const handleLogOut = (event) => {
@@ -157,10 +183,10 @@ const Header = (props) => {
                     </Collapse> 
                 </div>    
             </Navbar>
-            <Modal isOpen={isLoginModalOpen} toggle={toggleLoginModal}>
+            <Modal className={styles.navModal} contentClassName={styles.navModalContent} isOpen={isLoginModalOpen} toggle={toggleLoginModal}>
                 <ModalHeader toggle={toggleLoginModal}>Log In</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleLogin}>
+                    <Form className={styles.navModalForm} onSubmit={handleLogin}>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
                             <Input type="email" onChange={handleLoginInputChange} name="email"/>
@@ -169,15 +195,19 @@ const Header = (props) => {
                             <Label htmlFor="password">Password</Label>
                             <Input type="password" onChange={handleLoginInputChange} name="password"/>
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Log In</Button>
+                        <div className={styles.navModalFormBtnContainer}>
+                            <Button className={styles.navModalFormBtn} type="submit" value="submit" color="primary">Log In</Button>
+                        </div>                    
                     </Form>
-                    {modalMsg}                       
+                    <div className={styles.navModalMsg}>
+                        {modalMsg}    
+                    </div>                    
                 </ModalBody>               
             </Modal>
-            <Modal isOpen={isSignupModalOpen} toggle={toggleSignupModal}>
+            <Modal className={styles.navModal} contentClassName={styles.navModalContent} isOpen={isSignupModalOpen} toggle={toggleSignupModal}>
                 <ModalHeader toggle={toggleSignupModal}>Sign Up</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleSignUp}>
+                    <Form className={styles.navModalForm} onSubmit={handleSignUp}>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>
                             <Input type="text" onChange={handleSignupInputChange} name="username"/>
@@ -190,9 +220,13 @@ const Header = (props) => {
                             <Label htmlFor="password">Password</Label>
                             <Input type="password" onChange={handleSignupInputChange} name="password"/>
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Sign Up</Button>
+                        <div className={styles.navModalFormBtnContainer}>
+                            <Button className={styles.navModalFormBtn} type="submit" value="submit" color="primary">Sign Up</Button>
+                        </div>                    
                     </Form>
-                    {modalMsg}          
+                    <div className={styles.navModalMsg}>
+                        {modalMsg}    
+                    </div>      
                 </ModalBody>               
             </Modal>
         </React.Fragment>

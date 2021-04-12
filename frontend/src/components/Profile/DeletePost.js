@@ -50,12 +50,14 @@ const DeletePostBtn = (props) => {
     return (
         <React.Fragment>
             <Button className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} />
-            <Modal isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
+            <Modal className={styles.deletePostModal} contentClassName={styles.deletePostModalContent} isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
                 <ModalHeader toggle={toggleDeleteModal}>Delete Post</ModalHeader> 
                 <ModalBody>
-                    Are you sure you want to delete this post?
-                    <Button onClick={handleDeletion}>Yes</Button>
-                    <Button onClick={toggleDeleteModal}> No</Button>   
+                    <span>Are you sure you want to delete this post?</span>
+                    <div className={styles.deletePostModalBtns}>
+                        <Button className={styles.yesBtn} onClick={handleDeletion}>Yes</Button>
+                        <Button className={styles.noBtn} onClick={toggleDeleteModal}> No</Button>   
+                    </div>
                     {modalMsg}        
                 </ModalBody>               
             </Modal>

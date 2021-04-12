@@ -165,7 +165,7 @@ const RenderComment= (props) => {
                         <Modal isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
                             <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
                             <ModalBody>
-                                Looks like your session has expired. Please log in again to upvote or downvote this post.          
+                                Looks like your session has expired. Please log in again to upvote or downvote this comment.          
                             </ModalBody>             
                         </Modal>
                     </React.Fragment>

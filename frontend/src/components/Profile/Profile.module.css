@@ -208,3 +208,152 @@
   opacity: 0.8;
   transform: scale(1.05);
 }
+
+.newPostModal .newPostModalContent {
+  border-radius: 0;
+}
+  
+.newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtnContainer {
+  text-align: right;
+}
+
+.newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn {
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+  
+.newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.deletePostModal .deletePostModalContent {
+  border-radius: 0;
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn {
+  margin: 0px 10px;
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn {
+  margin: 0px 10px;
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.editPostTitleModal .editPostTitleModalContent {
+  border-radius: 0;
+}
+  
+.editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtnContainer {
+  text-align: right;
+}
+
+.editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn {
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+  
+.editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+
+.editPostBodyModal .editPostBodyModalContent {
+  border-radius: 0;
+}
+  
+.editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtnContainer {
+  text-align: right;
+}
+
+.editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn {
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+  
+.editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+
+

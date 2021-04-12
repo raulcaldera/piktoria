@@ -239,3 +239,88 @@
   border-color: rgba(0,128,0,0.75);
   outline:0;
 }
+
+.deleteCommentModal .deleteCommentModalContent {
+  border-radius: 0;
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn {
+  margin: 0px 10px;
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn {
+  margin: 0px 10px;
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}
+
+.editCommentModal .editCommentModalContent {
+  border-radius: 0;
+}
+  
+.editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtnContainer {
+  text-align: right;
+}
+
+.editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn {
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+  
+.editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}

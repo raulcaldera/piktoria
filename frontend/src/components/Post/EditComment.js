@@ -59,15 +59,17 @@ const EditCommentBtn = (props) => {
         return (
             <React.Fragment>
                 <Button className={`far fa-edit ${styles.editCommentTitleBtn}`} onClick={toggleCommentModal} />
-                <Modal isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
+                <Modal className={styles.editCommentModal} contentClassName={styles.editCommentModalContent} isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
                 <ModalHeader toggle={toggleCommentModal}>Edit comment</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleComment}>
+                    <Form className={styles.editCommentModalForm} onSubmit={handleComment}>
                         <FormGroup>
                             <Label htmlFor="body">Comment</Label>
                             <Input type="text" placeholder={comment.comment} onChange={handleCommentChange} name="body"/>
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Update!</Button>
+                        <div className={styles.editCommentModalFormBtnContainer}>
+                            <Button className={styles.editCommentModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>
+                        </div>                    
                     </Form>
                     {modalMsg}          
                 </ModalBody>             

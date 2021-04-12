@@ -65,15 +65,17 @@ const EditBodyBtn = (props) => {
     return (
         <React.Fragment>
             <Button className={`far fa-edit ${styles.editPostBodyBtn}`} onClick={toggleBodyModal} />
-            <Modal isOpen={isBodyModalOpen} toggle={toggleBodyModal}>
-                <ModalHeader toggle={toggleBodyModal}>Edit post body</ModalHeader> 
+            <Modal className={styles.editPostBodyModal} contentClassName={styles.editPostBodyModalContent} isOpen={isBodyModalOpen} toggle={toggleBodyModal}>
+                <ModalHeader toggle={toggleBodyModal}>Edit post image</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleBody}>
+                    <Form className={styles.editPostBodyModalForm} onSubmit={handleBody}>
                         <FormGroup>
                         <Label htmlFor="body">Body</Label>
                             <Input type="file" onChange={handleFileInputChange} name="body" />
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Update!</Button>
+                        <div className={styles.editPostBodyModalFormBtnContainer}>
+                            <Button className={styles.editPostBodyModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>
+                        </div>                    
                     </Form>
                     {modalMsg}          
                 </ModalBody>             

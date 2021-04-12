@@ -73,19 +73,21 @@ const NewPost = (props) => {
     return (
         <React.Fragment>
                 <Button className={styles.newPostBtn} onClick={toggleNewPostModal}>New Post</Button>
-            <Modal isOpen={isNewPostModalOpen} toggle={toggleNewPostModal}>
+            <Modal className={styles.newPostModal} contentClassName={styles.newPostModalContent} isOpen={isNewPostModalOpen} toggle={toggleNewPostModal}>
                 <ModalHeader toggle={toggleNewPostModal}>New Post</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleNewPost}>
+                    <Form className={styles.newPostModalForm} onSubmit={handleNewPost}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
                             <Input type="text" onChange={handleNewPostTitleInputChange} name="title"/>
                         </FormGroup>
                         <FormGroup>
-                            <Label htmlFor="body">Body</Label>
+                            <Label htmlFor="body">Image</Label>
                             <Input type="file" onChange={handleNewPostFileInputChange} name="body" />
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Post!</Button>
+                        <div className={styles.newPostModalFormBtnContainer}>
+                            <Button className={styles.newPostModalFormBtn} type="submit" value="submit" color="primary">Post!</Button>
+                        </div>                    
                     </Form>
                     {modalMsg}          
                 </ModalBody>               

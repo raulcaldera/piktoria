@@ -1,4 +1,33 @@
 .navbar {
     background-color: lightblue;
   }
+
+.navModal .navModalContent {
+  border-radius: 0;
+}
   
+.navModal .navModalContent .navModalForm .navModalFormBtnContainer {
+  text-align: right;
+}
+
+.navModal .navModalContent .navModalForm .navModalFormBtn {
+  border-radius: 0px;
+  border: none;
+  background-color:rgba(0,128,0,0.75);
+}
+  
+.navModal .navModalContent .navModalForm .navModalFormBtn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.navModal .navModalContent .navModalForm .navModalFormBtn:focus {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+}
+
+.navModal .navModalContent .navModalForm .navModalFormBtn:active {
+  background-color: rgba(0,128,0,0.75);
+  border-color: rgba(0,128,0,0.75);
+  outline:0;
+}

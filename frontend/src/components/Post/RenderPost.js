@@ -133,7 +133,7 @@ const RenderPost = (props) => {
         return (
             <div key={postId} className="Post">
                 {posts.map(post => 
-                    <React.Fragment>
+                    <React.Fragment key={postId}>
                         <Card key={postId} className={styles.postCard}>
                             <CardBody className={styles.postCardBody}>
                                 <CardTitle tag="h5" className={styles.postCardTitle}>

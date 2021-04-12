@@ -56,15 +56,17 @@ const EditTitleBtn = (props) => {
     return (
         <React.Fragment>
             <Button className={`far fa-edit ${styles.editPostTitleBtn}`} onClick={toggleTitleModal} />
-            <Modal isOpen={isTitleModalOpen} toggle={toggleTitleModal}>
+            <Modal className={styles.editPostTitleModal} contentClassName={styles.editPostTitleModalContent} isOpen={isTitleModalOpen} toggle={toggleTitleModal}>
                 <ModalHeader toggle={toggleTitleModal}>Edit post title</ModalHeader> 
                 <ModalBody>
-                    <Form onSubmit={handleTitle}>
+                    <Form className={styles.editPostTitleModalForm} onSubmit={handleTitle}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
                             <Input type="text" placeholder={title} onChange={handleTitleChange} name="title"/>
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Update!</Button>
+                        <div className={styles.editPostTitleModalFormBtnContainer}>
+                            <Button className={styles.editPostTitleModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>
+                        </div>                    
                     </Form>
                     {modalMsg}          
                 </ModalBody>             
