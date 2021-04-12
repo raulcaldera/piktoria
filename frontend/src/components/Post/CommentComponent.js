@@ -106,7 +106,7 @@ const Comment = (props) => {
     return (
         <React.Fragment>
             <div className="row align-items-start">
-                <div className="CommentSection col-12 col-md-5">
+                <div className="CommentSection col-12 col-md-6 offset-md-3">
                     <div className={styles.commentForm}>
                         <CommentForm postId={postId} user={user} setPostComments={setPostComments} auth={auth}/>         
                     </div>

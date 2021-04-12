@@ -168,7 +168,7 @@ const RenderProfilePost = (props) => {
                                 </div>
                             </CardBody>
                         </Card>
-                        <Modal isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
+                        <Modal className={styles.upvoteModal} contentClassName={styles.upvoteModalContent} isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
                             <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
                             <ModalBody>
                                 Looks like your session has expired. Please log in again to upvote or downvote this post.          

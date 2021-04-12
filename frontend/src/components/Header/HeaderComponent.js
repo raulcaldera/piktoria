@@ -133,14 +133,14 @@ const Header = (props) => {
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <Button outline onClick={toggleLoginModal}>
-                                <span className="fas fa-sign-in-alt fa-lg"></span> Log In
+                                Log In
                             </Button>
                         </NavItem>
                     </Nav>
                     <Nav className="ml" navbar>
                         <NavItem>
                             <Button outline onClick={toggleSignupModal}>
-                                <span className="fas fa-sign-in-alt fa-lg"></span> Sign Up
+                                Sign Up
                             </Button>
                         </NavItem>
                     </Nav>
@@ -152,14 +152,14 @@ const Header = (props) => {
                     <Nav navbar>
                         <NavItem>
                             <NavLink className="nav-link " to={`/profile/${user.userId}`}>
-                                <span className="fa fa-user fa-lg"></span> Profile
+                                Profile
                             </NavLink>
                         </NavItem>                        
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <Button outline onClick={handleLogOut}>
-                                <span className="fas fa-sign-out-alt fa-lg"></span> Log Out
+                                Log Out
                             </Button>
                         </NavItem>
                     </Nav>

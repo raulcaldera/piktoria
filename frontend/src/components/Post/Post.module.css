@@ -3,9 +3,9 @@
 }
 
 .timestamp {
-    float: right;
-    display: inline;
-  }
+  float: right;
+  display: inline;
+}
 
 .textarea {
   resize: none;
@@ -20,15 +20,16 @@
   margin: 0;   
 }
 
-.postCard {
+.post .postCard {
   margin-bottom: 1em;
+  border-radius: 0;
 }
 
-.postCard .postCardBody {
+.post .postCard .postCardBody {
   padding: 10px 20px 0px 20px;
 }
 
-.postCard .postCardCount {
+.post .postCard .postCardCount {
   position: relative;
 }
 
@@ -94,16 +95,17 @@
   transform: scale(1.05);
 }
 
-.commentCard {
+.comment .commentCard {
   margin-bottom: 1em;
+  border-radius: 0;
 }
 
-.commentCard .commentCardBody {
+.comment .commentCard .commentCardBody {
   padding: 10px 20px 0px 20px;
 }
 
 
-.commentCard .commentCardCount {
+.comment .commentCard .commentCardCount {
   position: relative;
 }
 
@@ -323,4 +325,8 @@
   background-color: rgba(0,128,0,0.75);
   border-color: rgba(0,128,0,0.75);
   outline:0;
+}
+
+.upvoteModal .upvoteModalContent {
+  border-radius: 0;
 }

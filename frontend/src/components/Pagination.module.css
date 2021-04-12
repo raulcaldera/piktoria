@@ -1,0 +1,18 @@
+.paginationContainer {
+    padding: 6px;     
+}
+
+.pageLink { 
+    background: none;
+    border-radius: 6px;
+    padding: 6px 8px; 
+    border: none; 
+}
+.pageLink:hover {
+    background-color: rgba(0,128,0,0.5);
+    transform: scale(1.05);
+}
+
+.pageItem .active {
+    background-color: rgba(0,128,0,0.75);
+}
