@@ -55,8 +55,8 @@ const DeleteCommentBtn = (props) => {
             <React.Fragment>
                 <Button className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} /><br></br>
                 <Modal className={styles.deleteCommentModal} contentClassName={styles.deleteCommentModalContent} isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
-                    <ModalHeader toggle={toggleDeleteModal}>Delete Comment</ModalHeader> 
-                    <ModalBody>
+                    <ModalHeader className={styles.deleteCommentModalHeader}  toggle={toggleDeleteModal}>Delete Comment</ModalHeader> 
+                    <ModalBody className={styles.deleteCommentModalBody}>
                         <span>Are you sure you want to delete this comment?</span>
                         <div className={styles.deleteCommentModalBtns}>
                             <Button className={styles.yesBtn} onClick={handleDeletion}>Yes</Button>

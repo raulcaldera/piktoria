@@ -144,12 +144,12 @@ const RenderProfilePost = (props) => {
                             <CardBody className={styles.postCardBody}> 
                                 <CardTitle tag="h5" className={styles.postCardTitle}>
                                     <span>
-                                        <Link to={`/post/${post.id}`}>{post.title}</Link>
+                                        <Link className={styles.link} to={`/post/${post.id}`}>{post.title}</Link>
                                         <EditTitleBtn postId={postId} title={post.title} setPost={setPost}/>
                                     </span>
                                 </CardTitle>
                                 <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
-                                    By <Link to={`/user/${post.author.id}`}>{post.author.username}</Link>
+                                    By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username}</Link>
                                     <p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                                 </CardSubtitle>
                             </CardBody>
@@ -169,8 +169,8 @@ const RenderProfilePost = (props) => {
                             </CardBody>
                         </Card>
                         <Modal className={styles.upvoteModal} contentClassName={styles.upvoteModalContent} isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
-                            <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
-                            <ModalBody>
+                            <ModalHeader className={styles.upvoteModalHeader} toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+                            <ModalBody className={styles.upvoteModalBody}>
                                 Looks like your session has expired. Please log in again to upvote or downvote this post.          
                             </ModalBody>             
                         </Modal>

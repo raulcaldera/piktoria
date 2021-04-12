@@ -9,10 +9,10 @@
     border: none; 
 }
 .pageLink:hover {
-    background-color: rgba(0,128,0,0.5);
+    background-color: rgba(20,118,90,0.5);
     transform: scale(1.05);
 }
 
 .pageItem .active {
-    background-color: rgba(0,128,0,0.75);
+    background-color: rgba(20,118,90,0.5);
 }

@@ -8,7 +8,7 @@ import styles from "./Post.module.css";
 import { FadeLoader } from "react-spinners";
 
 
-const RenderComment= (props) => {
+const RenderComment = (props) => {
     let commentId = props.commentId;
     let postId = props.postId;
     let userCommentUpvotes = props.userCommentUpvotes;
@@ -144,7 +144,7 @@ const RenderComment= (props) => {
                             </CardBody>
                             <CardBody className={styles.commentCardBody}>
                                 <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
-                                    <Link to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
+                                    <Link className={styles.link} to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
                                     <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
                                 </CardSubtitle>
                             </CardBody>
@@ -163,8 +163,8 @@ const RenderComment= (props) => {
                             </CardBody>
                         </Card>
                         <Modal className={styles.upvoteModal} contentClassName={styles.upvoteModalContent} isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
-                            <ModalHeader toggle={toggleUpvoteModal}>Woops</ModalHeader> 
-                            <ModalBody>
+                            <ModalHeader className={styles.upvoteModalHeader} toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+                            <ModalBody className={styles.upvoteModalBody}>
                                 Looks like your session has expired. Please log in again to upvote or downvote this comment.          
                             </ModalBody>             
                         </Modal>

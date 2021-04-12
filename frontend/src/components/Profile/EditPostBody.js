@@ -66,8 +66,8 @@ const EditBodyBtn = (props) => {
         <React.Fragment>
             <Button className={`far fa-edit ${styles.editPostBodyBtn}`} onClick={toggleBodyModal} />
             <Modal className={styles.editPostBodyModal} contentClassName={styles.editPostBodyModalContent} isOpen={isBodyModalOpen} toggle={toggleBodyModal}>
-                <ModalHeader toggle={toggleBodyModal}>Edit post image</ModalHeader> 
-                <ModalBody>
+                <ModalHeader className={styles.editPostBodyModalHeader} toggle={toggleBodyModal}>Edit post image</ModalHeader> 
+                <ModalBody className={styles.editPostBodyModalBody}>
                     <Form className={styles.editPostBodyModalForm} onSubmit={handleBody}>
                         <FormGroup>
                         <Label htmlFor="body">Body</Label>

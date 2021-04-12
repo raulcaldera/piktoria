@@ -184,8 +184,8 @@ const Header = (props) => {
                 </div>    
             </Navbar>
             <Modal className={styles.navModal} contentClassName={styles.navModalContent} isOpen={isLoginModalOpen} toggle={toggleLoginModal}>
-                <ModalHeader toggle={toggleLoginModal}>Log In</ModalHeader> 
-                <ModalBody>
+                <ModalHeader className={styles.navModalHeader} toggle={toggleLoginModal}>Log In</ModalHeader> 
+                <ModalBody className={styles.navModalBody}>
                     <Form className={styles.navModalForm} onSubmit={handleLogin}>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
@@ -205,8 +205,8 @@ const Header = (props) => {
                 </ModalBody>               
             </Modal>
             <Modal className={styles.navModal} contentClassName={styles.navModalContent} isOpen={isSignupModalOpen} toggle={toggleSignupModal}>
-                <ModalHeader toggle={toggleSignupModal}>Sign Up</ModalHeader> 
-                <ModalBody>
+                <ModalHeader className={styles.navModalHeader} toggle={toggleSignupModal}>Sign Up</ModalHeader> 
+                <ModalBody className={styles.navModalBody}>
                     <Form className={styles.navModalForm} onSubmit={handleSignUp}>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>

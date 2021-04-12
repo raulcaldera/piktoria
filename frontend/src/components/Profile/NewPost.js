@@ -74,8 +74,8 @@ const NewPost = (props) => {
         <React.Fragment>
                 <Button className={styles.newPostBtn} onClick={toggleNewPostModal}>New Post</Button>
             <Modal className={styles.newPostModal} contentClassName={styles.newPostModalContent} isOpen={isNewPostModalOpen} toggle={toggleNewPostModal}>
-                <ModalHeader toggle={toggleNewPostModal}>New Post</ModalHeader> 
-                <ModalBody>
+                <ModalHeader className={styles.newPostModalHeader} toggle={toggleNewPostModal}>New Post</ModalHeader> 
+                <ModalBody className={styles.newPostModalBody}>
                     <Form className={styles.newPostModalForm} onSubmit={handleNewPost}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>

@@ -21,8 +21,10 @@
 }
 
 .post .postCard {
+  background-color: rgba(33,143,92,0.5);
   margin-bottom: 1em;
   border-radius: 0;
+  border: none;
 }
 
 .post .postCard .postCardBody {
@@ -73,31 +75,33 @@
   transform: scale(1.05);
 }
 
-.postCardTitle a:link, a:visited {
+.postCardTitle .link:link, .link:visited {
   text-decoration: none;
   color: black;
   display: inline-block;
 }
 
-.postCardTitle a:hover, a:active {
+.postCardTitle .link:hover, .link:active {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
-.postCardAuthor a:link, a:visited {
+.postCardAuthor .link:link, .link:visited {
   text-decoration: none;
   color: black;
   display: inline-block;
 }
 
-.postCardAuthor a:hover, a:active {
+.postCardAuthor .link:hover, .link:active {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
 .comment .commentCard {
+  background-color: rgba(33,143,92,0.5);
   margin-bottom: 1em;
   border-radius: 0;
+  border: none;
 }
 
 .comment .commentCard .commentCardBody {
@@ -149,13 +153,13 @@
   transform: scale(1.05);
 }
 
-.commentCardAuthor a:link, a:visited {
+.commentCardAuthor .link:link, .link:visited {
   text-decoration: none;
   color: black;
   display: inline-block;
 }
 
-.commentCardAuthor a:hover, a:active {
+.commentCardAuthor .link:hover, .link:active {
   opacity: 0.8;
   transform: scale(1.05);
 }
@@ -192,7 +196,7 @@
   border: none;
   margin: 0px 10px;
   padding: 6px 12px;
-  background-color:rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:hover {
@@ -201,13 +205,13 @@
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:focus {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:active {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
   outline:0;
 }
 
@@ -223,7 +227,7 @@
   border-radius: 0px;
   border: none;
   padding: 8px 30px;
-  background-color:rgba(0,128,0,0.75);
+  background-color:rgba(20,118,90,0.8);
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:hover {
@@ -232,14 +236,25 @@
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:focus {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:active {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
   outline:0;
+}
+
+.deleteCommentModal .deleteCommentModalHeader {
+  background-color: rgba(20,118,90,0.5);
+  border-radius: 0;
+  border: none;
+}
+
+.deleteCommentModal .deleteCommentModalBody {
+  background-color: rgba(33,143,92,0.5);
+  border: none;
 }
 
 .deleteCommentModal .deleteCommentModalContent {
@@ -255,14 +270,14 @@
   margin: 0px 10px;
   border-radius: 0px;
   border: none;
-  background-color:rgba(0,128,0,0.75);
+  background-color:rgba(20,118,90,0.8);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn {
   margin: 0px 10px;
   border-radius: 0px;
   border: none;
-  background-color:rgba(0,128,0,0.75);
+  background-color:rgba(20,118,90,0.8);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:hover {
@@ -271,13 +286,13 @@
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:focus {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:active {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
   outline:0;
 }
 
@@ -287,14 +302,25 @@
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:focus {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:active {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
   outline:0;
+}
+
+.editCommentModal .editCommentModalHeader {
+  background-color: rgba(20,118,90,0.5);
+  border-radius: 0;
+  border: none;
+}
+
+.editCommentModal .editCommentModalBody {
+  background-color: rgba(33,143,92,0.5);
+  border: none;
 }
 
 .editCommentModal .editCommentModalContent {
@@ -308,7 +334,7 @@
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn {
   border-radius: 0px;
   border: none;
-  background-color:rgba(0,128,0,0.75);
+  background-color:rgba(20,118,90,0.8);
 }
   
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:hover {
@@ -317,16 +343,43 @@
 }
 
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:focus {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
 }
 
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:active {
-  background-color: rgba(0,128,0,0.75);
-  border-color: rgba(0,128,0,0.75);
+  background-color: rgba(20,118,90,0.8);
+  border-color: rgba(20,118,90,0.8);
   outline:0;
+}
+
+.upvoteModal .upvoteModalHeader {
+  background-color: rgba(20,118,90,0.5);
+  border-radius: 0;
+  border: none;
+}
+
+.upvoteModal .upvoteModalBody {
+  background-color: rgba(33,143,92,0.5);
+  border: none;
 }
 
 .upvoteModal .upvoteModalContent {
   border-radius: 0;
 }
+
+.commentModal .commentModalHeader {
+  background-color: rgba(20,118,90,0.5);
+  border-radius: 0;
+  border: none;
+}
+
+.commentModal .commentModalBody {
+  background-color: rgba(33,143,92,0.5);
+  border: none;
+}
+
+.commentModal .commentModalContent {
+  border-radius: 0;
+}
+

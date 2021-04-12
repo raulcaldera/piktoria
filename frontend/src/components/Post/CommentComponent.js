@@ -64,9 +64,9 @@ const CommentForm = (props) => {
                         <Button className={styles.postCommentBtn} type="submit" value="submit" color="primary">Post</Button>
                     </div>
                 </Form>
-                <Modal isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
-                    <ModalHeader toggle={toggleCommentModal}>Woops</ModalHeader> 
-                    <ModalBody>
+                <Modal className={styles.commentModal} contentClassName={styles.commentModalContent} isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
+                    <ModalHeader className={styles.commentModalHeader} toggle={toggleCommentModal}>Woops</ModalHeader> 
+                    <ModalBody className={styles.commentModalBody}>
                         Looks like your session has expired. Please log in again to post a comment.          
                     </ModalBody>             
                 </Modal>

@@ -57,8 +57,8 @@ const EditTitleBtn = (props) => {
         <React.Fragment>
             <Button className={`far fa-edit ${styles.editPostTitleBtn}`} onClick={toggleTitleModal} />
             <Modal className={styles.editPostTitleModal} contentClassName={styles.editPostTitleModalContent} isOpen={isTitleModalOpen} toggle={toggleTitleModal}>
-                <ModalHeader toggle={toggleTitleModal}>Edit post title</ModalHeader> 
-                <ModalBody>
+                <ModalHeader className={styles.editPostTitleModalHeader} toggle={toggleTitleModal}>Edit post title</ModalHeader> 
+                <ModalBody className={styles.editPostTitleModalBody}>
                     <Form className={styles.editPostTitleModalForm} onSubmit={handleTitle}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
