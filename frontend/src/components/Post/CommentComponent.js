@@ -58,7 +58,7 @@ const CommentForm = (props) => {
             <React.Fragment>
                 <Form onSubmit={handleCommentPost}>
                     <FormGroup>
-                        <Input className={styles.textarea} type="textarea" placeholder="Post a comment..." onChange={handleCommentInputChange} name="comment"/>
+                        <Input className={styles.textarea} type="textarea" placeholder="Post a comment..." onChange={handleCommentInputChange} name="comment" maxLength="200" required/>
                     </FormGroup>
                     <div className={styles.postCommentBtnContainer}>
                         <Button className={styles.postCommentBtn} type="submit" value="submit" color="primary">Post</Button>

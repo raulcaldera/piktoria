@@ -27,7 +27,7 @@
 }
 
 .post .postCard {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #7abc9d;
   margin-bottom: 1em;
   border-radius: 0;
   border: none;
@@ -51,7 +51,7 @@
   border: none;
   margin: 10px 0px;
   padding: 8px 30px;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
 
 .postsContainer .newPost .newPostBtn:hover {
@@ -60,13 +60,13 @@
 }
 
 .postsContainer .newPost .newPostBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .postsContainer .newPost .newPostBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
@@ -154,7 +154,7 @@
   border: none;
   margin: 0px 10px;
   padding: 6px 12px;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
 
 .postCardBody .postCardTitle .editPostTitleBtn:hover {
@@ -163,13 +163,13 @@
 }
 
 .postCardBody .postCardTitle .editPostTitleBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .postCardBody .postCardTitle .editPostTitleBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
@@ -182,7 +182,7 @@
   border: none;
   margin-bottom: 10px;
   padding: 6px 12px;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
 
 .postCardBody .editPostBody .editPostBodyBtn:hover {
@@ -191,13 +191,13 @@
 }
 
 .postCardBody .editPostBody .editPostBodyBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .postCardBody .editPostBody .editPostBodyBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
@@ -213,13 +213,13 @@
 }
 
 .newPostModal .newPostModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .newPostModal .newPostModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #90c7ae;
   border: none;
 }
 
@@ -234,7 +234,7 @@
 .newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn {
   border-radius: 0px;
   border: none;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
   
 .newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:hover {
@@ -243,24 +243,24 @@
 }
 
 .newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .newPostModal .newPostModalContent .newPostModalForm .newPostModalFormBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
 .deletePostModal .deletePostModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .deletePostModal .deletePostModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #90c7ae;
   border: none;
 }
 
@@ -277,14 +277,14 @@
   margin: 0px 10px;
   border-radius: 0px;
   border: none;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn {
   margin: 0px 10px;
   border-radius: 0px;
   border: none;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:hover {
@@ -293,13 +293,13 @@
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .yesBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
@@ -309,24 +309,24 @@
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .deletePostModal .deletePostModalContent .deletePostModalBtns .noBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
 .editPostTitleModal .editPostTitleModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .editPostTitleModal .editPostTitleModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #90c7ae;
   border: none;
 }
 
@@ -341,7 +341,7 @@
 .editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn {
   border-radius: 0px;
   border: none;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
   
 .editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:hover {
@@ -350,24 +350,24 @@
 }
 
 .editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .editPostTitleModal .editPostTitleModalContent .editPostTitleModalForm .editPostTitleModalFormBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
 .editPostBodyModal .editPostBodyModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .editPostBodyModal .editPostBodyModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #90c7ae;
   border: none;
 }
 
@@ -382,7 +382,7 @@
 .editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn {
   border-radius: 0px;
   border: none;
-  background-color:rgba(20,118,90,0.8);
+  background-color:#43917b;
 }
   
 .editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:hover {
@@ -391,24 +391,24 @@
 }
 
 .editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .editPostBodyModal .editPostBodyModalContent .editPostBodyModalForm .editPostBodyModalFormBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
 
 .upvoteModal .upvoteModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .upvoteModal .upvoteModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color: #90c7ae;
   border: none;
 }
 

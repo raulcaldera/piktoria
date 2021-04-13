@@ -79,11 +79,11 @@ const NewPost = (props) => {
                     <Form className={styles.newPostModalForm} onSubmit={handleNewPost}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
-                            <Input type="text" onChange={handleNewPostTitleInputChange} name="title"/>
+                            <Input type="text" onChange={handleNewPostTitleInputChange} name="title" maxLength="50" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="body">Image</Label>
-                            <Input type="file" onChange={handleNewPostFileInputChange} name="body" />
+                            <Input type="file" onChange={handleNewPostFileInputChange} name="body" required/>
                         </FormGroup>
                         <div className={styles.newPostModalFormBtnContainer}>
                             <Button className={styles.newPostModalFormBtn} type="submit" value="submit" color="primary">Post!</Button>

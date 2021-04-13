@@ -62,7 +62,7 @@ const EditTitleBtn = (props) => {
                     <Form className={styles.editPostTitleModalForm} onSubmit={handleTitle}>
                         <FormGroup>
                             <Label htmlFor="title">Title</Label>
-                            <Input type="text" placeholder={title} onChange={handleTitleChange} name="title"/>
+                            <Input type="text" placeholder={title} onChange={handleTitleChange} name="title" maxLength="50" required/>
                         </FormGroup>
                         <div className={styles.editPostTitleModalFormBtnContainer}>
                             <Button className={styles.editPostTitleModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>

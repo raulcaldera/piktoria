@@ -71,7 +71,7 @@ const EditBodyBtn = (props) => {
                     <Form className={styles.editPostBodyModalForm} onSubmit={handleBody}>
                         <FormGroup>
                         <Label htmlFor="body">Body</Label>
-                            <Input type="file" onChange={handleFileInputChange} name="body" />
+                            <Input type="file" onChange={handleFileInputChange} name="body" required/>
                         </FormGroup>
                         <div className={styles.editPostBodyModalFormBtnContainer}>
                             <Button className={styles.editPostBodyModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>

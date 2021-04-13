@@ -65,7 +65,7 @@ const EditCommentBtn = (props) => {
                     <Form className={styles.editCommentModalForm} onSubmit={handleComment}>
                         <FormGroup>
                             <Label htmlFor="body">Comment</Label>
-                            <Input type="text" placeholder={comment.comment} onChange={handleCommentChange} name="body"/>
+                            <Input className={styles.textarea} type="textarea" placeholder={comment.comment} onChange={handleCommentChange} name="body" maxLength="200" required/>
                         </FormGroup>
                         <div className={styles.editCommentModalFormBtnContainer}>
                             <Button className={styles.editCommentModalFormBtn} type="submit" value="submit" color="primary">Update!</Button>

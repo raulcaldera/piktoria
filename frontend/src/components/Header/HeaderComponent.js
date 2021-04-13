@@ -173,8 +173,8 @@ const Header = (props) => {
             <Navbar light className={styles.navbar} expand="md">
                 <div className="container-fluid">
                     <NavbarToggler onClick={toggleNav} />
-                    <NavbarBrand className="mr-auto">
-                        <NavLink className="nav-link " to="/">
+                    <NavbarBrand className={`mr-auto ${styles.navBrand}`}>
+                        <NavLink className={`nav-link ${styles.navLink}`} to="/">
                             Brand
                         </NavLink>
                     </NavbarBrand>
@@ -189,11 +189,11 @@ const Header = (props) => {
                     <Form className={styles.navModalForm} onSubmit={handleLogin}>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
-                            <Input type="email" onChange={handleLoginInputChange} name="email"/>
+                            <Input type="email" onChange={handleLoginInputChange} name="email" maxLength="50" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>
-                            <Input type="password" onChange={handleLoginInputChange} name="password"/>
+                            <Input type="password" onChange={handleLoginInputChange} name="password" minLength="4" maxLength="50" required/>
                         </FormGroup>
                         <div className={styles.navModalFormBtnContainer}>
                             <Button className={styles.navModalFormBtn} type="submit" value="submit" color="primary">Log In</Button>
@@ -210,15 +210,15 @@ const Header = (props) => {
                     <Form className={styles.navModalForm} onSubmit={handleSignUp}>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>
-                            <Input type="text" onChange={handleSignupInputChange} name="username"/>
+                            <Input type="text" onChange={handleSignupInputChange} name="username" maxLength="50" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
-                            <Input type="email" onChange={handleSignupInputChange} name="email"/>
+                            <Input type="email" onChange={handleSignupInputChange} name="email" maxLength="50" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>
-                            <Input type="password" onChange={handleSignupInputChange} name="password"/>
+                            <Input type="password" onChange={handleSignupInputChange} name="password" minLength="4" maxLength="50" required/>
                         </FormGroup>
                         <div className={styles.navModalFormBtnContainer}>
                             <Button className={styles.navModalFormBtn} type="submit" value="submit" color="primary">Sign Up</Button>

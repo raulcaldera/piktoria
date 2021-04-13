@@ -1,6 +1,17 @@
 .navbar {
-  background-color: rgba(20,118,90,0.5);
+  background-color:#43917b;
   }
+
+.navbar .navBrand .navLink:link, .navLink:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.navbar .navBrand .navLink:hover, .navLink:active {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
 
 .navModal .navModalContent {
   border-radius: 0;
@@ -11,20 +22,20 @@
 }
 
 .navModal .navModalHeader {
-  background-color: rgba(20,118,90,0.5);
+  background-color: #8abbad;
   border-radius: 0;
   border: none;
 }
 
 .navModal .navModalBody {
-  background-color: rgba(33,143,92,0.5);
+  background-color:#90c7ae;
   border: none;
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn {
   border-radius: 0px;
   border: none;
-  background-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
 }
   
 .navModal .navModalContent .navModalForm .navModalFormBtn:hover {
@@ -33,12 +44,12 @@
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn:focus {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn:active {
-  background-color: rgba(20,118,90,0.8);
-  border-color: rgba(20,118,90,0.8);
+  background-color: #43917b;
+  border-color: #43917b;
   outline:0;
 }
