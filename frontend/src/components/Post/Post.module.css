@@ -101,9 +101,23 @@
 
 .comment .commentCard {
   background-color: #7abc9d;
-  margin-bottom: 1em;
-  border-radius: 0;
+  margin-bottom: 2em;
+  border-radius: 1em;
   border: none;
+  position:relative;
+}
+
+.comment .sb:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 1em solid #7abc9d;
+  border-right: 1em solid transparent;
+  border-top: 1em solid #7abc9d;
+  border-bottom: 1em solid transparent;
+  left: 19px;
+  bottom: -19px;
 }
 
 .comment .commentCard .commentCardBody {

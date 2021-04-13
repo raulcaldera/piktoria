@@ -3,6 +3,14 @@
   margin-bottom: 1em;
 }
 
+.navbar .navContainer .navBrand {
+  margin: 0;
+}
+
+.navbar .navContainer .navCollapse {
+  text-align: center;
+}
+
 .nav .navItem .navButton {
   border: none;
   background: none;

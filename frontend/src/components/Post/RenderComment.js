@@ -136,7 +136,7 @@ const RenderComment = (props) => {
             <div className={styles.comment}>
                 {comments.map(comment => 
                     <React.Fragment key={commentId}>
-                        <Card key={commentId} className={styles.commentCard}>
+                        <Card key={commentId} className={`${styles.commentCard} ${styles.sb}`}>
                             <CardBody className={styles.commentCardBody}>
                                 <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
                                     <Link className={styles.link} to={`/user/${comment.user.id}`}>{comment.user.username}</Link>

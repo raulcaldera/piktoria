@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Input, Modal, ModalHeader, ModalBody } from 'r
 import AxiosApi from '../AxiosApi';
 import RenderComment from './RenderComment';
 import moment from 'moment-timezone';
-import Pagination from '../Pagination';
+import Pagination from '../Pagination/Pagination';
 import styles from "./Post.module.css";
 
 const CommentForm = (props) => {

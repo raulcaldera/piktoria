@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import AxiosApi from '../AxiosApi';
 import RenderPost from '../Post/RenderPost';
-import Pagination from '../Pagination';
+import Pagination from '../Pagination/Pagination';
 import styles from "./User.module.css";
 
 const User = (props) => {

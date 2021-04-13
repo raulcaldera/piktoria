@@ -171,9 +171,9 @@ const Header = (props) => {
     return(
         <React.Fragment>
             <Navbar light className={styles.navbar} expand="md">
-                <div className="container-fluid">
+                <div className={`container-fluid ${styles.navContainer}`}>
                     <NavbarToggler onClick={toggleNav} />
-                    <NavbarBrand className={`mr-auto ${styles.navBrand}`}>
+                    <NavbarBrand className={styles.navBrand}>
                         <NavLink className={`nav-link ${styles.navLink}`} activeClassName={`nav-link ${styles.navLinkActive}`} to="/">
                             Home
                         </NavLink>

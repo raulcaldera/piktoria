@@ -4,7 +4,7 @@ import AxiosApi from '../AxiosApi';
 import RenderProfilePost from './RenderProfilePost';
 import NewPost from './NewPost';
 import Unauthorized from '../UnauthorizedComponent';
-import Pagination from '../Pagination';
+import Pagination from '../Pagination/Pagination';
 import styles from "./Profile.module.css";
 
 const Profile = (props) => {
