@@ -13,8 +13,6 @@ const Post = (props) => {
 
     return (
         <div className="container-fluid">
-            <p>Post upvotes: {userPostUpvotes}</p>
-            <p>Comment upvotes: {userCommentUpvotes}</p> 
             <div className="row align-items-start">
                 <div className="PostSection col-12 col-md-6 offset-md-3">   
                     <RenderPost user={user} auth={auth} postId={postId} userPostUpvotes={userPostUpvotes} />

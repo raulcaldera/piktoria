@@ -138,11 +138,6 @@ const RenderComment = (props) => {
                     <React.Fragment key={commentId}>
                         <Card key={commentId} className={styles.commentCard}>
                             <CardBody className={styles.commentCardBody}>
-                                <div className={styles.deletePost}>
-                                    <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
-                                </div>
-                            </CardBody>
-                            <CardBody className={styles.commentCardBody}>
                                 <CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.commentCardAuthor}`}>
                                     <Link className={styles.link} to={`/user/${comment.user.id}`}>{comment.user.username}</Link>
                                     <p className={styles.timestamp}>{comment.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
@@ -153,6 +148,7 @@ const RenderComment = (props) => {
                                     <span>
                                         {comment.comment}
                                         <EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
+                                        <DeleteCommentBtn userId={user.userId} comment={comment} postId={postId} setComment={setComment} setCommentUpvotes={setCommentUpvotes} setIsCommentUpvoted={setIsCommentUpvoted} setPostComments={setPostComments}/>
                                     </span>
                                 </div>
                             </CardBody>

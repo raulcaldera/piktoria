@@ -75,7 +75,7 @@
   border: none;
   margin: 10px 0px;
   padding: 8px 30px;
-  background-color:rgba(255,0,0,0.75);
+  background-color:#ff3f3f;
 }
 
 .post .deletePost .deletePostBtn:hover {
@@ -84,13 +84,13 @@
 }
 
 .post .deletePost .deletePostBtn:focus {
-  background-color:rgba(255,0,0,0.75);
-  border-color:rgba(255,0,0,0.75);
+  background-color:#ff3f3f;
+  border-color:#ff3f3f;
 }
 
 .post .deletePost .deletePostBtn:active {
-  background-color:rgba(255,0,0,0.75);
-  border-color:rgba(255,0,0,0.75);
+  background-color:#ff3f3f;
+  border-color:#ff3f3f;
   outline:0;
 }
 
@@ -142,6 +142,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  font-weight: bold;
 }
 
 .postCardTitle .link:hover, .link:active {
@@ -205,6 +206,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  font-weight: bold;
 }
 
 .postCardAuthor .link:hover, .link:active {

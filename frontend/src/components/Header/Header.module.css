@@ -1,11 +1,47 @@
 .navbar {
   background-color:#43917b;
-  }
+  margin-bottom: 1em;
+}
+
+.nav .navItem .navButton {
+  border: none;
+  background: none;
+  font-size: 20px;
+}
+
+.nav .navItem .navButton:link, .navButton:visited {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.nav .navItem .navButton:hover, .navButton:active {
+  transform: scale(1.05);
+}
+
+.nav .navItem .profileLink {
+  font-size: 20px;
+  padding: 1px 6px;
+}
+
+.nav .navItem .profileLinkActive {
+  color: black;
+  font-weight: bold;
+}
+
+.nav .navItem .profileLink:link, .profileLink:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.nav .navItem .profileLink:hover, .profileLink:active {
+  color: black;
+  transform: scale(1.05);
+}
 
 .navbar .navBrand .navLink:link, .navLink:visited {
   text-decoration: none;
   color: black;
-  display: inline-block;
 }
 
 .navbar .navBrand .navLink:hover, .navLink:active {

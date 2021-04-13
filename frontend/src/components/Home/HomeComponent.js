@@ -34,9 +34,7 @@ const Home = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`container-fluid ${styles.postsContainer}`}>
-                <p>Post upvotes: {userPostUpvotes}</p>
-                <p>Comment upvotes: {userCommentUpvotes}</p>  
+            <div className={`container-fluid ${styles.postsContainer}`}>  
                 <div className="row align-items-start">
                     <div className="PostSection col-12 col-md-6 offset-md-3">
                         {currentPosts.map(post => 

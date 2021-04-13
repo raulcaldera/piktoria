@@ -53,7 +53,7 @@ const DeleteCommentBtn = (props) => {
     if (userId === comment.user.id) {
         return (
             <React.Fragment>
-                <Button className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} /><br></br>
+                <Button className={`far fa-trash-alt ${styles.deleteCommentBtn}`} onClick={toggleDeleteModal} /><br></br>
                 <Modal className={styles.deleteCommentModal} contentClassName={styles.deleteCommentModalContent} isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
                     <ModalHeader className={styles.deleteCommentModalHeader}  toggle={toggleDeleteModal}>Delete Comment</ModalHeader> 
                     <ModalBody className={styles.deleteCommentModalBody}>

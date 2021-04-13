@@ -79,6 +79,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  font-weight: bold;
 }
 
 .postCardTitle .link:hover, .link:active {
@@ -90,6 +91,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  font-weight: bold;
 }
 
 .postCardAuthor .link:hover, .link:active {
@@ -105,7 +107,7 @@
 }
 
 .comment .commentCard .commentCardBody {
-  padding: 10px 20px 0px 20px;
+  padding: 20px 20px 0px 20px;
 }
 
 
@@ -157,6 +159,7 @@
   text-decoration: none;
   color: black;
   display: inline-block;
+  font-weight: bold;
 }
 
 .commentCardAuthor .link:hover, .link:active {
@@ -164,30 +167,26 @@
   transform: scale(1.05);
 }
 
-.deletePost {
-  text-align: right;
-}
-
-.commentCard .deletePost .deletePostBtn {
+.commentCardBody .commentCardComment .deleteCommentBtn {
   border-radius: 0px;
   border: none;
-  padding: 8px 30px;
-  background-color:rgba(255,0,0,0.75);
+  padding: 6px 14px;
+  background-color:#ff3f3f;
 }
 
-.commentCard .deletePost .deletePostBtn:hover {
+.commentCardBody .commentCardComment .deleteCommentBtn:hover {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
-.commentCard .deletePost .deletePostBtn:focus {
-  background-color:rgba(255,0,0,0.75);
-  border-color:rgba(255,0,0,0.75);
+.commentCardBody .commentCardComment .deleteCommentBtn:focus {
+  background-color:#ff3f3f;
+  border-color:#ff3f3f;
 }
 
-.commentCard .deletePost .deletePostBtn:active {
-  background-color:rgba(255,0,0,0.75);
-  border-color:rgba(255,0,0,0.75);
+.commentCardBody .commentCardComment .deleteCommentBtn:active {
+  background-color:#ff3f3f;
+  border-color:#ff3f3f;
   outline:0;
 }
 

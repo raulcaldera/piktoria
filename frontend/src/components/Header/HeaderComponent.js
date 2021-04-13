@@ -130,18 +130,18 @@ const Header = (props) => {
         if(!auth) {
             return (
                 <React.Fragment>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <Button outline onClick={toggleLoginModal}>
+                    <Nav className={`ml-auto ${styles.nav}`} navbar>
+                        <NavItem className={styles.navItem}>
+                            <button className={styles.navButton} outline onClick={toggleLoginModal}>
                                 Log In
-                            </Button>
+                            </button>
                         </NavItem>
                     </Nav>
-                    <Nav className="ml" navbar>
-                        <NavItem>
-                            <Button outline onClick={toggleSignupModal}>
+                    <Nav className={`ml ${styles.nav}`} navbar>
+                        <NavItem className={styles.navItem}>
+                            <button className={styles.navButton} outline onClick={toggleSignupModal}>
                                 Sign Up
-                            </Button>
+                            </button>
                         </NavItem>
                     </Nav>
             </React.Fragment>
@@ -149,18 +149,18 @@ const Header = (props) => {
         } else {
             return (
                 <React.Fragment>
-                    <Nav navbar>
-                        <NavItem>
-                            <NavLink className="nav-link " to={`/profile/${user.userId}`}>
+                    <Nav className={styles.nav} navbar>
+                        <NavItem className={styles.navItem}>
+                            <NavLink className={`nav-link ${styles.profileLink}`} activeClassName={`nav-link ${styles.profileLinkActive}`} to={`/profile/${user.userId}`}>
                                 Profile
                             </NavLink>
                         </NavItem>                        
                     </Nav>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <Button outline onClick={handleLogOut}>
+                    <Nav className={`ml-auto ${styles.nav}`} navbar>
+                        <NavItem className={styles.navItem}>
+                            <button className={styles.navButton} outline onClick={handleLogOut}>
                                 Log Out
-                            </Button>
+                            </button>
                         </NavItem>
                     </Nav>
                 </React.Fragment>
@@ -174,12 +174,12 @@ const Header = (props) => {
                 <div className="container-fluid">
                     <NavbarToggler onClick={toggleNav} />
                     <NavbarBrand className={`mr-auto ${styles.navBrand}`}>
-                        <NavLink className={`nav-link ${styles.navLink}`} to="/">
-                            Brand
+                        <NavLink className={`nav-link ${styles.navLink}`} activeClassName={`nav-link ${styles.navLinkActive}`} to="/">
+                            Home
                         </NavLink>
                     </NavbarBrand>
-                    <Collapse isOpen={isNavOpen} navbar>
-                        <RenderNavButtons />
+                    <Collapse className={styles.navCollapse} isOpen={isNavOpen} navbar>
+                        <RenderNavButtons/>
                     </Collapse> 
                 </div>    
             </Navbar>

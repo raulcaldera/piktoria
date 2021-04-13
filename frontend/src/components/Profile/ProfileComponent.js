@@ -41,10 +41,10 @@ const Profile = (props) => {
             <React.Fragment>
                 <div className={`container-fluid ${styles.postsContainer}`}>
                     <div className="row align-items-start">
-                        <div className="PostSection col-12 col-md-6 offset-md-3">                    
-                            <p>Post upvotes: {userPostUpvotes}</p>
-                            <p>Comment upvotes: {userCommentUpvotes}</p>  
-                            <p>Hello {user.username}, with Id {user.userId}!!</p>
+                        <div className="PostSection col-12 col-md-6 offset-md-3">
+                            <div>
+                                <p>Hello {user.username}!</p>
+                            </div>                    
                             <div className={styles.newPost}>
                                 <NewPost userId={userId} setPost={setPost}/>     
                             </div>
