@@ -1,36 +1,36 @@
 .footer {
-    background-color:#43917b;
-    height: 60px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 0;
-    padding: 0 15px;
+	background-color:#43917b;
+	height: 60px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 0;
+	padding: 0 15px;
 }
 
 .footer .footerContainer {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 15px;
-    text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 0 15px;
+	text-align: center;
 }
 
 .footer .footerContainer .author {
-    margin: 0;
-    padding: 6px 8px;
-    font-size: 14px;
-    color: black;
+	margin: 0;
+	padding: 6px 8px;
+	font-size: 14px;
+	color: black;
 }
 
 .footer .footerContainer .github {
-    padding: 6px 8px;
-    border: none;
+	padding: 6px 8px;
+	border: none;
 }
 
 .footer .footerContainer .linkedin {
-    padding: 6px 8px;
-    border: none;
+	padding: 6px 8px;
+	border: none;
 }

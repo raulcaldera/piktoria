@@ -5,24 +5,23 @@ import { CommentUpvote as CommentUpvoteEntity } from '../commentUpvote/commentUp
 
 @Entity()
 export class Comment {
-  @PrimaryGeneratedColumn()
-  id: number;
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  @JoinColumn({name : 'postId'})
-  post: PostEntity;
+	@ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+	@JoinColumn({name : 'postId'})
+	post: PostEntity;
 
-  @ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  @JoinColumn({name : 'userId'})
-  user: UserEntity;
+	@ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+	@JoinColumn({name : 'userId'})
+	user: UserEntity;
 
-  @Column('text')
-  comment: string;
+	@Column('text')
+	comment: string;
 
-  @Column('timestamptz')
-  timestamp: Date;
+	@Column('timestamptz')
+	timestamp: Date;
 
-  @OneToMany(() => CommentUpvoteEntity, commentUpvote => commentUpvote.comment , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  commentUpvote: CommentUpvoteEntity[];
-
+	@OneToMany(() => CommentUpvoteEntity, commentUpvote => commentUpvote.comment , {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+	commentUpvote: CommentUpvoteEntity[];
 }

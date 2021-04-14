@@ -9,11 +9,11 @@ var jwt = require('jsonwebtoken');
 
 @Injectable()
 export class PostUpvoteService {  constructor(
-    @Inject('POSTUPVOTE_REPOSITORY')
-    private postUpvoteRepository: Repository<PostUpvote>
-  ) {}
+		@Inject('POSTUPVOTE_REPOSITORY')
+		private postUpvoteRepository: Repository<PostUpvote>
+	) {}
 
-  async verify(authCookie, userId) {
+	async verify(authCookie, userId) {
 	let userAuth = await jwt.verify(authCookie,'shhhhh');
 
 	if (userAuth.userId == userId) {
@@ -23,10 +23,10 @@ export class PostUpvoteService {  constructor(
 	return false;
 	}
 
-  	async upvotePost(postUpvote: IPostUpvote, req) {
+	async upvotePost(postUpvote: IPostUpvote, req) {
 		let auth = await this.verify(req.cookies?.JWT, postUpvote.userId);
 
-    	if (auth) {
+			if (auth) {
 			let dbUpvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postUpvote.postId, user : postUpvote.userId}});
 
 			if (dbUpvote !== undefined) {
@@ -67,13 +67,11 @@ export class PostUpvoteService {  constructor(
 	async getPostUpvotes(postId: number) {
 		const upvotes = await this.postUpvoteRepository.find({relations: ['post','user'],  where: { post : postId }});
 		return {postId : postId, postUpvoteCount: upvotes.length , upvotes : upvotes}
-		
 	}
 
 	async getPostUpvotesByUserId(userId: number) {
 		const upvotes = await this.postUpvoteRepository.find({relations: ['post','user'],  where: { user : userId }});
 		return {userId : userId, postUpvoteCount: upvotes.length , upvotes : upvotes}
-
 	}
 
 	async DownvotePost(postDownvote: IPostUpvote, req) {
@@ -98,5 +96,4 @@ export class PostUpvoteService {  constructor(
 			return {downvoted: false, msg: "User not authorized to perform this operation"};	      
 		}
 	}
-
-	}
+}

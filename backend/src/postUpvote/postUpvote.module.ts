@@ -8,8 +8,8 @@ import { postProviders } from '../post/post.providers';
 
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [PostUpvoteController],
-  providers: [PostUpvoteService, ...postUpvoteProviders, ...userProviders, ...postProviders]
-  })
-  export class PostUpvoteModule {}
+	imports: [DatabaseModule],
+	controllers: [PostUpvoteController],
+	providers: [PostUpvoteService, ...postUpvoteProviders, ...userProviders, ...postProviders]
+	})
+	export class PostUpvoteModule {}

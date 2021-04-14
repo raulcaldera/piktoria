@@ -1,103 +1,103 @@
 .navbar {
-  background-color:#43917b;
-  margin-bottom: 1em;
+	background-color:#43917b;
+	margin-bottom: 1em;
 }
 
 .navbar .navContainer .navToggler {
-  border: none;
+	border: none;
 }
 
 .navbar .navContainer .navBrand {
-  margin: 0;
+	margin: 0;
 }
 
 .navbar .navContainer .navCollapse {
-  text-align: center;
+	text-align: center;
 }
 
 .nav .navItem .navButton {
-  border: none;
-  background: none;
-  font-size: 20px;
+	border: none;
+	background: none;
+	font-size: 20px;
 }
 
 .nav .navItem .navButton:link, .navButton:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
 }
 
 .nav .navItem .navButton:hover, .navButton:active {
-  transform: scale(1.05);
+	transform: scale(1.05);
 }
 
 .nav .navItem .profileLink {
-  font-size: 20px;
-  padding: 1px 6px;
+	font-size: 20px;
+	padding: 1px 6px;
 }
 
 .nav .navItem .profileLinkActive {
-  color: black;
-  font-weight: bold;
+	color: black;
+	font-weight: bold;
 }
 
 .nav .navItem .profileLink:link, .profileLink:visited {
-  text-decoration: none;
-  color: black;
+	text-decoration: none;
+	color: black;
 }
 
 .nav .navItem .profileLink:hover, .profileLink:active {
-  color: black;
-  transform: scale(1.05);
+	color: black;
+	transform: scale(1.05);
 }
 
 .navbar .navBrand .navLink:link, .navLink:visited {
-  text-decoration: none;
-  color: black;
+	text-decoration: none;
+	color: black;
 }
 
 .navbar .navBrand .navLink:hover, .navLink:active {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .navModal .navModalContent {
-  border-radius: 0;
+	border-radius: 0;
 }
-  
+	
 .navModal .navModalContent .navModalForm .navModalFormBtnContainer {
-  text-align: right;
+	text-align: right;
 }
 
 .navModal .navModalHeader {
-  background-color: #8abbad;
-  border-radius: 0;
-  border: none;
+	background-color: #8abbad;
+	border-radius: 0;
+	border: none;
 }
 
 .navModal .navModalBody {
-  background-color:#90c7ae;
-  border: none;
+	background-color:#90c7ae;
+	border: none;
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn {
-  border-radius: 0px;
-  border: none;
-  background-color: #43917b;
+	border-radius: 0px;
+	border: none;
+	background-color: #43917b;
 }
-  
+	
 .navModal .navModalContent .navModalForm .navModalFormBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .navModal .navModalContent .navModalForm .navModalFormBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }

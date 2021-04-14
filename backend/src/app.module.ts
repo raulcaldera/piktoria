@@ -12,13 +12,13 @@ import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({isGlobal: true}),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),
-    }),
-    CommentModule, PostModule, UserModule, PostUpvoteModule, CommentUpvoteModule],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		ConfigModule.forRoot({isGlobal: true}),
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, '..', 'uploads'),
+		}),
+		CommentModule, PostModule, UserModule, PostUpvoteModule, CommentUpvoteModule],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}

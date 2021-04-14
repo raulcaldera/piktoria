@@ -4,14 +4,14 @@ import { User as UserEntity } from '../user/user.entity';
 
 @Entity()
 export class PostUpvote {
-  @PrimaryGeneratedColumn()
-  id: number;
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  @JoinColumn({name : 'postId'})
-  post: PostEntity;
+	@ManyToOne(() => PostEntity, post => post.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+	@JoinColumn({name : 'postId'})
+	post: PostEntity;
 
-  @ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
-  @JoinColumn({name : 'userId'})
-  user: UserEntity;
+	@ManyToOne(() => UserEntity, user => user.id, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
+	@JoinColumn({name : 'userId'})
+	user: UserEntity;
 }

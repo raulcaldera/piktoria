@@ -1,4 +1,4 @@
 export interface ICommentUpvote {
-  readonly commentId: number;
-  readonly userId: number;    
+	readonly commentId: number;
+	readonly userId: number;    
 }

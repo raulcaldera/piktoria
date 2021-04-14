@@ -4,27 +4,26 @@ var jwt = require('jsonwebtoken');
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+	canActivate(
+		context: ExecutionContext,
+	): boolean | Promise<boolean> | Observable<boolean> {
 
-    const request = context.switchToHttp().getRequest();
-    var authCookie = request.cookies?.JWT;
+		const request = context.switchToHttp().getRequest();
+		var authCookie = request.cookies?.JWT;
 
-    if ( !authCookie ) {
-        throw new UnauthorizedException("Not Authorized, No Cookie")  
-    }
+		if ( !authCookie ) {
+			throw new UnauthorizedException("Not Authorized, No Cookie")  
+		}
 
-    let userAuth;
+		let userAuth;
 
-    try {
-        userAuth = jwt.verify(authCookie,'shhhhh');
-    } catch (err) {
-        throw new UnauthorizedException("Not Authorized, Not Verified")    
-    }
+		try {
+			userAuth = jwt.verify(authCookie,'shhhhh');
+		} catch (err) {
+			throw new UnauthorizedException("Not Authorized, Not Verified")    
+		}
 
-    request.userId =  userAuth.userId; 
-    return true;
-
-  }
+		request.userId =  userAuth.userId; 
+		return true;
+	}
 }

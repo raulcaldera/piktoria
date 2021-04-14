@@ -9,10 +9,10 @@ var jwt = require('jsonwebtoken');
 
 @Injectable()
 export class CommentService {
-    constructor(
-        @Inject('COMMENT_REPOSITORY')
-        private commentRepository: Repository<Comment>
-    ) {}
+	constructor(
+		@Inject('COMMENT_REPOSITORY')
+		private commentRepository: Repository<Comment>
+	) {}
 
 	async verify(authCookie, userId) {
 		let userAuth = await jwt.verify(authCookie,'shhhhh');
@@ -106,5 +106,4 @@ export class CommentService {
 			return {deleted: false, msg: "User not authorized to perform this operation"};
 		}			
 	}
-
 }

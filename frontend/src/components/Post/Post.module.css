@@ -1,399 +1,398 @@
 .postSeparator {
-  margin: 0px 0px 30px 0px;
+	margin: 0px 0px 30px 0px;
 }
 
 .timestamp {
-  float: right;
-  display: inline;
-  margin: 0;
+	float: right;
+	display: inline;
+	margin: 0;
 }
 
 .textarea {
-  resize: none;
+	resize: none;
 }
 
 .pagination {
-  margin: 0 auto 1em auto;
-  overflow: auto;
+	margin: 0 auto 1em auto;
+	overflow: auto;
 }
 
 .pagination ul {
-  margin: 0;   
+	margin: 0;   
 }
 
 .post .postCard {
-  background-color: #7abc9d;
-  margin-bottom: 1em;
-  border-radius: 0;
-  border: none;
+	background-color: #7abc9d;
+	margin-bottom: 1em;
+	border-radius: 0;
+	border: none;
 }
 
 .post .postCard .postCardBody {
-  padding: 10px 20px 0px 20px;
+	padding: 10px 20px 0px 20px;
 }
 
 .post .postCard .postCardCount {
-  position: relative;
+	position: relative;
 }
 
 .postCardCount .postCardCountContainer {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  margin-right: 20px;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-right: 20px;
+	transform: translateY(-50%);
 }
 
 .postCardCountContainer .upvoteBtnUp {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .postCardCountContainer .upvoteBtnUp:hover {
-  opacity: 0.8;
-  color:rgba(0,128,0,0.75);
-  transform: scale(1.05);
+	opacity: 0.8;
+	color:rgba(0,128,0,0.75);
+	transform: scale(1.05);
 }
 
 .postCardCountContainer .upvoteBtnDown {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .postCardCountContainer .upvoteBtnDown:hover {
-  opacity: 0.8;
-  color:rgba(255,0,0,0.75);
-  transform: scale(1.05);
+	opacity: 0.8;
+	color:rgba(255,0,0,0.75);
+	transform: scale(1.05);
 }
 
 .postCardCountContainer a:link, a:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
 }
 
 .postCardCountContainer a:hover, a:active {
-  opacity: 0.8;
-  color: black;
-  transform: scale(1.05);
+	opacity: 0.8;
+	color: black;
+	transform: scale(1.05);
 }
 
 .postCardTitle .link:link, .link:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  font-weight: bold;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	font-weight: bold;
 }
 
 .postCardTitle .link:hover, .link:active {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .postCardAuthor .link:link, .link:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  font-weight: bold;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	font-weight: bold;
 }
 
 .postCardAuthor .link:hover, .link:active {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .comment .commentCard {
-  background-color: #7abc9d;
-  margin-bottom: 2em;
-  border-radius: 1em;
-  border: none;
-  position:relative;
+	background-color: #7abc9d;
+	margin-bottom: 2em;
+	border-radius: 1em;
+	border: none;
+	position:relative;
 }
 
 .comment .sb:before {
-  content: "";
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border-left: 1em solid #7abc9d;
-  border-right: 1em solid transparent;
-  border-top: 1em solid #7abc9d;
-  border-bottom: 1em solid transparent;
-  left: 19px;
-  bottom: -19px;
+	content: "";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-left: 1em solid #7abc9d;
+	border-right: 1em solid transparent;
+	border-top: 1em solid #7abc9d;
+	border-bottom: 1em solid transparent;
+	left: 19px;
+	bottom: -19px;
 }
 
 .comment .commentCard .commentCardBody {
-  padding: 20px 20px 0px 20px;
+	padding: 20px 20px 0px 20px;
 }
 
 
 .comment .commentCard .commentCardCount {
-  position: relative;
+	position: relative;
 }
 
 .commentCardCount .commentCardCountContainer {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  margin-right: 20px;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-right: 20px;
+	transform: translateY(-50%);
 }
 
 .commentCardCountContainer .upvoteBtnUp {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .commentCardCountContainer .upvoteBtnUp:hover {
-  opacity: 0.8;
-  color:rgba(0,128,0,0.75);
-  transform: scale(1.05);
+	opacity: 0.8;
+	color:rgba(0,128,0,0.75);
+	transform: scale(1.05);
 }
 
 .commentCardCountContainer .upvoteBtnDown {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .commentCardCountContainer .upvoteBtnDown:hover {
-  opacity: 0.8;
-  color:rgba(255,0,0,0.75);
-  transform: scale(1.05);
+	opacity: 0.8;
+	color:rgba(255,0,0,0.75);
+	transform: scale(1.05);
 }
 
 .commentCardCountContainer a:link, a:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
 }
 
 .commentCardCountContainer a:hover, a:active {
-  opacity: 0.8;
-  color: black;
-  transform: scale(1.05);
+	opacity: 0.8;
+	color: black;
+	transform: scale(1.05);
 }
 
 .commentCardAuthor .link:link, .link:visited {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  font-weight: bold;
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	font-weight: bold;
 }
 
 .commentCardAuthor .link:hover, .link:active {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .commentCardBody .commentCardComment .deleteCommentBtn {
-  border-radius: 0px;
-  border: none;
-  padding: 6px 14px;
-  background-color:#ff3f3f;
+	border-radius: 0px;
+	border: none;
+	padding: 6px 14px;
+	background-color:#ff3f3f;
 }
 
 .commentCardBody .commentCardComment .deleteCommentBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .commentCardBody .commentCardComment .deleteCommentBtn:focus {
-  background-color:#ff3f3f;
-  border-color:#ff3f3f;
+	background-color:#ff3f3f;
+	border-color:#ff3f3f;
 }
 
 .commentCardBody .commentCardComment .deleteCommentBtn:active {
-  background-color:#ff3f3f;
-  border-color:#ff3f3f;
-  outline:0;
+	background-color:#ff3f3f;
+	border-color:#ff3f3f;
+	outline:0;
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn {
-  border-radius: 0px;
-  border: none;
-  margin: 0px 10px;
-  padding: 6px 12px;
-  background-color: #43917b;
+	border-radius: 0px;
+	border: none;
+	margin: 0px 10px;
+	padding: 6px 12px;
+	background-color: #43917b;
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .commentCardBody .commentCardComment .editCommentTitleBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }
 
 .commentForm {
-  margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .commentForm .postCommentBtnContainer {
-  text-align: right;
+	text-align: right;
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn {
-  border-radius: 0px;
-  border: none;
-  padding: 8px 30px;
-  background-color:#43917b;
+	border-radius: 0px;
+	border: none;
+	padding: 8px 30px;
+	background-color:#43917b;
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .commentForm .postCommentBtnContainer .postCommentBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }
 
 .deleteCommentModal .deleteCommentModalHeader {
-  background-color: #8abbad;
-  border-radius: 0;
-  border: none;
+	background-color: #8abbad;
+	border-radius: 0;
+	border: none;
 }
 
 .deleteCommentModal .deleteCommentModalBody {
-  background-color: #90c7ae;
-  border: none;
+	background-color: #90c7ae;
+	border: none;
 }
 
 .deleteCommentModal .deleteCommentModalContent {
-  border-radius: 0;
+	border-radius: 0;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns {
-  text-align: center;
-  padding-top: 16px;
+	text-align: center;
+	padding-top: 16px;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn {
-  margin: 0px 10px;
-  border-radius: 0px;
-  border: none;
-  background-color:#43917b;
+	margin: 0px 10px;
+	border-radius: 0px;
+	border: none;
+	background-color:#43917b;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn {
-  margin: 0px 10px;
-  border-radius: 0px;
-  border: none;
-  background-color:#43917b;
+	margin: 0px 10px;
+	border-radius: 0px;
+	border: none;
+	background-color:#43917b;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .yesBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .deleteCommentModal .deleteCommentModalContent .deleteCommentModalBtns .noBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }
 
 .editCommentModal .editCommentModalHeader {
-  background-color: #8abbad;
-  border-radius: 0;
-  border: none;
+	background-color: #8abbad;
+	border-radius: 0;
+	border: none;
 }
 
 .editCommentModal .editCommentModalBody {
-  background-color: #90c7ae;
-  border: none;
+	background-color: #90c7ae;
+	border: none;
 }
 
 .editCommentModal .editCommentModalContent {
-  border-radius: 0;
+	border-radius: 0;
 }
-  
+	
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtnContainer {
-  text-align: right;
+	text-align: right;
 }
 
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn {
-  border-radius: 0px;
-  border: none;
-  background-color:#43917b;
+	border-radius: 0px;
+	border: none;
+	background-color:#43917b;
 }
-  
+	
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+	opacity: 0.8;
+	transform: scale(1.05);
 }
 
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:focus {
-  background-color: #43917b;
-  border-color: #43917b;
+	background-color: #43917b;
+	border-color: #43917b;
 }
 
 .editCommentModal .editCommentModalContent .editCommentModalForm .editCommentModalFormBtn:active {
-  background-color: #43917b;
-  border-color: #43917b;
-  outline:0;
+	background-color: #43917b;
+	border-color: #43917b;
+	outline:0;
 }
 
 .upvoteModal .upvoteModalHeader {
-  background-color: #8abbad;
-  border-radius: 0;
-  border: none;
+	background-color: #8abbad;
+	border-radius: 0;
+	border: none;
 }
 
 .upvoteModal .upvoteModalBody {
-  background-color: #90c7ae;
-  border: none;
+	background-color: #90c7ae;
+	border: none;
 }
 
 .upvoteModal .upvoteModalContent {
-  border-radius: 0;
+	border-radius: 0;
 }
 
 .commentModal .commentModalHeader {
-  background-color: #8abbad;
-  border-radius: 0;
-  border: none;
+	background-color: #8abbad;
+	border-radius: 0;
+	border: none;
 }
 
 .commentModal .commentModalBody {
-  background-color: #90c7ae;
-  border: none;
+	background-color: #90c7ae;
+	border: none;
 }
 
 .commentModal .commentModalContent {
-  border-radius: 0;
+	border-radius: 0;
 }
-

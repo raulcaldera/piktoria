@@ -1,12 +1,12 @@
 .paginationContainer{
-    display: block;
-    overflow: auto;
+	display: block;
+	overflow: auto;
 }
 
 .pagination {
-    margin: 0 auto 1em auto;
+	margin: 0 auto 1em auto;
 }
 
 .pagination ul {
-    margin: 0;  
-  }
+	margin: 0;  
+}

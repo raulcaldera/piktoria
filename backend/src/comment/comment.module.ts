@@ -7,8 +7,8 @@ import { userProviders } from '../user/user.providers';
 import { postProviders } from '../post/post.providers';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [CommentController],
-  providers: [CommentService, ...commentProviders, ...userProviders, ...postProviders]
+	imports: [DatabaseModule],
+	controllers: [CommentController],
+	providers: [CommentService, ...commentProviders, ...userProviders, ...postProviders]
 })
 export class CommentModule {}
