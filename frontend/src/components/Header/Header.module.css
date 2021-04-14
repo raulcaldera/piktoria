@@ -3,6 +3,10 @@
   margin-bottom: 1em;
 }
 
+.navbar .navContainer .navToggler {
+  border: none;
+}
+
 .navbar .navContainer .navBrand {
   margin: 0;
 }

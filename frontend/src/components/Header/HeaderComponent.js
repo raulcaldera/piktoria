@@ -132,14 +132,14 @@ const Header = (props) => {
                 <React.Fragment>
                     <Nav className={`ml-auto ${styles.nav}`} navbar>
                         <NavItem className={styles.navItem}>
-                            <button className={styles.navButton} outline onClick={toggleLoginModal}>
+                            <button className={styles.navButton} onClick={toggleLoginModal}>
                                 Log In
                             </button>
                         </NavItem>
                     </Nav>
                     <Nav className={`ml ${styles.nav}`} navbar>
                         <NavItem className={styles.navItem}>
-                            <button className={styles.navButton} outline onClick={toggleSignupModal}>
+                            <button className={styles.navButton} onClick={toggleSignupModal}>
                                 Sign Up
                             </button>
                         </NavItem>
@@ -158,7 +158,7 @@ const Header = (props) => {
                     </Nav>
                     <Nav className={`ml-auto ${styles.nav}`} navbar>
                         <NavItem className={styles.navItem}>
-                            <button className={styles.navButton} outline onClick={handleLogOut}>
+                            <button className={styles.navButton} onClick={handleLogOut}>
                                 Log Out
                             </button>
                         </NavItem>
@@ -172,7 +172,7 @@ const Header = (props) => {
         <React.Fragment>
             <Navbar light className={styles.navbar} expand="md">
                 <div className={`container-fluid ${styles.navContainer}`}>
-                    <NavbarToggler onClick={toggleNav} />
+                    <NavbarToggler className={styles.navToggler} onClick={toggleNav} />
                     <NavbarBrand className={styles.navBrand}>
                         <NavLink className={`nav-link ${styles.navLink}`} activeClassName={`nav-link ${styles.navLinkActive}`} to="/">
                             Home

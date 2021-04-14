@@ -5,9 +5,7 @@ import Pagination from '../Pagination/Pagination';
 import styles from "./Home.module.css";
 
 const Home = (props) => {
-    const userCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
     const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
-
     const auth = props.auth;
     const user = props.user;    
     const [posts, setPost] = useState([]);

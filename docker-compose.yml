@@ -33,7 +33,7 @@ services:
   backend:
     image: node:14.16.0
     ports:
-      - 3001:3000
+      - 3001:3001
     working_dir: /app
     volumes: 
       - ./backend:/app

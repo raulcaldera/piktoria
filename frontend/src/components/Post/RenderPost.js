@@ -147,7 +147,7 @@ const RenderPost = (props) => {
                             <CardBody className={styles.postCardBody}>
                                 <div width="100%">
                                     <a href={`/post/${post.id}`}>
-                                        <img width="100%" max-height="auto" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                                        <img width="100%" max-height="auto" src={`${process.env.REACT_APP_BASE_URL}${post.body}`} alt={post.body}/> 
                                     </a>
                                 </div>
                             </CardBody>

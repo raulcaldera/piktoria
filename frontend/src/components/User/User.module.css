@@ -1,12 +1,5 @@
-.postsContainer{
-    margin-bottom: 62px;
-}
-
-
 .paginationContainer{
     display: block;
-    position: absolute;
-    bottom: 60px;
     overflow: auto;
 }
 

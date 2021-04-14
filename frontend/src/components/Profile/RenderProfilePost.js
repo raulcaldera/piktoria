@@ -158,7 +158,7 @@ const RenderProfilePost = (props) => {
                                     <EditBodyBtn postId={postId} body={post.body} setPost={setPost}/>
                                 </div>
                                 <a href={`/post/${post.id}`}>
-                                    <img width="100%" src={`http://localhost:3001/${post.body}`} alt={post.body}/> 
+                                    <img width="100%" src={`${process.env.REACT_APP_BASE_URL}${post.body}`} alt={post.body}/> 
                                 </a>
                             </CardBody>
                             <CardBody className={styles.postCardCount}>

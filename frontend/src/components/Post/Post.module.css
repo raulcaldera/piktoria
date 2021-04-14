@@ -5,6 +5,7 @@
 .timestamp {
   float: right;
   display: inline;
+  margin: 0;
 }
 
 .textarea {

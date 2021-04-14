@@ -7,15 +7,13 @@ import styles from "./User.module.css";
 
 const User = (props) => {
     let { userId } = useParams();
+    const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
     const auth = props.auth;
     const user = props.user;
     const [posts, setPost] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(5);  
     
-    const userCommentUpvotes = JSON.parse(localStorage.getItem("userCommentUpvotes"));
-    const userPostUpvotes = JSON.parse(localStorage.getItem("userPostUpvotes"));
-
     useEffect(() => {
         let isMounted = true;
         (async () => {
