@@ -131,15 +131,15 @@ const RenderPost = (props) => {
 							</CardBody>
 							<CardBody className={styles.postCardBody}>
 								<div width="100%">
-									<a href={`/post/${post.id}`}>
+									<Link to={`/post/${post.id}`}>
 										<img width="100%" max-height="auto" src={`${process.env.REACT_APP_BASE_URL}${post.body}`} alt={post.body}/> 
-									</a>
+									</Link>
 								</div>
 							</CardBody>
 							<CardBody className={styles.postCardCount}>
 								<div className={styles.postCardCountContainer}>
 									<span>{postUpvotes} <UpvoteBtn /> </span>
-									<span>{postCommentCount} <a href={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></a></span>
+									<span>{postCommentCount} <Link to={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></Link></span>
 								</div>
 							</CardBody>
 						</Card>

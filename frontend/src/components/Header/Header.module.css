@@ -9,6 +9,8 @@
 
 .navbar .navContainer .navBrand {
 	margin: 0;
+	font-size: 20px;
+	padding-right: 31px;
 }
 
 .navbar .navContainer .navCollapse {
@@ -33,7 +35,7 @@
 
 .nav .navItem .profileLink {
 	font-size: 20px;
-	padding: 1px 6px;
+	padding: 1px 0px;
 }
 
 .nav .navItem .profileLinkActive {
@@ -51,12 +53,24 @@
 	transform: scale(1.05);
 }
 
-.navbar .navBrand .navLink:link, .navLink:visited {
+.navbar .navBrand {
+	cursor: pointer;
+}
+
+
+.navbar .navBrand .logo {
+	height: auto;
+	width: auto;
+	max-height: 70px;
+	max-width: 70px;
+}
+
+.navbar .navBrand:link, .navBrand:visited {
 	text-decoration: none;
 	color: black;
 }
 
-.navbar .navBrand .navLink:hover, .navLink:active {
+.navbar .navBrand:hover, .navBrand:active {
 	opacity: 0.8;
 	transform: scale(1.05);
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
+import { Navbar, Nav, NavbarToggler, Collapse, NavItem,
 	Button, Modal, ModalHeader, ModalBody,
 	Form, FormGroup, Input, Label
 } from 'reactstrap';
@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
 import styles from "./Header.module.css";
 import { useHistory } from "react-router-dom";
+import Logo from "../../static/PiktoriaLogo.png" 
 
 const Header = (props) => {
 	const auth = props.auth;
@@ -171,12 +172,10 @@ const Header = (props) => {
 		<React.Fragment>
 			<Navbar light className={styles.navbar} expand="md">
 				<div className={`container-fluid ${styles.navContainer}`}>
-					<NavbarToggler className={styles.navToggler} onClick={toggleNav} />
-					<NavbarBrand className={styles.navBrand}>
-						<NavLink className={`nav-link ${styles.navLink}`} activeClassName={`nav-link ${styles.navLinkActive}`} to="/">
-							Home
-						</NavLink>
-					</NavbarBrand>
+					<NavLink className={styles.navBrand} to="/">
+						<img className={styles.logo} src={Logo} alt='Home'/>
+					</NavLink>
+					<NavbarToggler className={`ml-auto ${styles.navToggler}`} onClick={toggleNav} />
 					<Collapse className={styles.navCollapse} isOpen={isNavOpen} navbar>
 						<RenderNavButtons />
 					</Collapse>

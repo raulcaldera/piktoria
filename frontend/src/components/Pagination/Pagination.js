@@ -25,8 +25,6 @@ const Pagination = (props) => {
 
 	const handleGoTo = (event) => {
 		event.preventDefault();
-		console.log(goToPage);
-		console.log(typeof(goToPage));
 		setLeftPopoverOpen(false);
 		setRightPopoverOpen(false);
 		paginate(goToPage);
