@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardTitle, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Card, CardTitle, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import DeletePostBtn from './DeletePost';
 import EditTitleBtn from './EditPostTitle';
@@ -110,7 +110,15 @@ const RenderProfilePost = (props) => {
 			if(isPostUpvoted) {
 				return <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtnDown}`} onClick={handleDownvote}/>
 			} else return <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtnUp}`} onClick={handleUpvote}/>
-		} else return <span className="fa fa-arrow-up fa-lg"/>;
+		} else {
+			return (
+				<React.Fragment>
+					<i id="upvoteTooltip" className="fas fa-arrow-up fa-lg"/>
+					<UncontrolledTooltip  placement="bottom" target="upvoteTooltip">
+						You must be logged in to upvote
+					</UncontrolledTooltip >
+				</React.Fragment>
+			)}
 	}
 	
 	if (loading) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Card, CardBody, CardSubtitle, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 import AxiosApi from '../AxiosApi';
 import { Link } from 'react-router-dom';
 import EditCommentBtn from './EditComment';
@@ -108,7 +108,15 @@ const RenderComment = (props) => {
 			if(isCommentUpvoted) {
 				return <i className={`fas fa-arrow-down fa-lg ${styles.upvoteBtnDown}`} onClick={handleDownvote}/>
 			} else return <i className={`fas fa-arrow-up fa-lg ${styles.upvoteBtnUp}`} onClick={handleUpvote}/>
-		} else return <i className="fas fa-arrow-up fa-lg"/>;
+		} else {
+			return (
+				<React.Fragment>
+					<i id="upvoteTooltip" className="fas fa-arrow-up fa-lg"/>
+					<UncontrolledTooltip  placement="bottom" target="upvoteTooltip">
+						You must be logged in to upvote
+					</UncontrolledTooltip >
+				</React.Fragment>
+			)}
 	}
 
 	if (loading) {
