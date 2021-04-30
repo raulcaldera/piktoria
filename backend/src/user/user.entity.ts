@@ -12,10 +12,10 @@ export class User {
   @Column('text')
   username: string;
 
-  @Column('text')
+  @Column('text', {select: false})
   email: string;
 
-  @Column('text')
+  @Column('text', {select: false})
   password: string;
 
   @OneToMany(() => CommentEntity, comment => comment.user, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})

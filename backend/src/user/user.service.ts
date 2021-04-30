@@ -58,7 +58,12 @@ export class UserService {
 
 	/*Login*/
 	async authenticate(user){
-		const dbUser = await this.userRepository.findOne({email: user?.email});
+		const dbUser = await this.userRepository.createQueryBuilder('user')
+			.select('user.id')
+			.addSelect('user.password')
+			.addSelect('user.email')
+			.where('user.email = :email', {email: user?.email})
+			.getOne();
 
 		if (dbUser) {
 			const validPassword = await bcrypt.compare(user.password, dbUser.password);
