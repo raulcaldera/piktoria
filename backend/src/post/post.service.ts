@@ -52,9 +52,6 @@ export class PostService { constructor(
 			.loadRelationCountAndMap('post.comments', 'post.comment')
 			.leftJoinAndSelect('post.author', 'author', )
 			.getMany();
-			// .leftJoin('post.postUpvote', 'postUpvote')
-			// .where('')
-		return await this.postRepository.find({relations: ['author', 'postUpvote'], order: {timestamp: "DESC"}});
 	}
 
 	async getPostById(id: number) {
