@@ -34,7 +34,7 @@ const EditCommentBtn = (props) => {
 						toggleCommentModal();
 						(async () => {
 							let commentData = await AxiosApi.get(`/comment/${comment.id}`).then(({ data }) => data);
-							setComment([commentData]);
+							setComment(commentData);
 						})();
 					} else {
 						setModalMsg(res.data.msg);

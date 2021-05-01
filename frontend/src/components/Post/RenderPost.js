@@ -27,7 +27,7 @@ const RenderPost = (props) => {
 			setIsPostUpvoted(userPostUpvotes?.includes(parseInt(postId)));
 		}
 		return () => { isMounted = false };
-	}, [postId,userPostUpvotes]);
+	}, [postId, userPostUpvotes]);
 
 	const handleDownvote = (event) => {
 		event.preventDefault();

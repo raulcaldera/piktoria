@@ -25,7 +25,7 @@ const DeleteCommentBtn = (props) => {
 			await AxiosApi.delete(`/comment/${comment.id}`)
 			.then(function (res) {
 				if (res.data.deleted && res.status === 200) {
-					setComment([]);
+					setComment();
 					setIsCommentUpvoted(false);
 					setCommentUpvotes([]);
 					(async () => {

@@ -108,8 +108,8 @@ const Comment = (props) => {
 							key={comment.id} 
 							user={user} 
 							auth={auth} 
-							commentId={comment.id} 
 							postId={postId} 
+							comment = {comment}
 							userCommentUpvotes={userCommentUpvotes} 
 							setPostComments={setPostComments}
 						/>

@@ -25,7 +25,7 @@ const DeletePostBtn = (props) => {
 			await AxiosApi.delete(`/post/${postId}`, {data: {postId: postId}})
 			.then(function (res) {
 				if (res.data.deleted && res.status === 200) {
-					setPost([]);
+					setPost();
 					setIsPostUpvoted(false);
 					setPostComments([]);
 					setPostUpvotes([]);

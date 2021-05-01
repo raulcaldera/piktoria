@@ -62,7 +62,7 @@ export class PostService { constructor(
 		.loadRelationCountAndMap('post.commentCount', 'post.comment')
 		.leftJoinAndSelect('post.author', 'author',)
 		.where('post.id = :id', { id : id })
-		.getMany();
+		.getOne();
 	}
 
 	async getPostsByAuthorId(authorId: number) {

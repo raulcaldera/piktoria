@@ -59,7 +59,13 @@ export class CommentService {
 	}
 
 	async getCommentByPostId(postId: number) {
-		const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }, order: {timestamp: "DESC"}}); 
+		/*const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }, order: {timestamp: "DESC"}});*/
+		const postComments = await this.commentRepository.createQueryBuilder('comment')
+		.loadRelationCountAndMap('comment.upvotes', 'comment.commentUpvote')
+		.leftJoinAndSelect('comment.user', 'user', )
+		.where('comment.postId = :id', { id : postId })
+		.orderBy({timestamp: "DESC"})
+		.getMany();
 		return {postId : postId, commentCount: postComments.length , postComments : postComments}
 	}
 

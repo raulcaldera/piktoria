@@ -33,7 +33,7 @@ const EditTitleBtn = (props) => {
 						toggleTitleModal();
 						(async () => {
 							let postData = await AxiosApi.get(`/post/${postId}`).then(({ data }) => data);
-							setPost([postData]);
+							setPost(postData);
 						})();
 					} else {
 						setModalMsg(res.data.msg);
