@@ -9,16 +9,16 @@ import styles from "./Profile.module.css";
 import { FadeLoader } from "react-spinners";
 
 const RenderProfilePost = (props) => {
-	const postId = parseInt(props.postId);
+	const postId = parseInt(props.post?.id);
 	const userPostUpvotes = props.userPostUpvotes;
 	const auth = props.auth;
 	const user = props.user;
-	const [posts, setPost] = useState([]);
-	const [postUpvotes, setPostUpvotes] = useState([]);
-	const [postCommentCount, setPostComments] = useState([]);
-	const [isPostUpvoted, setIsPostUpvoted] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [post, setPost] = useState(props.post);
+	const [postUpvotes, setPostUpvotes] = useState(post?.upvotes);
+	const [postCommentCount, setPostComments] = useState(post?.commentCount);
+	const [isPostUpvoted, setIsPostUpvoted] = useState(userPostUpvotes?.includes(parseInt(postId)));
 	const [isUpvoteModalOpen, setUpvoteModalOpen] = useState(false);
+	/*const [loading, setLoading] = useState(false);*/
 
 	const toggleUpvoteModal = () => {
 		setUpvoteModalOpen(!isUpvoteModalOpen);
@@ -26,28 +26,9 @@ const RenderProfilePost = (props) => {
 
 	useEffect(() => {
 		let isMounted = true;                    
-		(async () => {
-			setLoading(true);
-			let postData = await AxiosApi.get(`/post/${postId}`).then(({ data }) => data);
-			let postCommentData = await AxiosApi.get(`/comment/post/${postId}`).then(({ data }) => data);
-			let postUpvoteData = await AxiosApi.get(`/postupvotes/post/${postId}`).then(({ data }) => data);
-
-			if (isMounted) {
-				setPost([postData]);
-				setPostComments(postCommentData.commentCount);
-				setPostUpvotes(postUpvoteData.postUpvoteCount);
-			}
-			setLoading(false);
-		})();
-
 		if (isMounted) {
-			if (userPostUpvotes?.includes(parseInt(postId))) {
-				setIsPostUpvoted(true);
-			} else {
-				setIsPostUpvoted(false);
-			}
+			setIsPostUpvoted(userPostUpvotes?.includes(parseInt(postId)));
 		}
-
 		return () => { isMounted = false };
 	}, [postId, userPostUpvotes]);
 
@@ -121,58 +102,54 @@ const RenderProfilePost = (props) => {
 			)}
 	}
 	
-	if (loading) {
-		return (
-			<FadeLoader loading height={15} width={5} radius={2} margin={2} color='grey'/>
-		)
-	} else {
-		return (
-			<div key={postId} className={styles.post}>
-				{posts.map(post => 
-				   <div key={postId}>
-						<div className={styles.deletePost}>
-							<DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} />
-						</div>
-						<Card className={styles.postCard}>
-							<CardBody className={styles.postCardBody}> 
-								<CardTitle tag="h5" className={styles.postCardTitle}>
-									<span>
-										<Link className={styles.link} to={`/post/${post.id}`}>{post.title}</Link>
-										<EditTitleBtn postId={postId} title={post.title} setPost={setPost}/>
-									</span>
-								</CardTitle>
-								<CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
-									By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username}</Link>
-									<p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
-								</CardSubtitle>
-							</CardBody>
-							<CardBody className={styles.postCardBody}>
-								<div className={styles.editPostBody}>
-									<EditBodyBtn postId={postId} body={post.body} setPost={setPost}/>
-								</div>
-								<Link to={`/post/${post.id}`}>
-									<img width="100%" src={`${process.env.REACT_APP_BASE_URL}${post.body}`} alt={post.body}/> 
-								</Link>
-							</CardBody>
-							<CardBody className={styles.postCardCount}>
-								<div className={styles.postCardCountContainer}>
-									<span>{postUpvotes} <UpvoteBtn /> </span>
-									<span>{postCommentCount} <Link to={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></Link></span>
-								</div>
-							</CardBody>
-						</Card>
-						<Modal className={styles.upvoteModal} contentClassName={styles.upvoteModalContent} isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
-							<ModalHeader className={styles.upvoteModalHeader} toggle={toggleUpvoteModal}>Woops</ModalHeader> 
-							<ModalBody className={styles.upvoteModalBody}>
-								Looks like your session has expired. Please log in again to upvote or downvote this post.          
-							</ModalBody>             
-						</Modal>
-						<hr className={styles.postSeparator}></hr> 
-					</div>
-				)}
-			</div>                   
-		)
+	if (!post) {
+		return <FadeLoader loading height={15} width={5} radius={2} margin={2} color='grey'/>
 	}
+
+	return (
+		<div key={postId} className={styles.post}>
+			<div key={postId}>
+				<div className={styles.deletePost}>
+					<DeletePostBtn postId={postId} userId={user.userId} setPost={setPost} setIsPostUpvoted={setIsPostUpvoted} setPostComments={setPostComments} setPostUpvotes={setPostUpvotes} />
+				</div>
+				<Card className={styles.postCard}>
+					<CardBody className={styles.postCardBody}> 
+						<CardTitle tag="h5" className={styles.postCardTitle}>
+							<span>
+								<Link className={styles.link} to={`/post/${post.id}`}>{post.title}</Link>
+								<EditTitleBtn postId={postId} title={post.title} setPost={setPost}/>
+							</span>
+						</CardTitle>
+						<CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
+							By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username}</Link>
+							<p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
+						</CardSubtitle>
+					</CardBody>
+					<CardBody className={styles.postCardBody}>
+						<div className={styles.editPostBody}>
+							<EditBodyBtn postId={postId} body={post.body} setPost={setPost}/>
+						</div>
+						<Link to={`/post/${post.id}`}>
+							<img width="100%" src={`${process.env.REACT_APP_BASE_URL}${post.body}`} alt={post.body}/> 
+						</Link>
+					</CardBody>
+					<CardBody className={styles.postCardCount}>
+						<div className={styles.postCardCountContainer}>
+							<span>{postUpvotes} <UpvoteBtn /> </span>
+							<span>{postCommentCount} <Link to={`/post/${post.id}`}><i className="far fa-comment-alt fa-lg"></i></Link></span>
+						</div>
+					</CardBody>
+				</Card>
+				<Modal className={styles.upvoteModal} contentClassName={styles.upvoteModalContent} isOpen={isUpvoteModalOpen} toggle={toggleUpvoteModal}>
+					<ModalHeader className={styles.upvoteModalHeader} toggle={toggleUpvoteModal}>Woops</ModalHeader> 
+					<ModalBody className={styles.upvoteModalBody}>
+						Looks like your session has expired. Please log in again to upvote or downvote this post.          
+					</ModalBody>             
+				</Modal>
+				<hr className={styles.postSeparator}></hr> 
+			</div>
+		</div>                   
+	)
 }
 
 export default RenderProfilePost;

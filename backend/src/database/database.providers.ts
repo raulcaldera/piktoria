@@ -7,7 +7,7 @@ export const databaseProviders = [
 			type: 'postgres',
 			/*Docker */
 			/*host: 'db',*/
-			host: 'db',
+			host: 'localhost',
 			port: 5432,
 			username: 'root',
 			password: '1234567890',

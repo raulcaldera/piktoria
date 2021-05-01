@@ -49,17 +49,31 @@ export class PostService { constructor(
 	async getAll() {
 		return await this.postRepository.createQueryBuilder('post')
 			.loadRelationCountAndMap('post.upvotes', 'post.postUpvote')
-			.loadRelationCountAndMap('post.comments', 'post.comment')
+			.loadRelationCountAndMap('post.commentCount', 'post.comment')
 			.leftJoinAndSelect('post.author', 'author', )
+			.orderBy({timestamp: "DESC"})
 			.getMany();
 	}
 
 	async getPostById(id: number) {
-		return await this.postRepository.findOne({relations: ['author'],  where: { id : id }});
+		/*return await this.postRepository.findOne({relations: ['author'],  where: { id : id }});*/
+		return await this.postRepository.createQueryBuilder('post')
+		.loadRelationCountAndMap('post.upvotes', 'post.postUpvote')
+		.loadRelationCountAndMap('post.commentCount', 'post.comment')
+		.leftJoinAndSelect('post.author', 'author',)
+		.where('post.id = :id', { id : id })
+		.getMany();
 	}
 
 	async getPostsByAuthorId(authorId: number) {
-		return await this.postRepository.find({relations: ['author'],  where: { author : authorId }, order: {timestamp: "DESC"}});
+		/*return await this.postRepository.find({relations: ['author'],  where: { author : authorId }, order: {timestamp: "DESC"}});*/
+		return await this.postRepository.createQueryBuilder('post')
+		.loadRelationCountAndMap('post.upvotes', 'post.postUpvote')
+		.loadRelationCountAndMap('post.commentCount', 'post.comment')
+		.leftJoinAndSelect('post.author', 'author',)
+		.where('post.authorId = :id', { id : authorId })
+		.orderBy({timestamp: "DESC"})
+		.getMany();
 	}  
 
 	async updatePostTitle(updatedPost : { id: number , title: string }, req) {

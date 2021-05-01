@@ -6,41 +6,27 @@ import styles from "./Post.module.css";
 import { FadeLoader } from "react-spinners";
 
 const RenderPost = (props) => {
-	const postId = parseInt(props.postId);
+	const postId = parseInt(props.post?.id);
 	const userPostUpvotes = props.userPostUpvotes;
 	const auth = props.auth;
 	const user = props.user;
 	const [post, setPost] = useState(props.post);
 	const [postUpvotes, setPostUpvotes] = useState(post?.upvotes);
-	const [postCommentCount, setPostComments] = useState(post?.comments);
+	const [postCommentCount, setPostComments] = useState(post?.commentCount);
 	const [isPostUpvoted, setIsPostUpvoted] = useState(userPostUpvotes?.includes(parseInt(postId)));
 	const [isUpvoteModalOpen, setUpvoteModalOpen] = useState(false);
-	const [loading, setLoading] = useState(post === undefined)
+	/*const [loading, setLoading] = useState(post === undefined)*/
 
 	const toggleUpvoteModal = () => {
 		setUpvoteModalOpen(!isUpvoteModalOpen);
 	};
 
 	useEffect(() => {
-		if (!post) {
-			let isMounted = true;                    
-			(async () => {
-				let postData = await AxiosApi.get(`/post/${postId}`).then(({ data }) => data);
-				let postCommentData =  await AxiosApi.get(`/comment/post/${postId}`).then(({ data }) => data);
-				let postUpvoteData = await AxiosApi.get(`/postupvotes/post/${postId}`).then(({ data }) => data);
-	
-				if (isMounted) {
-					setPost(postData);
-					setPostComments(postCommentData.commentCount);
-					setPostUpvotes(postUpvoteData.postUpvoteCount);
-				}
-			})();
-	
-			if (isMounted) {
-				setIsPostUpvoted(userPostUpvotes?.includes(parseInt(postId)));
-			}
-			return () => { isMounted = false };
+		let isMounted = true;
+		if (isMounted) {
+			setIsPostUpvoted(userPostUpvotes?.includes(parseInt(postId)));
 		}
+		return () => { isMounted = false };
 	}, [postId,userPostUpvotes]);
 
 	const handleDownvote = (event) => {

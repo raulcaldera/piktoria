@@ -60,6 +60,7 @@ export class UserService {
 	async authenticate(user){
 		const dbUser = await this.userRepository.createQueryBuilder('user')
 			.select('user.id')
+			.addSelect('user.username')
 			.addSelect('user.password')
 			.addSelect('user.email')
 			.where('user.email = :email', {email: user?.email})
