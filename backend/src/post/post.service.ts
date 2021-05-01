@@ -3,6 +3,7 @@ import { IPost } from './interfaces/post.interface';
 import { Repository, getConnection } from 'typeorm';
 import { Post } from './post.entity';
 import { User } from '../user/user.entity';
+import { PostUpvote } from 'src/postUpvote/postUpvote.entity';
 
 var jwt = require('jsonwebtoken');
 
@@ -46,7 +47,11 @@ export class PostService { constructor(
 	}
 
 	async getAll() {
-		return await this.postRepository.find({relations: ['author'], order: {timestamp: "DESC"}});
+		return await this.postRepository.createQueryBuilder('post')
+			.loadRelationCountAndMap('post.upvotes', 'post.postUpvote')
+			.loadRelationCountAndMap('post.comments', 'post.comment')
+			.leftJoinAndSelect('post.author', 'author', )
+			.getMany();
 	}
 
 	async getPostById(id: number) {

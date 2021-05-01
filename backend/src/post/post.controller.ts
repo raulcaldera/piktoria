@@ -39,7 +39,7 @@ export class PostController {
 	/*Read*/
 	@Get()
 	getAll()  {
-		return this.postService.getAll();    
+		return this.postService.getAll();
 	}    
 
 	@Get('/:id')

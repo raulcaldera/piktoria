@@ -28,6 +28,7 @@ services:
       - ./frontend:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_BASE_URL=http://localhost:3001/
     command: sh -c "yarn install && yarn start"
 
   backend:
@@ -37,4 +38,6 @@ services:
     working_dir: /app
     volumes: 
       - ./backend:/app
+    environment:
+      - BASE_URL=http://localhost:3000
     command: sh -c "yarn install && yarn run start:dev"    
