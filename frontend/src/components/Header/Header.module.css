@@ -115,3 +115,23 @@
 	border-color: #43917b;
 	outline:0;
 }
+
+
+.navModal .navModalContent .navModalForm .checkBox {
+	margin-bottom: 1em;
+	font-size: 16px;
+}
+
+.navModal .navModalContent .navModalForm .checkBox .tosCheck {
+	margin-top: 4.8px;
+}
+
+.navModal .navModalContent .navModalForm .checkBox .link:link, .link:visited {
+	text-decoration: none;
+	color: #0000EE;;
+	display: inline-block;
+}
+
+.navModal .navModalContent .navModalForm .checkBox .link:hover, .link:active {
+	opacity: 0.8;
+}

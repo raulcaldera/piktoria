@@ -1,0 +1,23 @@
+.ToSSection p,li {
+  font-size: 16px;
+}
+
+.ToSSection h2 {
+  font-size: 1.5em;
+  margin: 1.25em 0;
+}
+
+.ToSSection h3 {
+  font-size: 1.25em;
+  margin: 1em 0;
+}
+
+.ToSSection a {
+	text-decoration: none;
+	color: #0000EE;;
+	display: inline-block;
+}
+
+.ToSSection hr {
+  margin-top: 1em;
+}

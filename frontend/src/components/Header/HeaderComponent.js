@@ -3,7 +3,7 @@ import { Navbar, Nav, NavbarToggler, Collapse, NavItem,
 	Button, Modal, ModalHeader, ModalBody,
 	Form, FormGroup, Input, Label
 } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
 import styles from "./Header.module.css";
 import { useHistory } from "react-router-dom";
@@ -218,6 +218,12 @@ const Header = (props) => {
 							<Label htmlFor="password">Password</Label>
 							<Input type="password" onChange={handleSignupInputChange} name="password" minLength="4" maxLength="50" required />
 						</FormGroup>
+						<FormGroup check className={styles.checkBox}>
+        			<Input className={styles.tosCheck} type="checkbox" name="check" id="tosCheck" required/>
+							<Label for="tosCheck" check>
+								By clicking Sign Up, you agree to our <Link className={styles.link} to="/tos" target="_blank" rel="noopener noreferrer">Terms and Conditions</Link>
+							</Label>
+      			</FormGroup>
 						<div className={styles.navModalFormBtnContainer}>
 							<Button className={styles.navModalFormBtn} type="submit" value="submit" color="primary">Sign Up</Button>
 						</div>

@@ -5,6 +5,7 @@ import Profile from './Profile/ProfileComponent';
 import User from './User/UserComponent';
 import Header from './Header/HeaderComponent';
 import Footer from './Footer/FooterComponent';
+import ToS from './ToS/ToSComponent';
 import { PrivateRoute } from './PrivateRoute';
 import { Switch, Route } from 'react-router-dom';
 import AxiosApi from './AxiosApi';
@@ -105,11 +106,14 @@ const Main = () => {
 						auth={auth}
 					/>
 				</Route>
+				<Route exact path="/tos">
+					<ToS />
+				</Route>
 				<PrivateRoute exact path='/profile/:userId' component={Profile}
 					user={user} 
 					auth={auth} 
 				/>
-				<Route path="*">Not found</Route>
+				<Route path="*"> Not found</Route>
 			</Switch> 
 			<Footer />
 		</div>               
