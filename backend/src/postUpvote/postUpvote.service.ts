@@ -5,28 +5,14 @@ import { Post } from '../post/post.entity';
 import { User } from '../user/user.entity';
 import { PostUpvote } from '../postUpvote/postUpvote.entity';
 
-var jwt = require('jsonwebtoken');
-
 @Injectable()
 export class PostUpvoteService {  constructor(
 		@Inject('POSTUPVOTE_REPOSITORY')
 		private postUpvoteRepository: Repository<PostUpvote>
 	) {}
 
-	async verify(authCookie, userId) {
-	let userAuth = await jwt.verify(authCookie,'shhhhh');
-
-	if (userAuth.userId == userId) {
-		return true;
-	}
-
-	return false;
-	}
-
 	async upvotePost(postUpvote: IPostUpvote, req) {
-		let auth = await this.verify(req.cookies?.JWT, postUpvote.userId);
-
-			if (auth) {
+		if (req.userId == postUpvote?.userId) {
 			let dbUpvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postUpvote.postId, user : postUpvote.userId}});
 
 			if (dbUpvote !== undefined) {
@@ -75,9 +61,7 @@ export class PostUpvoteService {  constructor(
 	}
 
 	async DownvotePost(postDownvote: IPostUpvote, req) {
-		let auth = await this.verify(req.cookies?.JWT, postDownvote.userId);
-		
-		if (auth) {
+		if (req.userId == postDownvote?.userId) {
 			try {
 				let dbDownvote = await this.postUpvoteRepository.findOne({relations: ['post','user'],  where: { post : postDownvote.postId, user : postDownvote.userId}});
 

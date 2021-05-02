@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 			throw new UnauthorizedException("Not Authorized, Not Verified")    
 		}
 
-		request.userId =  userAuth.userId; 
+		request.userId = userAuth.userId; 
 		return true;
 	}
 }

@@ -30,7 +30,7 @@ const RenderComment = (props) => {
 			setIsCommentUpvoted(userCommentUpvotes?.includes(parseInt(commentId)));
 		}
 		return () => { isMounted = false };
-	}, [comment, commentId, userCommentUpvotes]);
+	}, [commentId, userCommentUpvotes]);
 
 	const handleDownvote = (event) => {
 		event.preventDefault();

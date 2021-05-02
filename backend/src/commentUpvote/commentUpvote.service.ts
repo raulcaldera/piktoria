@@ -5,28 +5,14 @@ import { User } from '../user/user.entity';
 import { Comment } from '../comment/comment.entity';
 import { CommentUpvote } from '../commentUpvote/commentUpvote.entity';
 
-var jwt = require('jsonwebtoken');
-
 @Injectable()
 export class CommentUpvoteService {  constructor(
 		@Inject('COMMENTUPVOTE_REPOSITORY')
 		private commentUpvoteRepository: Repository<CommentUpvote>
 	) {}
 
-	async verify(authCookie, userId) {
-		let userAuth = await jwt.verify(authCookie,'shhhhh');
-
-		if (userAuth.userId == userId) {
-			return true;
-		}
-
-		return false;
-	}
-
 	async upvoteComment(commentUpvote: ICommentUpvote, req) {
-		let auth = await this.verify(req.cookies?.JWT, commentUpvote.userId);
-
-		if (auth) {
+		if (req.userId == commentUpvote?.userId) {
 			let dbUpvote = await this.commentUpvoteRepository.findOne({
 				relations: ['user','comment'],  
 				where: { user : commentUpvote.userId, comment : commentUpvote.commentId }
@@ -78,9 +64,7 @@ export class CommentUpvoteService {  constructor(
 	}
 
 	async DownvoteComment(commentDownvote: ICommentUpvote, req) {
-		let auth = await this.verify(req.cookies?.JWT, commentDownvote.userId);
-		
-		if (auth) {
+		if (req.userId == commentDownvote?.userId) {
 			try {
 				let dbDownvote = await this.commentUpvoteRepository.findOne({
 					relations: ['user','comment'],  

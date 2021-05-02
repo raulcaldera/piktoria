@@ -5,8 +5,6 @@ import { Comment } from './comment.entity';
 import { Post } from '../post/post.entity';
 import { User } from '../user/user.entity';
 
-var jwt = require('jsonwebtoken');
-
 @Injectable()
 export class CommentService {
 	constructor(
@@ -14,20 +12,8 @@ export class CommentService {
 		private commentRepository: Repository<Comment>
 	) {}
 
-	async verify(authCookie, userId) {
-		let userAuth = await jwt.verify(authCookie,'shhhhh');
-
-		if (userAuth.userId == userId) {
-			return true;
-		}
-
-		return false;
-	}
-
 	async postComment(comment: IComment, req) {
-		let auth = await this.verify(req.cookies?.JWT, comment.userId);
-
-		if (auth) {
+		if (req.userId == comment?.userId) {
 			try {
 				var commentRelation = await this.commentRepository.save(comment);
 			
@@ -59,7 +45,6 @@ export class CommentService {
 	}
 
 	async getCommentByPostId(postId: number) {
-		/*const postComments = await this.commentRepository.find({relations: ['post','user'],  where: { post : postId }, order: {timestamp: "DESC"}});*/
 		const postComments = await this.commentRepository.createQueryBuilder('comment')
 		.loadRelationCountAndMap('comment.upvotes', 'comment.commentUpvote')
 		.leftJoinAndSelect('comment.user', 'user', )
@@ -77,9 +62,8 @@ export class CommentService {
 
 	async updateComment(updatedComment : {id: number , comment: string }, req) {
 		let comment = await this.commentRepository.findOne({relations: ['post','user'],  where: { id : updatedComment.id }});
-		let auth = await this.verify(req.cookies?.JWT, comment?.user?.id);
 
-		if (auth) { 
+		if (req.userId == comment?.user?.id) { 
 			try {
 				await getConnection()
 				.createQueryBuilder()
@@ -99,9 +83,8 @@ export class CommentService {
 
 	async deleteComment(id: number, req) {
 		let comment = await this.commentRepository.findOne({relations: ['post','user'],  where: { id : id }});
-		let auth = await this.verify(req.cookies?.JWT, comment?.user?.id);
 
-		if (auth) { 
+		if (req.userId == comment?.user?.id) { 
 			try {		
 				await this.commentRepository.delete({id: id});
 				return {deleted: true, msg: "Comment deleted"};

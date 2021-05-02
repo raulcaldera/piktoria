@@ -5,28 +5,14 @@ import { Post } from './post.entity';
 import { User } from '../user/user.entity';
 import { PostUpvote } from 'src/postUpvote/postUpvote.entity';
 
-var jwt = require('jsonwebtoken');
-
 @Injectable()
 export class PostService { constructor(
 		@Inject('POST_REPOSITORY')
 		private postRepository: Repository<Post>
 	) {}
 
-	async verify(authCookie, userId) {
-		let userAuth = await jwt.verify(authCookie,'shhhhh');
-
-		if (userAuth.userId == userId) {
-			return true;
-		}
-		
-		return false;
-	}
-
 	async createPost(post: IPost, req) {
-		let auth = await this.verify(req.cookies?.JWT, post.authorId);
-
-		if (auth) {
+		if (req.userId == post?.authorId) {
 			try {
 				let postRelation = await this.postRepository.save(post);
 
@@ -78,9 +64,8 @@ export class PostService { constructor(
 
 	async updatePostTitle(updatedPost : { id: number , title: string }, req) {
 		let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
-		let auth = await this.verify(req.cookies?.JWT, post?.author?.id);
 
-		if (auth) { 
+		if (req.userId == post?.author?.id) { 
 			try {
 				await getConnection()
 				.createQueryBuilder()
@@ -100,9 +85,8 @@ export class PostService { constructor(
 
 	async updatePostBody(updatedPost : { id: number , body: string }, req) {
 		let post = await this.postRepository.findOne({relations: ['author'],  where: { id : updatedPost.id }});
-		let auth = await this.verify(req.cookies?.JWT, post?.author?.id);
 
-		if (auth) {
+		if (req.userId == post?.author?.id) {
 			try {
 				await getConnection()
 				.createQueryBuilder()
@@ -122,9 +106,8 @@ export class PostService { constructor(
 
 	async deletePost(id: number, req) {
 		let post = await this.postRepository.findOne({relations: ['author'],  where: { id : id }});
-		let auth = await this.verify(req.cookies?.JWT, post?.author?.id);
 
-		if (auth) {
+		if (req.userId == post?.author?.id) {
 			try {
 				await getConnection()
 				.createQueryBuilder()

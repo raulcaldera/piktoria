@@ -19,16 +19,6 @@ export class UserService {
     	});
   	}
 
-	async verify(authCookie, userId) {
-		let userAuth = await jwt.verify(authCookie,'shhhhh');
-
-		if (userAuth.userId == userId) {
-			return true;
-		}
-
-		return false;
-	}
-
 	/*SignUp*/
 	async signup(user: IUser) {
 		const salt = await bcrypt.genSalt(10);
@@ -90,9 +80,7 @@ export class UserService {
 
 	/*Update Username*/
 	async updateUsername(updatedUser : {id: number , username: string}, req) {
-		let auth = await this.verify(req.cookies?.JWT, updatedUser.id)
-
-		if (auth) {
+		if (req.userId == updatedUser?.id) {
 			try {			
 				const dbUser = await this.userRepository.findOne({username: updatedUser?.username});
 
@@ -120,9 +108,7 @@ export class UserService {
 
 	/*Update Email*/
 	async updateEmail(updatedEmail : {id: number, email:string}, req) {
-		let auth = await this.verify(req.cookies?.JWT, updatedEmail.id);
-
-		if (auth) {
+		if (req.userId == updatedEmail?.id) {
 			try {
 				const dbUser = await this.userRepository.findOne({email: updatedEmail?.email});
 
@@ -149,9 +135,7 @@ export class UserService {
 
 	/*Delete*/
 	async deleteUser(id: number, req) {
-		let auth = await this.verify(req.cookies?.JWT, id);
-		
-		if (auth) {
+		if (req.userId == id) {
 			try {
 				await getConnection()
 				.createQueryBuilder()
