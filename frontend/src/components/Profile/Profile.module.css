@@ -8,9 +8,8 @@
 }
 
 .timestamp {
-		float: right;
-		display: inline;
-		margin: 0;
+	float: right;
+	font-size: 16px;
 	}
 
 .pagination {
@@ -133,6 +132,14 @@
 	transform: scale(1.05);
 }
 
+.link {
+  word-break: break-all;
+}
+
+.greeting {
+  word-break: break-all;
+}
+
 .postCardTitle .link:link, .link:visited {
 	text-decoration: none;
 	color: black;
@@ -142,13 +149,14 @@
 
 .postCardTitle .link:hover, .link:active {
 	opacity: 0.8;
-	transform: scale(1.05);
+	transform: scale(1.01);
 }
 
 .postCardBody .postCardTitle .editPostTitleBtn {
+	display: block;
 	border-radius: 0px;
 	border: none;
-	margin: 0px 10px;
+	margin: 10px 0px;
 	padding: 6px 12px;
 	background-color:#43917b;
 }
@@ -206,7 +214,7 @@
 
 .postCardAuthor .link:hover, .link:active {
 	opacity: 0.8;
-	transform: scale(1.05);
+	transform: scale(1.01);
 }
 
 .newPostModal .newPostModalHeader {
@@ -411,4 +419,11 @@
 
 .upvoteModal .upvoteModalContent {
 	border-radius: 0;
+}
+
+@media screen and (min-width: 0px) and (max-width: 960px) {
+	.timestamp {
+		float: none;
+		margin-top: 8px;
+	}
 }

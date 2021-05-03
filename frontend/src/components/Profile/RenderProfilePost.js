@@ -115,10 +115,8 @@ const RenderProfilePost = (props) => {
 				<Card className={styles.postCard}>
 					<CardBody className={styles.postCardBody}> 
 						<CardTitle tag="h5" className={styles.postCardTitle}>
-							<span>
-								<Link className={styles.link} to={`/post/${post.id}`}>{post.title}</Link>
-								<EditTitleBtn postId={postId} title={post.title} setPost={setPost}/>
-							</span>
+							<EditTitleBtn postId={postId} title={post.title} setPost={setPost}/>
+							<Link className={styles.link} to={`/post/${post.id}`}>{post.title}</Link>
 						</CardTitle>
 						<CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
 							By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username}</Link>

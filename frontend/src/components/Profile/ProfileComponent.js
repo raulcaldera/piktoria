@@ -39,7 +39,7 @@ const Profile = (props) => {
 					<div className="row align-items-start">
 						<div className="PostSection col-12 col-md-6 offset-md-3">
 							<div>
-								<p>Hello {user.username}!</p>
+								<p className={styles.greeting}>Hello {user.username}!</p>
 							</div>                    
 							<div className={styles.newPost}>
 								<NewPost userId={userId} setPost={setPost}/>     

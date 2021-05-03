@@ -209,7 +209,7 @@ const Header = (props) => {
 					<Form className={styles.navModalForm} onSubmit={handleSignUp}>
 						<FormGroup>
 							<Label htmlFor="username">Username</Label>
-							<Input type="text" onChange={handleSignupInputChange} name="username" maxLength="50" required />
+							<Input type="text" onChange={handleSignupInputChange} name="username" maxLength="20" required />
 						</FormGroup>
 						<FormGroup>
 							<Label htmlFor="email">Email</Label>

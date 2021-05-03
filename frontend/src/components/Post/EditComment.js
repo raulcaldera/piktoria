@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, UncontrolledTooltip } from 'reactstrap';
 import styles from "./Post.module.css";
 
 const EditCommentBtn = (props) => {
@@ -54,7 +54,10 @@ const EditCommentBtn = (props) => {
 	if (userId === comment.user.id) {
 		return (
 			<React.Fragment>
-				<Button className={`far fa-edit ${styles.editCommentTitleBtn}`} onClick={toggleCommentModal} />
+				<Button id="editCommentTooltip"className={`far fa-edit ${styles.editCommentTitleBtn}`} onClick={toggleCommentModal} />
+				<UncontrolledTooltip  placement="bottom" target="editCommentTooltip">
+					Edit Comment
+				</UncontrolledTooltip>
 				<Modal className={styles.editCommentModal} contentClassName={styles.editCommentModalContent} isOpen={isCommentModalOpen} toggle={toggleCommentModal}>
 				<ModalHeader className={styles.editCommentModalHeader} toggle={toggleCommentModal}>Edit comment</ModalHeader> 
 				<ModalBody  className={styles.editCommentModalBody}>

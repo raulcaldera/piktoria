@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 import styles from "./Profile.module.css";
 
 const DeletePostBtn = (props) => {
@@ -46,7 +46,10 @@ const DeletePostBtn = (props) => {
 
 	return (
 		<React.Fragment>
-			<Button className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} />
+			<Button id="deleteTooltip" className={`far fa-trash-alt ${styles.deletePostBtn}`} onClick={toggleDeleteModal} />
+			<UncontrolledTooltip  placement="bottom" target="deleteTooltip">
+				Delete Post
+			</UncontrolledTooltip>
 			<Modal className={styles.deletePostModal} contentClassName={styles.deletePostModalContent} isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
 				<ModalHeader className={styles.deletePostModalHeader} toggle={toggleDeleteModal}>Delete Post</ModalHeader> 
 				<ModalBody className={styles.deletePostModalBody}>

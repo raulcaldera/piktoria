@@ -112,7 +112,7 @@ const RenderPost = (props) => {
 							<Link className={styles.link} to={`/post/${postId}`}>{post.title}</Link>
 						</CardTitle>
 						<CardSubtitle tag="h6" className={`mb-2 text-muted" ${styles.postCardAuthor}`}>
-							By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username} </Link>
+							By <Link className={styles.link} to={`/user/${post.author.id}`}>{post.author.username}</Link>
 							<p className={styles.timestamp}>{post.timestamp.slice(0, 19).replace(/-/g, "/").replace("T", " ")}</p>
 						</CardSubtitle>
 					</CardBody>

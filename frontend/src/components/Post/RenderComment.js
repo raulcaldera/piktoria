@@ -119,7 +119,6 @@ const RenderComment = (props) => {
 					<CardBody className={styles.commentCardBody}>
 						<div className={styles.commentCardComment}>
 							<span>
-								{comment.comment}
 								<EditCommentBtn userId={user.userId} comment={comment} setComment={setComment}/>
 								<DeleteCommentBtn 
 									userId={user.userId} 
@@ -131,6 +130,7 @@ const RenderComment = (props) => {
 									setPostComments={setPostComments}
 								/>
 							</span>
+							<p>{comment.comment}</p>
 						</div>
 					</CardBody>
 					<CardBody className={styles.commentCardCount}>

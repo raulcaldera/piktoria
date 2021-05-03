@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 import styles from "./Post.module.css";
 
 const DeleteCommentBtn = (props) => {
@@ -50,7 +50,10 @@ const DeleteCommentBtn = (props) => {
 	if (userId === comment.user.id) {
 		return (
 			<React.Fragment>
-				<Button className={`far fa-trash-alt ${styles.deleteCommentBtn}`} onClick={toggleDeleteModal} /><br></br>
+				<Button id="deleteTooltip" className={`far fa-trash-alt ${styles.deleteCommentBtn}`} onClick={toggleDeleteModal} />
+				<UncontrolledTooltip  placement="bottom" target="deleteTooltip">
+					Delete Comment
+				</UncontrolledTooltip>
 				<Modal className={styles.deleteCommentModal} contentClassName={styles.deleteCommentModalContent} isOpen={isDeleteModalOpen} toggle={toggleDeleteModal}>
 					<ModalHeader className={styles.deleteCommentModalHeader} toggle={toggleDeleteModal}>Delete Comment</ModalHeader> 
 					<ModalBody className={styles.deleteCommentModalBody}>

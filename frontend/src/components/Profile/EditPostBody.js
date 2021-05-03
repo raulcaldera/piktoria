@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AxiosApi from '../AxiosApi';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, UncontrolledTooltip } from 'reactstrap';
 import styles from "./Profile.module.css";
 
 const EditBodyBtn = (props) => {
@@ -60,7 +60,10 @@ const EditBodyBtn = (props) => {
 
 	return (
 		<React.Fragment>
-			<Button className={`far fa-edit ${styles.editPostBodyBtn}`} onClick={toggleBodyModal} />
+			<Button id="editBodyTooltip" className={`far fa-edit ${styles.editPostBodyBtn}`} onClick={toggleBodyModal} />
+			<UncontrolledTooltip  placement="bottom" target="editBodyTooltip">
+				Edit Image
+			</UncontrolledTooltip>
 			<Modal className={styles.editPostBodyModal} contentClassName={styles.editPostBodyModalContent} isOpen={isBodyModalOpen} toggle={toggleBodyModal}>
 				<ModalHeader className={styles.editPostBodyModalHeader} toggle={toggleBodyModal}>Edit post image</ModalHeader> 
 				<ModalBody className={styles.editPostBodyModalBody}>
