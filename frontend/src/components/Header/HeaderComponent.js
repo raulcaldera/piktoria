@@ -5,9 +5,10 @@ import { Navbar, Nav, NavbarToggler, Collapse, NavItem,
 } from 'reactstrap';
 import { Link, NavLink } from 'react-router-dom';
 import AxiosApi from '../AxiosApi';
-import styles from "./Header.module.css";
+import moment from 'moment-timezone';
 import { useHistory } from "react-router-dom";
-import Logo from "../../static/PiktoriaLogo.png" 
+import styles from "./Header.module.css";
+import Logo from "../../static/PiktoriaLogo.png";
 
 const Header = (props) => {
 	const auth = props.auth;
@@ -80,7 +81,7 @@ const Header = (props) => {
 		event.preventDefault();
 		if (signUpData.username && signUpData.email && signUpData.password) {
 			(async () => {
-				await AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password })
+				await AxiosApi.post('/user/signup/', { username: signUpData.username, email: signUpData.email, password: signUpData.password, terms_agreed: moment().tz("Europe/Madrid").format("YYYY-MM-DDTHH:mm:ss") })
 					.then(function (res) {
 						if (res.data.signedUp && res.status === 200) {
 							toggleSignupModal();

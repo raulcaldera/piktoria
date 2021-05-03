@@ -29,10 +29,12 @@ const NewPost = (props) => {
 
 	const handleNewPost = (event) => {
 		event.preventDefault();
-		if (!newPostTitleData|| !newPostImageData) {
+		if (!newPostTitleData || !newPostImageData) {
 			setModalMsg('Please enter all the fields :)');
 		} else if (newPostImageData.type !== "image/jpeg" && newPostImageData.type !== "image/png" && newPostImageData.type !== "image/gif") {
-			setModalMsg('The image must be a png, jpg, or gif file');
+			setModalMsg('The image must be a png, jpg, or gif file');	
+		}	else if (newPostImageData.size > 5242880) {
+			setModalMsg('The image size must be less than 5MB');	
 		} else {
 			const formData = new FormData();
 			formData.append('title', newPostTitleData);

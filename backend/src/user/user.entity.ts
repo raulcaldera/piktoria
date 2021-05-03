@@ -18,6 +18,9 @@ export class User {
   @Column('text', {select: false})
   password: string;
 
+  @Column('timestamptz')
+	terms_agreed: Date;
+
   @OneToMany(() => CommentEntity, comment => comment.user, {onUpdate : 'CASCADE', onDelete : 'CASCADE'})
   comment: CommentEntity[];
 
