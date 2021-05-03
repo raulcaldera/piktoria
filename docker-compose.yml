@@ -28,7 +28,7 @@ services:
       - ./frontend:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - REACT_APP_BASE_URL=http://localhost:3001/
+      - BACKEND_URL=http://localhost:3001/
     command: sh -c "yarn install && yarn start"
 
   backend:
@@ -39,5 +39,9 @@ services:
     volumes: 
       - ./backend:/app
     environment:
-      - BASE_URL=http://localhost:3000
+      - FRONTEND_URL=http://localhost:3000
+      - DB_URL=localhost
+      - DB_USER=root 
+      - DB_PASSWORD=1234567890
+      - DB_NAME=db
     command: sh -c "yarn install && yarn run start:dev"    
