@@ -44,4 +44,5 @@ services:
       - DB_USER=root 
       - DB_PASSWORD=1234567890
       - DB_NAME=db
+      - DB_PORT=5432
     command: sh -c "yarn install && yarn run start:dev"    
