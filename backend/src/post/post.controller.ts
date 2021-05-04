@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, UseInterceptors, UploadedFile, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, UseInterceptors, UploadedFile, Req, Res, Header } from '@nestjs/common';
 import { AuthGuard } from 'src/core/guards/auth.guard';
 import { PostService } from './post.service';
 import { Request, Response } from 'express';
@@ -13,6 +13,7 @@ export class PostController {
 
 	/*Create*/
 	@Post()
+	@Header('Access-Control-Allow-Origin ', process.env.FRONTEND_URL)
 	@UseGuards(AuthGuard)
 	@UseInterceptors(FileInterceptor('body', {
 		storage: diskStorage({

@@ -45,7 +45,7 @@ const NewPost = (props) => {
 				headers: { 'content-type': 'multipart/form-data' }
 			};
 			(async () => {
-				await AxiosApi.post('/post', formData, config)
+				await AxiosApi.post('/post/', formData, config)
 				.then(function (res) {
 					if (res.data.posted && res.status === 200) {
 						setNewPostTitleData('');
